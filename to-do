@@ -1,0 +1,6 @@
+clean the project, keep only what is necessary
+clean the css file and create variables
+finish the responsive menubar
+create the top icons and the bottom icons
+make them into a component so it is reusable
+create git repo and issue so we can go through them with PRs
