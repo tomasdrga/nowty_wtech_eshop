@@ -269,9 +269,161 @@ div.content {
 }
 
 
+.login-title {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.login-image {
+  width: 8%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-label-text {
+  font-family: var(--primary-font);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+}
+
+.logo-hide {
+  max-width: 30%;
+  padding-right: .2rem;
+}
+.button-hide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#card-component{
+  border-radius: 10px;
+  border: 1px var(--primary-color) solid;
+}
+
+#card-body{
+  padding: 2rem 0.9rem;
+}
+
+#email-field, #password-field{
+  height: 2rem;
+  max-width: 22rem;
+  width: 22rem;
+  border-radius: 10px;
+
+}
+
+.check-terms-conditions {
+  display: flex;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
 
 
+#checkbox-terms {
+  width:1.2rem;
+  height: 1.2rem;
+  border-radius: 10%;
+}
+#checkbox-terms:checked {
+  background-color: var(--primary-color);
+  background-image: linear-gradient(-45deg,transparent 65%,var(--primary-color) 65.99%),
+                    linear-gradient(45deg,transparent 75%,var(--primary-color) 75.99%),
+                    linear-gradient(-45deg,var(--primary-color) 40%,transparent 40.99%),
+                    linear-gradient(45deg,var(--primary-color) 30%,white 30.99%,
+                    white 40%,transparent 40.99%),
+                    linear-gradient(-45deg,white 50%,
+                    var(--primary-color) 50.99%);
+}
 
+#terms-text{
+  padding-left: 0.5rem;
+  font-family: var(--primary-font);
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  padding-top: 0.7rem;
+  opacity: 75%;
+}
 
+.button-main{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.3rem;
+  border: none;
+  width: 115px;
+  border-radius: 10px;
+  font-family: var(--primary-font);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -1rem;
+}
 
+.button-main:hover {
+  opacity: 95%;
+}
 
+.button-signup {
+  background-color: white;
+  color: var(--primary-color);
+  opacity: 75%;
+  padding: .2rem .5rem;
+  border: var(--primary-color) 1px solid;
+  width: 80px;
+  border-radius: 10px;
+  font-family: var(--primary-font);
+  font-size: .8rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: .6rem;
+}
+
+#signup-text {
+  font-family: var(--primary-font);
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  padding-top: 0.5rem;
+  text-align: center;
+  opacity: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#email-label-text{
+  padding-top: 1rem;
+}
+
+.label-input-fields {
+  display: flex;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem .25rem .5rem;
+}
+
+#divider-with-text {
+  opacity: 80%;
+  font-family: var(--primary-font);
+  font-size: 0.8rem;
+
+}
+
+#divider-with-text::before, #divider-with-text::after {
+  opacity: 75%;
+  background-color: var(--primary-color);
+}
