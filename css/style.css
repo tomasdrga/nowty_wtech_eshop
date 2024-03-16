@@ -7,6 +7,11 @@ html {
     line-height: 1.4;
 }
 
+:root {
+  --primary-color: #260065;
+  --primary-font: "Lexend Deca", sans-serif;
+}
+
 /* The side navigation menu */
 .sidebar {
     margin: 0;
@@ -96,6 +101,49 @@ html {
   font-size: 60px;
 }
 
+/* must be applied only for index.html */
+body {
+  overflow: hidden;
+}
+
+.scrollmenu {
+  width: 95rem;
+  height: 75rem;
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  background-color: white;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.product-image {
+  display: inline-block;
+  width: 35%;
+  margin-right: -15rem;
+}
+
+@media screen and (max-height: 750px){
+  .product-image {
+    width: 30%;
+    margin-right: -13rem;
+  }
+}
+
+@media screen and (max-height: 650px){
+  .product-image {
+    width: 25%;
+    margin-right: -11rem;
+  }
+}
+
+@media screen and (max-height: 550px){
+  .product-image {
+    width: 20%;
+    margin-right: -9rem;
+  }
+}
+
 /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
 @media screen and (max-height: 450px) {
   .overlay a {font-size: 20px}
@@ -103,6 +151,10 @@ html {
     font-size: 40px;
     top: 15px;
     right: 35px;
+  }
+  .product-image {
+    width: 20%;
+    margin-right: -7rem;
   }
 }
 
@@ -112,6 +164,43 @@ div.content {
     padding: 1px 16px;
     height: 1000px;
 }
+
+@media screen and (max-width: 1900px) {
+  .scrollmenu {
+    width: 85rem;
+  }
+}
+
+@media screen and (max-width: 1768px) {
+  .scrollmenu {
+    width: 80rem;
+  }
+  .product-image {
+    margin-right: -13rem;
+  }
+}
+
+@media screen and (max-width: 1668px) {
+  .scrollmenu {
+    width: 75rem;
+  }
+  .product-image {
+    margin-right: -11rem;
+  }
+}
+
+@media screen and (max-width: 1568px) {
+  .scrollmenu {
+    width: 69rem;
+  }
+}
+
+@media screen and (max-width: 1468px) {
+  .scrollmenu {
+    width: 65rem;
+  }
+}
+
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (min-width: 768px) {
@@ -124,7 +213,7 @@ div.content {
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .sidebar {
     width: 100%;
     height: auto;
@@ -138,6 +227,38 @@ div.content {
     height: auto;
   }
   div.content {margin-left: 0;}
+
+  .mobile-hamburger .image-hamburger {
+    color: var(--primary-color);
+    font-size: 2rem;
+  }
+  .overlay {
+    background: white;
+  }
+
+  .overlay a {
+    color: var(--primary-color);
+    display: block;
+    padding: 0.25rem;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: var(--primary-font);
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .overlay a:hover:not(.active) {
+    opacity: 30%;
+    color: var(--primary-color);
+  }
+
+  .overlay .closebtn {
+    font-size: 2rem;
+    font-weight: normal;
+    right: 1rem;
+    top: 0;
+  }
+
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
@@ -147,3 +268,162 @@ div.content {
   }
 }
 
+
+.login-title {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.login-image {
+  width: 8%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-label-text {
+  font-family: var(--primary-font);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+}
+
+.logo-hide {
+  max-width: 30%;
+  padding-right: .2rem;
+}
+.button-hide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#card-component{
+  border-radius: 10px;
+  border: 1px var(--primary-color) solid;
+}
+
+#card-body{
+  padding: 2rem 0.9rem;
+}
+
+#email-field, #password-field{
+  height: 2rem;
+  max-width: 22rem;
+  width: 22rem;
+  border-radius: 10px;
+
+}
+
+.check-terms-conditions {
+  display: flex;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+
+#checkbox-terms {
+  width:1.2rem;
+  height: 1.2rem;
+  border-radius: 10%;
+}
+#checkbox-terms:checked {
+  background-color: var(--primary-color);
+  background-image: linear-gradient(-45deg,transparent 65%,var(--primary-color) 65.99%),
+                    linear-gradient(45deg,transparent 75%,var(--primary-color) 75.99%),
+                    linear-gradient(-45deg,var(--primary-color) 40%,transparent 40.99%),
+                    linear-gradient(45deg,var(--primary-color) 30%,white 30.99%,
+                    white 40%,transparent 40.99%),
+                    linear-gradient(-45deg,white 50%,
+                    var(--primary-color) 50.99%);
+}
+
+#terms-text{
+  padding-left: 0.5rem;
+  font-family: var(--primary-font);
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  padding-top: 0.7rem;
+  opacity: 75%;
+}
+
+.button-main{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.3rem;
+  border: none;
+  width: 115px;
+  border-radius: 10px;
+  font-family: var(--primary-font);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -1rem;
+}
+
+.button-main:hover {
+  opacity: 95%;
+}
+
+.button-signup {
+  background-color: white;
+  color: var(--primary-color);
+  opacity: 75%;
+  padding: .2rem .5rem;
+  border: var(--primary-color) 1px solid;
+  width: 80px;
+  border-radius: 10px;
+  font-family: var(--primary-font);
+  font-size: .8rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: .6rem;
+}
+
+#signup-text {
+  font-family: var(--primary-font);
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  padding-top: 0.5rem;
+  text-align: center;
+  opacity: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#email-label-text{
+  padding-top: 1rem;
+}
+
+.label-input-fields {
+  display: flex;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem .25rem .5rem;
+}
+
+#divider-with-text {
+  opacity: 80%;
+  font-family: var(--primary-font);
+  font-size: 0.8rem;
+
+}
+
+#divider-with-text::before, #divider-with-text::after {
+  opacity: 75%;
+  background-color: var(--primary-color);
+}

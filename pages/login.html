@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="no-js" data-theme="light" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nowty</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <meta name="description" content="" />
+
+  <link rel="icon" href="/img/favicon/nowty_face.png" sizes="any" />
+  <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png" />
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet" />
+
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta name="theme-color" content="#fafafa" />
+</head>
+
+<body>
+
+<div class="sidebar flex flex-row md:flex-col justify-between">
+  <a class="sidebar-logo mr-5 mt-3" href=""><img class="sidebar-logo-image"
+                                                 src="../img/logo/nowty_animation_croped.gif" alt="" /></a>
+  <div class="sidebar-container container mb-5 ml-5">
+    <a class="sidebar-link" href="">PRODUCTS</a>
+    <a class="sidebar-link" href="">SIGN UP</a>
+    <a class="sidebar-link" href="">SIZE GUIDE</a>
+    <a class="sidebar-link" href="">TERMS</a>
+    <a class="sidebar-link" href="">SHIPPING</a>
+  </div>
+  <div class="sidebar-hamburger">
+    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+    </div>
+  </div>
+</div>
+
+<div class="hero min-h-screen">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div id= "card-component" class="card shrink-0 w-full max-w-sm">
+
+      <form id= "card-body" class="card-body">
+        <div class="header-login-card">
+          <img class="login-image" src="../img/icons/user.png" alt="" />
+          <h2 class="login-title">CREATE AN ACCOUNT</h2>
+        </div>
+        <div class="form-control">
+          <label id= "email-label-text" class="label-input-fields">
+            <span class="input-label-text">EMAIL</span>
+          </label>
+          <label>
+            <input type="email" id="email-field" class="input input-bordered" required />
+          </label>
+          <label class="label-input-fields">
+            <span class="input-label-text">PASSWORD</span>
+
+            <button class= "button-hide" type="button">
+              <img class="logo-hide" src="../img/icons/hide.png" alt="" />
+              <span class="input-label-text">HIDE</span>
+            </button>
+          </label>
+
+          <label>
+            <input type="password" id="password-field" class="input input-bordered" required />
+          </label>
+        </div>
+
+        <label class="check-terms-conditions">
+          <input type="checkbox" id="checkbox-terms" class="checkbox" />
+          <span id= "terms-text" class="label-text">
+              By creating an account, I agree to our <u>Terms</u> of use and <u>Privacy Policy</u>
+            </span>
+        </label>
+
+        <div class="form-control mt-6">
+          <button class="button-main">LOG IN</button>
+        </div>
+
+        <div id= "divider-with-text" class="divider">OR</div>
+        <div class="sign-up">
+          <span id="signup-text">Already have an account?</span>
+          <div>
+            <button class="button-signup">SIGN UP</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="myNav" class="overlay">
+
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <a href="#">PRODUCTS</a>
+    <a href="#">SIGN UP</a>
+    <a href="#">SIZE GUIDE</a>
+    <a href="#">TERMS</a>
+    <a href="#">SHIPPING</a>
+  </div>
+
+</div>
+
+<div tabindex="0" role="button" class="mobile-hamburger fixed inset-x-0 bottom-0 p-4 btn btn-ghost btn-circle"
+     onclick="openNav()">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 image-hamburger" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+</div>
+<script src="../js/app.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
