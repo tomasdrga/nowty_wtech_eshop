@@ -27,14 +27,7 @@ html {
 
 /* The Overlay (background) */
 .overlay {
-  position: fixed;
   bottom: -100%;
-  left: 0;
-  z-index: 1;
-  background-color: white;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  transition: 0.25s;
 }
 
 .overlay a {
@@ -52,87 +45,18 @@ body {
   overflow: hidden;
 }
 
-.scrollmenu {
-  width: 95rem;
-  height: 75rem;
-  position: absolute;
-  top: 15%;
-  right: 10%;
-  background-color: white;
-  overflow-x: auto;
-  white-space: nowrap;
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.product-image {
-  display: inline-block;
-  width: 35%;
-  margin-right: -15rem;
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-@media screen and (max-height: 750px){
-  .product-image {
-    width: 30%;
-    margin-right: -13rem;
-  }
-}
-
-@media screen and (max-height: 650px){
-  .product-image {
-    width: 25%;
-    margin-right: -11rem;
-  }
-}
-
-@media screen and (max-height: 550px){
-  .product-image {
-    width: 20%;
-    margin-right: -9rem;
-  }
-}
-
-/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
-@media screen and (max-height: 450px) {
-  .product-image {
-    width: 20%;
-    margin-right: -7rem;
-  }
-}
-
-@media screen and (max-width: 1900px) {
-  .scrollmenu {
-    width: 85rem;
-  }
-}
-
-@media screen and (max-width: 1768px) {
-  .scrollmenu {
-    width: 80rem;
-  }
-  .product-image {
-    margin-right: -13rem;
-  }
-}
-
-@media screen and (max-width: 1668px) {
-  .scrollmenu {
-    width: 75rem;
-  }
-  .product-image {
-    margin-right: -11rem;
-  }
-}
-
-@media screen and (max-width: 1568px) {
-  .scrollmenu {
-    width: 69rem;
-  }
-}
-
-@media screen and (max-width: 1468px) {
-  .scrollmenu {
-    width: 65rem;
-  }
-}
 
 .login-title {
   font-size: 1.1rem;
