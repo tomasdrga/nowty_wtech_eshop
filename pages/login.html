@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<div class="grid grid-rows-3 grid-cols-6 gap-4 h-lvh grid-flow-col-dense">
+<div class="grid grid-rows-3 grid-cols-6 gap-4 grid-flow-col-dense h-screen max-w-screen">
   <div class="max-lg:hidden lg:row-span-3 ...">
     <div class="sidebar flex flex-col h-full justify-between">
       <a class="w-full" href="">
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class="row-span-3 col-span-6 lg:col-span-5 flex flex-col">
+  <div class="row-span-3 col-span-6 lg:col-span-5 flex flex-col h-screen">
     <div class="self-start ... w-full">
       <div class="flex justify-between lg:justify-end">
         <a class="lg:hidden h-auto w-1/3 pt-1 sm:w-1/4 md:w-1/5" href="">
@@ -68,53 +68,59 @@
       </div>
     </div>
 
-    <div class="grow w-full">
-      <section class="">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
-          <div id="card-component" class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
-            <div class="px-4 py-6 space-y-4 md:space-y-6 sm:px-4 sm:py-8">
-              <div class="header-login-card">
-                <img class="mx-auto block login-image w-8 h-8" src="../img/icons/user.png" alt="" />
-                <h2 class="text-xl m-2 font-semibold text-center pb-4 login-title sm:text-2xl">CREATE AN ACCOUNT</h2>
-              </div>
-              <form class="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label for="email" class="block mb-2 text-sm font-medium text-label">EMAIL</label>
-                  <input type="email" name="email" id="email" class="border h-8 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                </div>
-                <div>
-                  <div class="flex select-none font-medium items-center justify-between pt-2 px-1">
-                    <label for="password" class="block mb-2 text-sm font-medium text-label">Password</label>
-                    <button class= "flex place-content-end pb-2" type="button">
-                      <img class="max-w-[30%] pr-0.5" src="../img/icons/hide.png" alt="" />
-                      <span class="text-sm font-medium text-label">HIDE</span>
-                    </button>
-                  </div>
-                  <input type="password" name="password" id="password" class="border h-8 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                </div>
-                <div class="flex items-start">
-                  <div class="flex items-center h-8">
-                    <input type="checkbox" id="checkbox-terms" class="checkbox" />
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="checkbox-terms" class="text-[.7rem] opacity-75 text-label ">By creating an account, I agree to our <u>Terms</u> of use and <u>Privacy Policy</u> <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
-                  </div>
-                </div>
-                <div class="form-control mt-6 pb-2">
-                  <button class="button-main text-white p-1 border-0 w-28 rounded-[10px] text-lg cursor-pointer block ml-auto mr-auto mt-2">LOG IN</button>
-                </div>
-                <div id= "divider-with-text" class="divider opacity-80 text-xs">OR</div>
-                <div class="sign-up">
-                  <span id="signup-text" class="text-[.7rem] text-primary pt-2 pb-2 text-center opacity-80 block ml-auto mr-auto">Already have an account?</span>
-                  <div>
-                    <button id= "button-signup" class="button-signup bg-white opacity-75 px-2 py-0.5 w-24 rounded-lg text-sm cursor-pointer block ml-auto mr-auto mt-1.5">SIGN UP</button>
-                  </div>
-                </div>
-              </form>
-            </div>
+    <div class="flex-1 w-full grid grid-cols-5 items-center">
+      <div class="col-span-5 mx-4 md:mx-8 lg:col-span-4 items-center justify-center flex flex-row h-3/4">
+        <div id="card-component" class="flex flex-col gap-y-8 w-2/3 md:w-1/2 min-w-64 max-w-md lg:min-w-96 h-auto bg-white rounded-lg shadow px-4 py-6 sm:py-8">
+          <div class="header-login-card">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto block login-image w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="64" height="64" viewBox="0 0 24 24">
+                <path fill="#260065" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+              </svg>
+            </i>
+            <h2 class="login-title text-xl sm:text-2xl lg:text-2xl xl:text-2xl mt-2 font-bold text-center">Create an account</h2>
           </div>
+          <form class="flex flex-col gap-4" action="#">
+            <div>
+              <label for="email" class="block mb-2 text-sm md:text-base font-medium text-label">Email</label>
+              <input type="email" name="email" id="email" class="border h-8 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+            </div>
+            <div>
+              <div class="flex select-none font-medium items-center justify-between pt-2">
+                <label for="password" class="block mb-2 text-sm md:text-base font-medium text-label">Password</label>
+                <button class= "flex place-content-end items-center pb-2" type="button">
+                  <i>
+                    <svg class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                      <path fill="#260065" d="M12 19c.946 0 1.81-.103 2.598-.281l-1.757-1.757c-.273.021-.55.038-.841.038c-5.351 0-7.424-3.846-7.926-5a8.642 8.642 0 0 1 1.508-2.297L4.184 8.305c-1.538 1.667-2.121 3.346-2.132 3.379a.994.994 0 0 0 0 .633C2.073 12.383 4.367 19 12 19zm0-14c-1.837 0-3.346.396-4.604.981L3.707 2.293L2.293 3.707l18 18l1.414-1.414l-3.319-3.319c2.614-1.951 3.547-4.615 3.561-4.657a.994.994 0 0 0 0-.633C21.927 11.617 19.633 5 12 5zm4.972 10.558l-2.28-2.28c.19-.39.308-.819.308-1.278c0-1.641-1.359-3-3-3c-.459 0-.888.118-1.277.309L8.915 7.501A9.26 9.26 0 0 1 12 7c5.351 0 7.424 3.846 7.926 5c-.302.692-1.166 2.342-2.954 3.558z"/>
+                    </svg>
+                  </i>
+                  <label class="text-sm md:text-base font-medium text-label">HIDE</label>
+                </button>
+              </div>
+              <input type="password" name="password" id="password" class="border h-8 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+            </div>
+            <div class="flex items-start">
+              <div class="flex items-center h-8">
+                <input type="checkbox" id="checkbox-terms" class="checkbox" />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="checkbox-terms" class="text-[.6rem] leading-3 sm:text-[.7rem] opacity-75 text-label">By creating an account, I agree to our <u>Terms</u> of use and <u>Privacy Policy</u> <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+              </div>
+            </div>
+            <div>
+              <div class="form-control mt-6 pb-2">
+                <button class="button-main text-white text-lg font-bold px-8 py-2 lg:px-12 border-0 rounded-lg cursor-pointer block mx-auto">LOGIN</button>
+              </div>
+              <div id= "divider-with-text" class="divider opacity-80 text-xs">or</div>
+              <div class="sign-up">
+                <span id="signup-text" class="text-[.6rem] leading-3 sm:text-[.7rem] text-primary py-2 text-center opacity-80 block mx-auto">Don't have an account yet?</span>
+                <div>
+                  <button id= "button-signup" class="opacity-75 text-sm font-semibold px-4 py-2 lg:px-6 rounded-lg cursor-pointer block mx-auto mt-2">SIGN UP</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </section>
+      </div>
     </div>
 
     <div class="self-end... w-full">
@@ -148,7 +154,7 @@
   </div>
 </div>
 
-<div id="myNav" class="overlay flex flex-col justify-between w-screen h-screen">
+<div id="myNav" class="overlay fixed left-0 z-10 bg-white overflow-hidden transition-all duration-250 flex flex-col justify-between w-screen h-screen">
   <div></div>
   <div class="self-center flex flex-col items-center overlay-content">
     <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl" href="">Products</a>
@@ -186,7 +192,6 @@
     </div>
   </div>
 </div>
-
 
 <script src="../js/app.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
