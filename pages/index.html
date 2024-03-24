@@ -14,35 +14,35 @@
 </head>
 <body>
   <!--Body-->
-  <div class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen overflow-auto">
+  <main class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen overflow-auto">
     <!--Sidebar, only on LG and up-->
-    <div class="max-lg:hidden lg:row-span-10">
-      <div class="flex flex-col justify-between h-full">
+    <aside class="max-lg:hidden lg:row-span-10">
+      <nav class="flex flex-col justify-between h-full">
         <a class="w-full h-auto" href="#">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
-        <div class="flex flex-col pb-4 pl-4">
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Products</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Sign up</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Size guide</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Terms</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Shipping</a>
-        </div>
-      </div>
-    </div>
+        <ul class="flex flex-col pb-4 pl-4">
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Sign up</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Shipping</a></li>
+        </ul>
+      </nav>
+    </aside>
     <!--Sidebar end-->
 
     <!--Main body-->
-    <div class="row-span-10 col-span-6 flex flex-col h-screen">
+    <section class="row-span-10 col-span-6 flex flex-col h-screen">
       <!--Top bar-->
-      <div class="self-start flex-none w-full">
+      <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
           <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="#">
             <img class="max-w-full h-auto mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
           </a>
           <!--Action buttons (cart, user, dark)-->
-          <div class="flex gap-2 pr-4 pt-4">
+          <section class="flex gap-2 pr-4 pt-4">
             <!--Cart-->
             <a href="">
               <i>
@@ -70,48 +70,46 @@
               </i>
             </a>
             <!--Dark end-->
-          </div>
+          </section>
           <!--Action buttons end-->
         </div>
-      </div>
+      </header>
       <!--Top bar end-->
 
       <!--Scrollable lookbook-->
-      <div class="flex-1 w-full grid grid-cols-5 items-center">
-      <!--<div class="flex-1 flex-col justify-between w-full pt-4">-->
-        <!--<div class="overflow-auto max-h-[calc(100vh-14rem)] sm:max-h-[calc(100vh-16rem)] lg:max-h-[calc(100vh-12.5rem)]"></div>-->
+      <section class="flex-1 w-full grid grid-cols-5 items-center">
         <div class="col-span-5 mx-4 md:mx-8 lg:col-span-4 items-center flex flex-row overflow-y-hidden overflow-x-auto whitespace-nowrap no-scrollbar h-3/4">
-          <div style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
-          <div style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></div>
+          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
+          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1"></button>
         </div>
-      </div>
+      </section>
       <!--Scrollable lookbook end-->
 
       <!--Bottom bar-->
-      <div class="self-end flex-none w-full">
+      <footer class="self-end flex-none w-full">
         <div class="flex justify-between lg:justify-end pb-4">
           <!--Hamburger-->
-          <div tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
+          <button tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 15 15">
               <path fill="#260065" fill-rule="evenodd" d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/>
             </svg>
-          </div>
+          </button>
           <!--Hamburger end-->
           <!--Socials icons-->
-          <div class="flex gap-2 items-center pr-4">
+          <section class="flex gap-2 items-center pr-4">
             <!--Instagram-->
             <a href="https://www.instagram.com/nowtyclothing/">
               <i>
@@ -133,14 +131,14 @@
               </i>
             </a>
             <!--X end-->
-          </div>
+          </section>
         </div>
         <!--Socials icons end-->
-      </div>
+      </footer>
       <!--Bottom bar end-->
-    </div>
+    </section>
     <!--Main body end-->
-  </div>
+  </main>
   <!--Body end-->
 
   <!--Navbar overlay-->
@@ -149,28 +147,28 @@
     <div></div>
 
     <!--Navlinks-->
-    <div class="self-center flex flex-col items-center overlay-content">
+    <nav class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Products</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Sign up</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Terms</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Shipping</a>
-    </div>
+    </nav>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->
     <div class="flex justify-between pb-4">
       <!--Overlay close button-->
-      <a href="javascript:void(0)" class="pl-4" onclick="closeNavbar()">
+      <button class="pl-4" onclick="closeNavbar()">
         <i>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 4L4 20M4 4l16 16"/>
           </svg>
         </i>
-      </a>
+      </button>
       <!--Overlay close button end-->
       <!--Overlay socials-->
-      <div class="flex gap-2 items-center pr-4">
+      <section class="flex gap-2 items-center pr-4">
         <!--Instagram-->
         <a href="https://www.instagram.com/nowtyclothing/">
           <i>
@@ -192,14 +190,14 @@
           </i>
         </a>
         <!--X end-->
-      </div>
+      </section>
       <!--Overlay socials end-->
     </div>
     <!--Overlay bottom bar end-->
   </div>
   <!--Navbar overlay end-->
 
-  <!--  Place for importing scripts-->
+  <!--Place for importing scripts-->
   <script src="../js/navbar.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </body>
