@@ -1,48 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
 :root {
   --primary-color: #260065;
   --primary-background-color: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
 }
+
 body {
   font-family: "Lexend Deca", sans-serif;
-  text-transform: uppercase;
-}
-
-html {
-    background: var(--primary-background-color);
-    font-family: "Lexend Deca", sans-serif;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-
-/* Sidebar links */
-.sidebar a {
-    color: var(--primary-color);
-}
-
-/* Active/current link */
-.sidebar a.active {
-  color: #531DACFF;
-}
-
-/* Links on mouse-over */
-.sidebar a:hover:not(.active) {
-  color: #531DACFF;
-}
-
-/* The Overlay (background) */
-.overlay {
-  bottom: -100%;
-}
-
-.overlay a {
   color: var(--primary-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--primary-background-color);
+  margin: 0 0;
+  padding: 0 0;
 }
-
-/* When you mouse over the navigation links, change their color */
-.overlay a:hover, .overlay a:focus {
-  color: #531DACFF;
-}
-
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
@@ -55,55 +26,20 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
-
-.login-title, .text-label, #signup-text, #divider-with-text{
-  color: var(--primary-color);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-#card-component{
-  border: 1px var(--primary-color) solid;
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
-#checkbox-terms {
-  width:1.2rem;
-  height: 1.2rem;
-  border-radius: 10%;
+.tab-active {
+  color: #260065;
 }
 
-#checkbox-terms:checked {
-  background-color: var(--primary-color);
-  background-image:
-    linear-gradient(-45deg, transparent 65%, var(--primary-color) 65.99%),
-    linear-gradient(45deg, transparent 75%, var(--primary-color) 75.99%),
-    linear-gradient(-45deg, var(--primary-color) 40%, transparent 40.99%),
-    linear-gradient(45deg, var(--primary-color) 30%, white 30.99%, white 40%, transparent 40.99%),
-    linear-gradient(-45deg, white 50%, var(--primary-color) 50.99%);
-}
-
-.button-main{
-  background-color: var(--primary-color);
-}
-
-.button-main:hover {
-  background-color: #531DACFF;
-  transition: 0.25s;
-}
-
-#button-signup {
-  color: var(--primary-color);
-  border: var(--primary-color) 1px solid;
-}
-
-/* Links on mouse-over */
-#button-signup:hover:not(.active) {
-  color: white;
-  background-color: var(--primary-color);
-  opacity: 100;
-  transition: 0.25s;
-}
-
-#divider-with-text::before, #divider-with-text::after {
-  opacity: 80%;
-  background-color: var(--primary-color);
-  color: var(--primary-color);
+.tab-inactive {
+  color: rgba(38, 0, 101, 0.5);
 }
