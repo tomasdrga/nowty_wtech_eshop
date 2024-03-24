@@ -14,40 +14,35 @@
 </head>
 <body>
   <!--Body-->
-  <div class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen lg:overflow-hidden">
+  <main class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen lg:overflow-hidden">
     <!--Sidebar, only on LG and up-->
-    <div class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
-      <div class="flex flex-col justify-between h-full">
+    <aside class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
+      <nav class="flex flex-col justify-between h-full">
         <a class="w-full h-auto" href="#">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
         </a>
-        <div class="flex flex-col pb-4 pl-4">
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Products</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Sign up</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Size guide</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Terms</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Shipping</a>
-        </div>
-      </div>
-    </div>
+        <ul class="flex flex-col pb-4 pl-4">
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Sign up</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="">Shipping</a></li>
+        </ul>
+      </nav>
+    </aside>
     <!--Sidebar end-->
 
     <!--Main body-->
-    <div class="row-span-10 col-span-6 flex flex-col h-screen">
+    <section class="row-span-10 col-span-6 flex flex-col h-screen">
       <!--Top bar-->
-      <div class="self-start flex-none w-full">
+      <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
           <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="#">
             <img class="max-w-full h-auto mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
           </a>
           <!--Action buttons (cart, user, dark)-->
-          <div class="flex gap-2 pr-4 pt-4">
+          <section class="flex gap-2 pr-4 pt-4">
             <!--Cart-->
             <a href="">
               <i>
@@ -76,20 +71,20 @@
               </i>
             </a>
             <!--Dark end-->
-          </div>
+          </section>
           <!--Action buttons end-->
         </div>
-      </div>
+      </header>
       <!--Top bar end-->
 
       <!--Shipping information-->
-      <div class="flex-1 w-full grid grid-cols-5 items-center max-lg:items-start">
+      <section class="flex-1 w-full grid grid-cols-5 items-center max-lg:items-start">
         <div class="flex flex-row col-span-5 lg:col-span-5 items-center justify-center mx-4 md:mx-8">
           <div class="flex flex-col w-screen gap-y-3">
-            <div class="flex justify-center justify-around my-2 md:my-4 lg:mb-6">
+            <section class="flex justify-center justify-around my-2 md:my-4 lg:mb-6">
               <h1 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold">Shipping</h1>
-            </div>
-            <div class="flex flex-col overflow-auto items-center">
+            </section>
+            <section class="flex flex-col overflow-auto items-center">
               <div>
                 <div class="border-[#260065] border-b-[1px] sm:border-b-2 mb-1">
                   <h2 class="text-xs sm:text-lg md:text-xl lg:text-2xl font-bold">When will my drip be shipped?</h2>
@@ -100,56 +95,50 @@
                 <p class="text-xs sm:text-base md:text-lg lg:text-xl opacity-75 pb-1">Norway €24 (5-7 working days delivery)</p>
                 <p class="text-xs sm:text-base md:text-lg lg:text-xl opacity-75 pb-1">Denmark €12 (3-5 working days delivery)</p>
               </div>
-            </div>
+            </section>
           </div>
         </div>
-      </div>
+      </section>
       <!--Shipping information end-->
 
       <!--Bottom bar-->
-      <div class="self-end flex-none w-full">
+      <footer class="self-end flex-none w-full">
         <div class="flex justify-between lg:justify-end pb-4">
           <!--Hamburger-->
-          <div tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
+          <button tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 15 15">
               <path fill="#260065" fill-rule="evenodd" d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/>
             </svg>
-          </div>
+          </button>
           <!--Hamburger end-->
         </div>
         <!--Socials icons end-->
-      </div>
+      </footer>
       <!--Bottom bar end-->
-    </div>
+    </section>
     <!--Main body end-->
-  </div>
+  </main>
   <!--Body end-->
 
   <!--Navbar overlay-->
-  <div id="navbar-overlay"
-       class="fixed -bottom-full left-0 z-[1] flex flex-col justify-between w-screen h-screen bg-white transition-all duration-250 overflow-hidden">
+  <div id="navbar-overlay" class="fixed -bottom-full left-0 z-[1] flex flex-col justify-between w-screen h-screen bg-white transition-all duration-250 overflow-hidden">
     <!--Spacer-->
     <div></div>
 
     <!--Navlinks-->
-    <div class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Shipping</a>
-    </div>
+    <nav class="self-center flex flex-col items-center overlay-content">
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Products</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Sign up</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Shipping</a>
+    </nav>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->
     <div class="flex justify-between pb-4">
       <!--Overlay close button-->
-      <a href="javascript:void(0)" class="pl-4" onclick="closeNavbar()">
+      <button class="pl-4" onclick="closeNavbar()">
         <i>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25"
                height="25" viewBox="0 0 24 24">
@@ -157,10 +146,10 @@
                   d="M20 4L4 20M4 4l16 16"/>
           </svg>
         </i>
-      </a>
+      </button>
       <!--Overlay close button end-->
       <!--Overlay socials-->
-      <div class="flex gap-2 items-center pr-4">
+      <section class="flex gap-2 items-center pr-4">
         <!--Instagram-->
         <a href="https://www.instagram.com/nowtyclothing/">
           <i>
@@ -186,7 +175,7 @@
           </i>
         </a>
         <!--X end-->
-      </div>
+      </section>
       <!--Overlay socials end-->
     </div>
     <!--Overlay bottom bar end-->
