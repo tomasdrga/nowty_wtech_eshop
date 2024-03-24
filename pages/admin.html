@@ -14,28 +14,28 @@
 </head>
 <body>
   <!--Body-->
-  <div class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen max-md:overflow-auto lg:overflow-hidden">
+  <main class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen max-md:overflow-auto lg:overflow-hidden">
     <!--Sidebar, only on LG and up-->
-    <div class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
-      <div class="flex flex-col justify-between h-full">
-        <a class="w-full h-auto" href="#">
+    <aside class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
+      <nav class="flex flex-col justify-between h-full">
+        <a class="w-full h-auto" href="index.html">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
-        <div class="flex flex-col pb-4 pl-4">
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Products</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Sign up</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Size guide</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Terms</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]" href="">Shipping</a>
-        </div>
-      </div>
-    </div>
+        <ul class="flex flex-col pb-4 pl-4">
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="category.html">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="signup.html">Sign up</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="size_guide.html">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="terms_conditions.html">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </nav>
+    </aside>
     <!--Sidebar end-->
 
     <!--Main body-->
-    <div class="row-span-10 col-span-6 flex flex-col h-screen">
+    <section class="row-span-10 col-span-6 flex flex-col h-screen">
       <!--Top bar-->
-      <div class="self-start flex-none w-full">
+      <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
           <div class="lg:hidden w-1/4 md:w-1/3">
@@ -45,7 +45,7 @@
           </div>
 
           <!--Action buttons (cart, user, dark)-->
-          <div class="flex gap-2 pr-4 pt-4 w-1/4 md:w-1/3 justify-end">
+          <section class="flex gap-2 pr-4 pt-4 w-1/4 md:w-1/3 justify-end">
             <!--Cart-->
             <a href="">
               <i>
@@ -73,17 +73,17 @@
               </i>
             </a>
             <!--Dark end-->
-          </div>
+          </section>
           <!--Action buttons end-->
         </div>
-      </div>
+      </header>
       <!--Top bar end-->
 
       <!--Products-->
-      <div class="flex-1 flex-col justify-between w-full">
+      <section class="flex-1 flex-col justify-between w-full">
         <!--Top row-->
-        <h2 class=" sm:text-lg md:text-xl lg:text-2xl font-semibold mb-1 pl-4">Admin Dashboard</h2>
-        <div class="flex flex-row justify-between px-4 border-b-2 border-[#260065] pt-2 pb-1">
+        <h2 class="sm:text-lg md:text-xl lg:text-2xl font-semibold mb-1 pl-4">Admin Dashboard</h2>
+        <section class="flex flex-row justify-between px-4 border-b-2 border-[#260065] pt-2 pb-1">
           <!--Tab system-->
           <div class="flex flex-row gap-x-8 overflow-x-auto no-scrollbar text-xs md:text-sm lg:text-base">
             <button class="tab-btn tab-active text-nowrap font-semibold" data-target="tab1">OVERVIEW</button>
@@ -92,37 +92,37 @@
             <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab4">LIST ALL USERS</button>
           </div>
           <!--Tab system end-->
-        </div>
+        </section>
         <!--Top row end-->
 
         <!--Scrollable content-->
-        <div class="overflow-auto max-h-[calc(100vh-9rem)] sm:max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-11rem)] lg:md:max-h-[calc(100vh-5rem)]">
+        <section class="overflow-auto max-h-[calc(100vh-9rem)] sm:max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-11rem)] lg:md:max-h-[calc(100vh-5rem)]">
           <!--Overview tab-->
           <div id="tab1" class="tab-content py-4">
             <!--Charts part-->
-            <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 gap-x-4 mx-20">
+            <section class="flex flex-row justify-between border-b-2 border-[#260065]/50 gap-x-4 mx-20">
               <!--Pie chart-->
-              <div class="w-1/3 mb-4">
+              <article class="w-1/3 mb-4">
                 <div class="flex flex-col rounded-[5px] bg-[#F5F5F5] h-[24rem]">
                   <span class="text-lg font-semibold text-[#260065] py-4 px-2">Order amount</span>
                   <div class="py-6 mt-4 grid place-items-center px-2">
                     <div id="pie-chart"></div>
                   </div>
                 </div>
-              </div>
+              </article>
               <!--Pie chart end-->
 
               <!--Line chart-->
-              <div class="w-2/3">
+              <article class="w-2/3">
                 <div class="flex flex-col rounded-[5px] bg-[#F5F5F5] h-[24rem]">
                   <span class="text-lg font-semibold text-[#260065] py-4 px-2">Orders</span>
                   <div class="pt-6 px-2 pb-0">
                     <div id="line-chart"></div>
                   </div>
                 </div>
-              </div>
+              </article>
               <!--Line chart end-->
-            </div>
+            </section>
             <!--Charts part end-->
 
             <!--One item in list of information part-->
@@ -612,7 +612,7 @@
           <!--Crate new tab-->
           <div id="tab3" class="tab-content hidden">
             <!--Inputs for create product-->
-            <div class="grid grid-cols-3 grid-rows-6 gap-y-5 gap-x-4 border-b-2 border-[#260065]/50 pt-2 px-4 pb-4">
+            <section class="grid grid-cols-3 grid-rows-6 gap-y-5 gap-x-4 border-b-2 border-[#260065]/50 pt-2 px-4 pb-4">
               <!--Title of product-->
               <div class="col-start-1 row-start-1">
                 <span class="text-sm font-medium">Title</span>
@@ -674,7 +674,7 @@
               <!--Size guide end-->
 
               <!--Description and sizes-->
-              <div class="col-start-2 row-start-1 row-span-4 col-span-2">
+              <section class="col-start-2 row-start-1 row-span-4 col-span-2">
                 <div class="flex flex-row gap-x-4">
                   <!--Texts for description and tech details-->
                   <div class="flex flex-col gap-y-5 w-8/12">
@@ -901,11 +901,11 @@
                   </div>
                   <!--Sizes quantity end-->
                 </div>
-              </div>
+              </section>
               <!--Description and sizes end-->
 
               <!--Product images-->
-              <div class="col-start-2 row-start-5 row-span-2 col-span-2">
+              <section class="col-start-2 row-start-5 row-span-2 col-span-2">
                 <span class="text-sm font-medium">Images</span>
                 <!--Image input with preview-->
                 <div class="border-[#260065]/50 border-[1px] h-[116px] rounded-[5px] p-3 grid grid-cols-5 gap-x-8">
@@ -932,18 +932,15 @@
                   </div>
                 </div>
                 <!--Image input with preview end-->
-              </div>
+              </section>
               <!--Product images end-->
-            </div>
+            </section>
             <!--Inputs for create product end-->
 
             <!--Create product button-->
-            <div class="flex justify-end pt-8 pr-4 pb-10">
-              <button
-                class="text-xl text-white font-bold border-0 rounded-lg bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250 px-8 py-2">
-                CREATE PRODUCT
-              </button>
-            </div>
+            <section class="flex justify-end pt-8 pr-4 pb-10">
+              <button class="text-xl text-white font-bold border-0 rounded-lg bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250 px-8 py-2">CREATE PRODUCT</button>
+            </section>
             <!--Create product button end-->
           </div>
           <!--Create new tab end-->
@@ -1368,27 +1365,27 @@
             </table>
           </div>
           <!--List all users tab end-->
-        </div>
+        </section>
         <!--Scrollable content end-->
-      </div>
+      </section>
       <!--Products end-->
 
       <!--Bottom bar-->
-      <div class="self-end flex-none w-full">
+      <footer class="self-end flex-none w-full">
         <div class="flex justify-between lg:justify-end pb-4">
           <!--Hamburger-->
-          <div tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
+          <button tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 15 15">
               <path fill="#260065" fill-rule="evenodd" d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/>
             </svg>
-          </div>
+          </button>
           <!--Hamburger end-->
         </div>
-      </div>
+      </footer>
       <!--Bottom bar end-->
-    </div>
+    </section>
     <!--Main body end-->
-  </div>
+  </main>
   <!--Body end-->
 
   <!--Navbar overlay-->
@@ -1397,28 +1394,28 @@
     <div></div>
 
     <!--Navlinks-->
-    <div class="self-center flex flex-col items-center overlay-content">
+    <nav class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Products</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Sign up</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Terms</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="">Shipping</a>
-    </div>
+    </nav>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->
     <div class="flex justify-between pb-4">
       <!--Overlay close button-->
-      <a href="javascript:void(0)" class="pl-4" onclick="closeNavbar()">
+      <button class="pl-4" onclick="closeNavbar()">
         <i>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 4L4 20M4 4l16 16"/>
           </svg>
         </i>
-      </a>
+      </button>
       <!--Overlay close button end-->
       <!--Overlay socials-->
-      <div class="flex gap-2 items-center pr-4">
+      <section class="flex gap-2 items-center pr-4">
         <!--Instagram-->
         <a href="https://www.instagram.com/nowtyclothing/">
           <i>
@@ -1440,7 +1437,7 @@
           </i>
         </a>
         <!--X end-->
-      </div>
+      </section>
       <!--Overlay socials end-->
     </div>
     <!--Overlay bottom bar end-->
