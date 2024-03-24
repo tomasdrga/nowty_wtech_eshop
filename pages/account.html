@@ -14,42 +14,42 @@
 </head>
 <body>
   <!--Body-->
-  <div class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen lg:overflow-hidden">
+  <main class="grid grid-rows-10 grid-cols-6 gap-y-4 grid-flow-col-dense max-w-screen h-screen lg:overflow-hidden">
     <!--Sidebar, only on LG and up-->
-    <div class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
-      <div class="flex flex-col justify-between h-full">
-        <a class="w-full h-auto" href="#">
+    <aside class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
+      <nav class="flex flex-col justify-between h-full">
+        <a class="w-full h-auto" href="index.html">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
         </a>
         <div class="flex flex-col pb-4 pl-4">
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Products</a>
+             href="category.html">Products</a>
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Sign up</a>
+             href="signup.html">Sign up</a>
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Size guide</a>
+             href="size_guide.html">Size guide</a>
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Terms</a>
+             href="terms_conditions.html">Terms</a>
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="">Shipping</a>
+             href="shipping.html">Shipping</a>
         </div>
-      </div>
-    </div>
+      </nav>
+    </aside>
     <!--Sidebar end-->
 
     <!--Main body-->
-    <div class="row-span-10 col-span-6 flex flex-col h-screen">
+    <section class="row-span-10 col-span-6 flex flex-col h-screen">
       <!--Top bar-->
-      <div class="self-start flex-none w-full">
+      <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
           <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="#">
             <img class="max-w-full h-auto mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
           </a>
           <!--Action buttons (cart, user, dark)-->
-          <div class="flex gap-2 pr-4 pt-4">
+          <section class="flex gap-2 pr-4 pt-4">
             <!--Cart-->
-            <a href="">
+            <a href="cart.html">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Z"/>
@@ -58,7 +58,7 @@
             </a>
             <!--Cart end-->
             <!--User-->
-            <a href="">
+            <a href="account.html">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="#260065" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
@@ -75,14 +75,14 @@
               </i>
             </a>
             <!--Dark end-->
-          </div>
+          </section>
           <!--Action buttons end-->
         </div>
-      </div>
+      </header>
       <!--Top bar end-->
 
       <!--My account overview content-->
-      <div class="flex-1 flex-col justify-between w-full">
+      <section class="flex-1 flex-col justify-between w-full">
         <!--Top row-->
         <h2 class=" sm:text-lg md:text-xl lg:text-2xl font-semibold mb-1 pl-4">My account</h2>
         <div class="flex flex-row justify-between px-4 border-b-2 border-[#260065] pt-2 pb-1">
@@ -102,15 +102,15 @@
         </div>
 
         <!--Scrollable content-->
-        <div class="overflow-auto max-h-[calc(100vh-11rem)] sm:max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-13rem)] lg:md:max-h-[calc(100vh-5rem)]">
+        <section class="overflow-auto max-h-[calc(100vh-11rem)] sm:max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-13rem)] lg:md:max-h-[calc(100vh-5rem)]">
           <!--Overview tab-->
-          <div id="tab1" class="tab-content py-4">
-            <div class="flex flex-col pt-2">
+          <section id="tab1" class="tab-content py-4">
+            <article class="flex flex-col">
               <!--Recent orders-->
               <div class="flex flex-col border-b-2 border-[#260065]/50">
                 <h3 class="text-sm lg:text-base font-medium mb-1 pl-4">Recent orders</h3>
                 <!--First order-->
-                <div class="flex flex-row justify-between border-b-[1px] border-[#260065]/50">
+                <article class="flex flex-row justify-between border-b-[1px] border-[#260065]/50">
                   <div class="flex flex-col pl-4">
                     <div class="flex flex-row gap-x-8 sm:gap-x-16">
                       <div class="text-xs sm:text-sm opacity-90">26/2/2024</div>
@@ -121,13 +121,13 @@
                     <div class="text-xs sm:text-sm opacity-50">shipped</div>
                   </div>
                   <div class="flex items-center">
-                    <a href="#" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
+                    <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
                   </div>
-                </div>
+                </article>
                 <!--First order end-->
 
                 <!--Second order-->
-                <div class="flex flex-row justify-between">
+                <article class="flex flex-row justify-between">
                   <div class="flex flex-col pl-4">
                     <div class="flex flex-row gap-x-8 sm:gap-x-16">
                       <div class="text-user text-xs sm:text-sm opacity-90">26/2/2024</div>
@@ -138,15 +138,15 @@
                     <div class="text-user text-xs sm:text-sm opacity-50">shipped</div>
                   </div>
                   <div class="flex items-center">
-                    <a href="#" class="text-user text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
+                    <a href="" class="text-user text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
                   </div>
-                </div>
+                </article>
                 <!--Second order end-->
               </div>
               <!--Recent orders end-->
 
               <!--My details-->
-              <div class="flex flex-row justify-between border-b-2 border-[#260065]/50">
+              <section class="flex flex-row justify-between border-b-2 border-[#260065]/50">
                 <div class="flex flex-col pl-4">
                   <h3 class="text-sm lg:text-base font-medium mb-1 mt-2">My details</h3>
                   <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
@@ -154,13 +154,13 @@
                   <div class="text-xs sm:text-sm opacity-90">•••••••••••</div>
                 </div>
                 <div class="flex items-center">
-                  <a href="#" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
+                  <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
                 </div>
-              </div>
+              </section>
               <!--My details end-->
 
               <!--Shipping address-->
-              <div class="flex flex-row justify-between border-b-2 border-[#260065]/50">
+              <section class="flex flex-row justify-between border-b-2 border-[#260065]/50">
                 <div class="flex flex-col pl-4">
                   <h3 class="text-sm lg:text-base font-medium mb-1 mt-2">Shipping address</h3>
                   <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
@@ -170,19 +170,19 @@
                   <div class="text-xs sm:text-sm opacity-90">Slovakia</div>
                 </div>
                 <div class="flex items-center">
-                  <a href="#" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
+                  <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
                 </div>
-              </div>
+              </section>
               <!--Shipping address end-->
-            </div>
-          </div>
+            </article>
+          </section>
           <!--Overview tab end-->
           <!--Orders tab-->
-          <div id="tab2" class="tab-content hidden">
+          <section id="tab2" class="tab-content hidden">
             <!--Orders content-->
             <div class="flex flex-col pt-2 gap-y-2">
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-xs sm:text-sm opacity-90">26/2/2024</div>
                   <div class="text-xs sm:text-sm opacity-50">#2001781488156</div>
@@ -190,11 +190,11 @@
                 <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-xs sm:text-sm opacity-90">€780</div>
                 <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
 
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-xs sm:text-sm opacity-90">12/1/2024</div>
                   <div class="text-xs sm:text-sm opacity-50">#2001781488761</div>
@@ -202,11 +202,11 @@
                 <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-xs sm:text-sm opacity-90">€15780</div>
                 <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
 
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-user text-xs sm:text-sm opacity-90">1/1/2024</div>
                   <div class="text-user text-xs sm:text-sm opacity-50">#2001781488228</div>
@@ -214,11 +214,11 @@
                 <div class="text-user text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-user text-xs sm:text-sm opacity-90">€12800</div>
                 <div class="text-user text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
 
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-xs sm:text-sm opacity-90">2/12/2023</div>
                   <div class="text-xs sm:text-sm opacity-50">#2001781981273</div>
@@ -226,11 +226,11 @@
                 <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-xs sm:text-sm opacity-90">€680</div>
                 <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
 
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-xs sm:text-sm opacity-90">23/11/2023</div>
                   <div class="text-xs sm:text-sm opacity-50">#2001781487452</div>
@@ -238,11 +238,11 @@
                 <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-xs sm:text-sm opacity-90">€1980</div>
                 <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
 
               <!--Order-->
-              <div class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
                 <div class="flex flex-row gap-x-8 sm:gap-x-16">
                   <div class="text-xs sm:text-sm opacity-90">18/9/2023</div>
                   <div class="text-xs sm:text-sm opacity-50">#2001781488156</div>
@@ -250,18 +250,18 @@
                 <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
                 <div class="text-xs sm:text-sm opacity-90">€1880</div>
                 <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </div>
+              </article>
               <!--Order end-->
             </div>
             <!--Orders content end-->
-          </div>
+          </section>
           <!--Orders tab end-->
           <!--My details new tab-->
-          <div id="tab3" class="tab-content hidden">
+          <section id="tab3" class="tab-content hidden">
             <!--Account details-->
             <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 pt-2">
               <!--Left side of component-->
-              <div class="flex flex-col pl-4">
+              <section class="flex flex-col pl-4">
                 <label for="first_name">
                   <input type="text" id="first_name" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="ASAP" required="">
                 </label>
@@ -274,7 +274,7 @@
                 <label for="password">
                   <input type="password" id="password" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none pb-4" placeholder="•••••••••••" required="">
                 </label>
-              </div>
+              </section>
               <!--Left side of component end-->
 
               <!--Right side of component-->
@@ -284,14 +284,14 @@
               <!--Right side of component end-->
             </div>
             <!--Account details end-->
-          </div>
+          </section>
           <!--My details tab end-->
           <!--Addresses tab-->
-          <div id="tab4" class="tab-content hidden">
+          <section id="tab4" class="tab-content hidden">
             <!--Shipping address-->
             <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 pt-2">
               <!--Left part of shipping address-->
-              <div class="flex flex-col pl-4">
+              <section class="flex flex-col pl-4">
                 <h3 class="text-sm lg:text-base font-medium text-user mb-1 mt-2">Shipping address</h3>
 
                 <!--Name-->
@@ -323,7 +323,7 @@
                   <input type="text" id="country" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none pb-4" placeholder="SLOVAKIA" required="">
                 </label>
                 <!--Country end-->
-              </div>
+              </section>
               <!--Left part of shipping address end-->
 
               <!--Right part of shipping address-->
@@ -333,30 +333,30 @@
               <!--Right part of shipping address end-->
             </div>
             <!--Shipping address end-->
-          </div>
+          </section>
           <!--Addresses tab end-->
-        </div>
+        </section>
         <!--Scrollable content end-->
-      </div>
+      </section>
       <!--My account overview content end-->
 
       <!--Bottom bar-->
-      <div class="self-end flex-none w-full">
+      <footer class="self-end flex-none w-full">
         <div class="flex justify-between lg:justify-end pb-4">
           <!--Hamburger-->
-          <div tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
+          <button tabindex="0" role="button" class="lg:hidden pl-4" onclick="openNavbar()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 15 15">
               <path fill="#260065" fill-rule="evenodd" d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/>
             </svg>
-          </div>
+          </button>
           <!--Hamburger end-->
         </div>
         <!--Socials icons end-->
-      </div>
+      </footer>
       <!--Bottom bar end-->
-    </div>
+    </section>
     <!--Main body end-->
-  </div>
+  </main>
   <!--Body end-->
 
   <!--Navbar overlay-->
@@ -368,22 +368,22 @@
     <!--Navlinks-->
     <div class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Products</a>
+         href="category.html">Products</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Sign up</a>
+         href="signup.html">Sign up</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Size guide</a>
+         href="size_guide.html">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Terms</a>
+         href="terms_conditions.html">Terms</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="">Shipping</a>
+         href="shipping.html">Shipping</a>
     </div>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->
     <div class="flex justify-between pb-4">
       <!--Overlay close button-->
-      <a href="javascript:void(0)" class="pl-4" onclick="closeNavbar()">
+      <button class="pl-4" onclick="closeNavbar()">
         <i>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25"
                height="25" viewBox="0 0 24 24">
@@ -391,11 +391,11 @@
                   d="M20 4L4 20M4 4l16 16"/>
           </svg>
         </i>
-      </a>
+      </button>
       <!--Overlay close button end-->
 
       <!--Overlay socials-->
-      <div class="flex gap-2 items-center pr-4">
+      <section class="flex gap-2 items-center pr-4">
         <!--Instagram-->
         <a href="https://www.instagram.com/nowtyclothing/">
           <i>
@@ -417,7 +417,7 @@
           </i>
         </a>
         <!--X end-->
-      </div>
+      </section>
       <!--Overlay socials end-->
     </div>
     <!--Overlay bottom bar end-->
