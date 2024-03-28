@@ -1,4 +1,54 @@
-.idea
+# System and editor files
 .DS_Store
+.idea/
+phpintel
+
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Development logs
+npm-debug.log
+yarn-error.log
+
+# Build directories
 dist
 .cache
+
+# Laravel specific
+/bootstrap/compiled.php
+/public/hot
+/public/storage
+/storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+.phpunit.result.cache
+.vendor
+
+# Laravel 4 specific
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage/
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage/
+public_html/hot
+
+# Environment configuration
+.env.*
+
+# Misc
+.config
+composer.phar
+phpunit.xml
+
+# Version control system
+/.vagrant
+
+# Other
+*.log
+*.sass-cache
+*.tmb

@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+:root {
+  --primary-color: #260065;
+  --primary-background-color: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
+}
+
+body {
+  font-family: "Lexend Deca", sans-serif;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--primary-background-color);
+  margin: 0 0;
+  padding: 0 0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.tab-active {
+  color: #260065;
+}
+
+.tab-inactive {
+  color: rgba(38, 0, 101, 0.5);
+}
