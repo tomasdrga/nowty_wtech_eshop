@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - laravel
+  web:
+    image: 'nginx:latest'
+    ports:
+      - '8080:80'
+    volumes:
+      - .:/var/www/html
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - app
+      - db
+    networks:
+      - laravel
+  db:
+    image: 'postgres:16'
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    networks:
+      - laravel
+networks:
+  laravel:
