@@ -43,3 +43,19 @@ input[type=number] {
 .tab-inactive {
   color: rgba(38, 0, 101, 0.5);
 }
+
+.input-pulse {
+  animation: pulse 1.25s 3;
+}
+@keyframes pulse {
+  0% {
+    color: var(--primary-color);
+  }
+  50% {
+    opacity: 55%;
+  }
+  100% {
+    color: var(--primary-color);;
+  }
+}
+
