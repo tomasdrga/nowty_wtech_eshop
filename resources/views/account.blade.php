@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Nowty Clothing - Account - Overview</title>
+  <title>Nowty Clothing • Account</title>
   <meta name="description" content="Account overview page of Nowty Clothing website."/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" href="/img/favicon/nowty_face.png" sizes="any"/>
@@ -21,9 +21,9 @@
         <a class="w-full h-auto" href="/">
           <img class="h-auto max-w-full mx-auto" src="/img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
         </a>
-        <div class="flex flex-col pb-4 pl-4">
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/category">Products</a>
+        <ul class="flex flex-col pb-4 pl-4">
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/products">Products</li>
           @auth
             @if(Auth::user()->role == 'admin')
               <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
@@ -33,13 +33,13 @@
           @else
             <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
           @endauth
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/size_guide">Size guide</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/terms_conditions">Terms</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/shipping">Shipping</a>
-        </div>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/size_guide">Size guide</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/terms">Terms</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/shipping">Shipping</li>
+        </ul>
       </nav>
     </aside>
     <!--Sidebar end-->
@@ -50,7 +50,7 @@
       <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
-          <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="#">
+          <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="/">
             <img class="max-w-full h-auto mx-auto" src="img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
           </a>
           <!--Action buttons (cart, user, dark)-->
@@ -335,9 +335,9 @@
     <div></div>
 
     <!--Navlinks-->
-    <div class="self-center flex flex-col items-center overlay-content">
+    <nav class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="/category">Products</a>
+         href="/products">Products</a>
       @auth
         @if(Auth::user()->role == 'admin')
           <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
@@ -350,10 +350,10 @@
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/size_guide">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="/terms_conditions">Terms</a>
+         href="/terms">Terms</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/shipping">Shipping</a>
-    </div>
+    </nav>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->

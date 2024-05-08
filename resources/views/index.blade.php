@@ -22,7 +22,8 @@
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
         <ul class="flex flex-col pb-4 pl-4">
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/category">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/products">Products</li>
           @auth
             @if(Auth::user()->role == 'admin')
               <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
@@ -32,9 +33,12 @@
           @else
             <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
           @endauth
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/size_guide">Size guide</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/terms_conditions">Terms</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/shipping">Shipping</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/size_guide">Size guide</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/terms">Terms</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/shipping">Shipping</li>
         </ul>
       </nav>
     </aside>
@@ -86,22 +90,10 @@
 
       <!--Scrollable lookbook-->
       <section class="flex-1 w-full grid grid-cols-5 items-center">
-        <div class="col-span-5 mx-4 md:mx-8 lg:col-span-4 items-center flex flex-row overflow-y-hidden overflow-x-auto whitespace-nowrap no-scrollbar h-3/4">
-          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/palace_1.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_2.png")' class="shrink rounded-lg bg-auto bg-top max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/palace_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/supreme_3.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
-          <button style='background-image: url("../img/products/carhartt_2.png")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1" onclick="window.location.href='/product_detail'"></button>
+        <div class="col-span-5 mx-4 md:mx-8 py-2 lg:col-span-4 items-center flex flex-row overflow-y-hidden overflow-x-auto whitespace-nowrap no-scrollbar h-3/4">
+          @foreach($products as $product)
+            <a style='background-image: url("../img/products/{{ $product->indexImage->name }}")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1 hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="{{ route('product.show', $product->slug) }}"></a>
+          @endforeach
         </div>
       </section>
       <!--Scrollable lookbook end-->
@@ -156,7 +148,8 @@
 
     <!--Navlinks-->
     <nav class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/category">Products</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/products">Products</a>
       @auth
         @if(Auth::user()->role == 'admin')
           <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
@@ -166,11 +159,12 @@
       @else
         <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
       @endauth
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/size_guide">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/terms_conditions">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/shipping">Shipping</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/size_guide">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/terms">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/shipping">Shipping</a>
     </nav>
     <!--Navlinks end-->
 

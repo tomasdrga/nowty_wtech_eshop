@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Nowty Clothing</title>
+  <title>Nowty Clothing • {{$product->name}}</title>
   <meta name="description" content="Product detail page for Nowty Clothing." />
 
   <link rel="icon" href="/img/favicon/nowty_face.png" sizes="any" />
@@ -18,15 +18,15 @@
     <!--Sidebar, only on LG and up-->
     <aside class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
       <nav class="flex flex-col justify-between h-full">
-        <a class="w-full h-auto" href="index.html">
+        <a class="w-full h-auto" href="/">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
         <ul class="flex flex-col pb-4 pl-4">
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="category.html">Products</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="signup.html">Sign up</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="size_guide.html">Size guide</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="terms_conditions.html">Terms</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="shipping.html">Shipping</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/products">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/size_guide">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/terms">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/shipping">Shipping</a></li>
         </ul>
       </nav>
     </aside>
@@ -39,7 +39,7 @@
         <div class="flex justify-between">
           <!--Website logo on smaller than LG-->
           <div class="lg:hidden w-1/4 md:w-1/3">
-            <a class="justify-start w-24 sm:w-32 md:w-36 h-auto pt-2" href="#">
+            <a class="justify-start w-24 sm:w-32 md:w-36 h-auto pt-2" href="/">
               <img class="w-24 sm:w-32 md:w-36 h-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
             </a>
           </div>
@@ -61,7 +61,7 @@
           <!--Action buttons (cart, user, dark)-->
           <section class="flex gap-2 pr-4 pt-4 w-1/4 md:w-1/3 justify-end">
             <!--Cart-->
-            <a href="cart.html">
+            <a href="/cart">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Z"/>
@@ -70,7 +70,7 @@
             </a>
             <!--Cart end-->
             <!--User-->
-            <a href="account.html">
+            <a href="/account">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
@@ -113,25 +113,19 @@
         <section class="text-xs flex w-full border-b-2 border-[#260065]/75 overflow-x-auto no-scrollbar">
           <ol class="flex items-center whitespace-nowrap pl-4 pb-1 pt-2" aria-label="Breadcrumb">
             <li class="inline-flex items-center">
-              <a class="flex items-center text-xs opacity-50 hover:opacity-75 text-breadcrumb" href="category.html">All products</a>
+              <a class="flex items-center text-xs opacity-50 hover:opacity-75 text-breadcrumb" href="/products#all">All products</a>
               <svg class="w-5 h-5 md:w-6 md:h-6 opacity-50" width="12" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 13L10 3" stroke="#260065" stroke-linecap="round" />
               </svg>
             </li>
             <li class="inline-flex items-center">
-              <a class="flex items-center text-xs opacity-50 hover:opacity-75 text-breadcrumb" href="category.html">Bottoms</a>
-              <svg class="w-5 h-5 md:w-6 md:h-6 opacity-50" width="12" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M6 13L10 3" stroke="#260065" stroke-linecap="round" />
-              </svg>
-            </li>
-            <li class="inline-flex items-center">
-              <a class="flex items-center text-xs opacity-50 hover:opacity-75 text-breadcrumb" href="category.html">Pants</a>
+              <a class="flex items-center text-xs opacity-50 hover:opacity-75 text-breadcrumb" href="/products#{{$product->category}}">Bottoms</a>
               <svg class="w-5 h-5 md:w-6 md:h-6 opacity-50" width="12" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 13L10 3" stroke="#260065" stroke-linecap="round" />
               </svg>
             </li>
             <li class="inline-flex items-center text-xs opacity-50">
-              P45 standard jean sand wash
+              {{$product->name}}
             </li>
           </ol>
         </section>
@@ -141,12 +135,14 @@
         <section class="overflow-auto h-[calc(100vh-12.5rem)] sm:h-[calc(100vh-12rem)] md:h-[calc(100vh-13rem)] lg:md:h-[calc(100vh-6rem)] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-8 px-4 sm:px-16 py-8">
           <!--Image side-->
           <section class="flex flex-col justify-around items-center h-full">
-            <div class="justify-center justify-items-center self-center w-3/4 h-3/5 min-h-24 max-h-96"><img class="h-full object-contain mx-auto" src="../img/products/palace_8.png" alt=""></div>
+            <div class="justify-center justify-items-center self-center w-3/4 h-3/5 min-h-24 max-h-96"><img class="h-full object-contain mx-auto main-image" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }}"></div>
             <div class="flex flex-row justify-center items-center w-full gap-x-2">
-              <div class="rounded-lg"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28" src="../img/products/palace_9.png" alt=""></div>
-              <div class="rounded-lg"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28" src="../img/products/palace_10.png" alt=""></div>
-              <div class="rounded-lg"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28" src="../img/products/palace_9.png" alt=""></div>
-              <div class="rounded-lg"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28" src="../img/products/palace_10.png" alt=""></div>
+              <div class="rounded-lg border border-double border-transparent hover:border-violet-500"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain secondary-image cursor-pointer" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }} front"></div>
+              @foreach($product->secondaryImages as $image)
+              <div class="rounded-lg border border-double border-transparent hover:border-violet-500">
+                  <img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain secondary-image cursor-pointer" src="../img/products/{{ $image->name }}" alt="{{ $product->name }} secondary images">
+              </div>
+              @endforeach
             </div>
           </section>
           <!--Image side end-->
@@ -154,22 +150,17 @@
           <section class="flex flex-col justify-between max-md:items-center w-full h-full">
             <div class="flex flex-col gap-y-4 w-full">
               <!--General-->
-              <h1 class="flex-auto text-lg lg:text-xl font-bold">P45 STANDARD JEAN SAND WASH</h1>
+              <h1 class="flex-auto text-lg lg:text-xl font-bold">{{ $product->name }}</h1>
               <div class="flex w-full text-xs md:text-sm font-medium ml-3">
-                <ul class="list-disc">
-                  <li >IF YOU DON’T LIKE</li>
-                  <li >THIS PANTS</li>
-                  <li >LEAVE THE WEBSITE</li>
-                  <li >IMMEDIATELY</li>
-                  <li >YOU TOSS POT</li>
-                </ul>
+
+                {{ $product->description }}
               </div>
               <!--General end-->
 
               <!--Details-->
               <div class="flex flex-col gap-y-1 text-xs md:text-sm font-medium text-label">
                 <a href="#" class="hover:text-[#531DACFF]"><u>Technical details</u></a>
-                <a href="size_guide.html" class="hover:text-[#531DACFF]"><u>Size guide</u></a>
+                <a href="/size_guide" class="hover:text-[#531DACFF]"><u>Size guide</u></a>
               </div>
               <!--Details end-->
 
@@ -206,7 +197,7 @@
 
             <!--Bottom-->
             <div class="flex flex-row justify-between md:justify-around w-full max-md:mt-16">
-              <p class="text-xl sm:text-2xl md:text-3xl font-bold">420$</p>
+              <p class="text-xl sm:text-2xl md:text-3xl font-bold">{{ $product->price }}$</p>
               <button class="text-sm sm:text-sm md:text-md lg:text-xl font-bold border-0 rounded-lg cursor-pointer bg-[#260065] text-white hover:bg-[#531DACFF] transition hover:transition-250 px-4 py-2 sm:px-4 sm:py-2 md:px-5 lg:px-8">ADD TO CART</button>
             </div>
             <!--Bottom end-->
@@ -242,11 +233,11 @@
 
     <!--Navlinks-->
     <nav class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="category.html">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="signup.html">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="size_guide.html">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="terms_conditions.html">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="shipping.html">Shipping</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/products">Products</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/size_guide">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/terms">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/shipping">Shipping</a>
     </nav>
     <!--Navlinks end-->
 
@@ -293,7 +284,7 @@
 
   <!--  Place for importing scripts-->
   <script src="../js/navbar.js"></script>
-  <script src="../js/tabs.js"></script>
+  <script src="../js/image_change.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
