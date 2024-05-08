@@ -6,7 +6,7 @@
 
   <title>Nowty Clothing - Admin</title>
   <meta name="description" content="Admin page for Nowty Clothing." />
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" href="/img/favicon/nowty_face.png" sizes="any" />
   <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png" />
 
@@ -18,15 +18,23 @@
     <!--Sidebar, only on LG and up-->
     <aside class="max-lg:hidden lg:row-span-10 bg-[#F5F5F5]">
       <nav class="flex flex-col justify-between h-full">
-        <a class="w-full h-auto" href="index.html">
+        <a class="w-full h-auto" href="/">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
         <ul class="flex flex-col pb-4 pl-4">
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="category.html">Products</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="signup.html">Sign up</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="size_guide.html">Size guide</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="terms_conditions.html">Terms</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="shipping.html">Shipping</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/category">Products</a></li>
+          @auth
+            @if(Auth::user()->role == 'admin')
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
+            @else
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/account">Account</a></li>
+            @endif
+          @else
+            <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          @endauth
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/size_guide">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/terms_conditions">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/shipping">Shipping</a></li>
         </ul>
       </nav>
     </aside>
@@ -39,7 +47,7 @@
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
           <div class="lg:hidden w-1/4 md:w-1/3">
-            <a class="justify-start w-24 sm:w-32 md:w-36 h-auto pt-2" href="index.html">
+            <a class="justify-start w-24 sm:w-32 md:w-36 h-auto pt-2" href="/">
               <img class="w-24 sm:w-32 md:w-36 h-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
             </a>
           </div>
@@ -47,7 +55,7 @@
           <!--Action buttons (cart, user, dark)-->
           <section class="flex gap-2 pr-4 pt-4 w-1/4 md:w-1/3 justify-end">
             <!--Cart-->
-            <a href="cart.html">
+            <a href="/cart">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Z"/>
@@ -56,7 +64,7 @@
             </a>
             <!--Cart end-->
             <!--User-->
-            <a href="account.html">
+            <a href="/account">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="#260065" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
@@ -92,6 +100,12 @@
             <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab4">LIST ALL USERS</button>
           </div>
           <!--Tab system end-->
+          <!--Log out button-->
+          <form action= "/logout" method="POST" class="flex">
+            @csrf
+            <button class="text-xs sm:text-sm text-nowrap font-bold pl-4 hover:opacity-50 logout-btn">LOG OUT</button>
+          </form>
+          <!--Log out button end-->
         </section>
         <!--Top row end-->
 
@@ -946,7 +960,7 @@
           <!--Create new tab end-->
           <!--List all users tab-->
           <div id="tab4" class="tab-content hidden">
-            <table class="table-auto w-full max-h-min">
+            <table class="table-auto w-full max-h-min mb-10">
               <!--Cart table head-->
               <thead class="border-b-2 border-[#260065]/50">
               <!--Head on LG-->
@@ -964,404 +978,62 @@
               </tr>
               </thead>
               <!--Head end-->
+
+
               <!--Card body-->
-              <tbody>
-              <!--Admin item on > LG-->
-              <tr class="max-md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-20">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User info-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <div class="text-sm">
-                      <h6>Sex: Male</h6>
-                      <h6>Liked products: 88</h6>
-                      <h6>Number of orders: 8</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--User info end-->
-                <!--UID-->
-                <td class="font-medium">
-                  <h6>cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                </td>
-                <!--UID end-->
-                <!--Sign up date-->
-                <td class="text-center font-medium">
-                  <h6>24.02.2024</h6>
-                </td>
-                <!--Sign up date end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--User item on > LG end-->
-              <!--User item on < LG-->
-              <tr class="md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-16">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--User name-->
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <h6>UID: cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-around pt-4 pr-4 sm:pr-8">
-                      <!--Sign up date-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Sign up date</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>24.02.2024</h6>
+              <tbody id="usersTableBody">
+                @foreach ($users as $user)
+                  <!--Admin item on > LG-->
+                  <tr class="max-md:hidden {{$loop->iteration % 2 != 1 ? '':'bg-[#F5F5F5]'}}">
+                    <!--ID-->
+                    <td class="text-center font-bold min-w-20">
+                      <h6>#{{$loop->iteration}}</h6>
+                    </td>
+                    <!--ID end-->
+                    <!--User info-->
+                    <td class="py-2">
+                      <div class="flex flex-col justify-between h-full">
+                        <h5 class="font-medium mb-2">{{$user->name}}</h5>
+                        <div class="text-sm">
+                          <h6>Role: {{$user->role}}</h6>
+                          <h6>{{$user->email}}</h6>
+                          <h6>Number of orders: {{$user->orders->count()}}</h6>
                         </div>
                       </div>
-                      <!--Sign up date end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--User end-->
-              </tr>
-              <!--User item on < LG end-->
+                    </td>
+                    <!--User info end-->
+                    <!--UID-->
+                    <td class="font-medium">
+                      <h6>{{$user->id}}</h6>
+                    </td>
+                    <!--UID end-->
+                    <!--Sign up date-->
+                    <td class="text-center font-medium">
+                      <h6>{{$user->created_at->format('d.m.Y')}}</h6>
+                    </td>
+                    <!--Sign up date end-->
 
-              <!--Admin item on > LG-->
-              <tr class="max-md:hidden">
-                <!--ID-->
-                <td class="text-center font-bold min-w-20">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User info-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <div class="text-sm">
-                      <h6>Sex: Male</h6>
-                      <h6>Liked products: 88</h6>
-                      <h6>Number of orders: 8</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--User info end-->
-                <!--UID-->
-                <td class="font-medium">
-                  <h6>cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                </td>
-                <!--UID end-->
-                <!--Sign up date-->
-                <td class="text-center font-medium">
-                  <h6>24.02.2024</h6>
-                </td>
-                <!--Sign up date end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--User item on > LG end-->
-              <!--User item on < LG-->
-              <tr class="md:hidden">
-                <!--ID-->
-                <td class="text-center font-bold min-w-16">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--User name-->
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <h6>UID: cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-around pt-4 pr-4 sm:pr-8">
-                      <!--Sign up date-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Sign up date</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>24.02.2024</h6>
-                        </div>
+                    <!--Actions-->
+                    <td class="font-medium">
+                      <div class="flex flex-row gap-x-4 justify-center self-center">
+                        @if($user->id !== auth()->user()->id)
+                          <button type="button" class="underline decoration-2 hover:text-[#531DACFF] delete-btn" data-id="{{ $user->id }}">
+                            DELETE
+                          </button>
+                        @else
+                          <button type="button" class="underline decoration-2" data-id="{{ $user->id }}" disabled>
+                            DELETE
+                          </button>
+                        @endif
                       </div>
-                      <!--Sign up date end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--User end-->
-              </tr>
-              <!--User item on < LG end-->
-
-              <!--Admin item on > LG-->
-              <tr class="max-md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-20">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User info-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <div class="text-sm">
-                      <h6>Sex: Male</h6>
-                      <h6>Liked products: 88</h6>
-                      <h6>Number of orders: 8</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--User info end-->
-                <!--UID-->
-                <td class="font-medium">
-                  <h6>cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                </td>
-                <!--UID end-->
-                <!--Sign up date-->
-                <td class="text-center font-medium">
-                  <h6>24.02.2024</h6>
-                </td>
-                <!--Sign up date end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--User item on > LG end-->
-              <!--User item on < LG-->
-              <tr class="md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-16">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--User name-->
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <h6>UID: cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-around pt-4 pr-4 sm:pr-8">
-                      <!--Sign up date-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Sign up date</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>24.02.2024</h6>
-                        </div>
-                      </div>
-                      <!--Sign up date end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--User end-->
-              </tr>
-              <!--User item on < LG end-->
-
-              <!--Admin item on > LG-->
-              <tr class="max-md:hidden">
-                <!--ID-->
-                <td class="text-center font-bold min-w-20">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User info-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <div class="text-sm">
-                      <h6>Sex: Male</h6>
-                      <h6>Liked products: 88</h6>
-                      <h6>Number of orders: 8</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--User info end-->
-                <!--UID-->
-                <td class="font-medium">
-                  <h6>cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                </td>
-                <!--UID end-->
-                <!--Sign up date-->
-                <td class="text-center font-medium">
-                  <h6>24.02.2024</h6>
-                </td>
-                <!--Sign up date end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--User item on > LG end-->
-              <!--User item on < LG-->
-              <tr class="md:hidden">
-                <!--ID-->
-                <td class="text-center font-bold min-w-16">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--User name-->
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <h6>UID: cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-around pt-4 pr-4 sm:pr-8">
-                      <!--Sign up date-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Sign up date</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>24.02.2024</h6>
-                        </div>
-                      </div>
-                      <!--Sign up date end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--User end-->
-              </tr>
-              <!--User item on < LG end-->
-
-              <!--Admin item on > LG-->
-              <tr class="max-md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-20">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User info-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <div class="text-sm">
-                      <h6>Sex: Male</h6>
-                      <h6>Liked products: 88</h6>
-                      <h6>Number of orders: 8</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--User info end-->
-                <!--UID-->
-                <td class="font-medium">
-                  <h6>cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                </td>
-                <!--UID end-->
-                <!--Sign up date-->
-                <td class="text-center font-medium">
-                  <h6>24.02.2024</h6>
-                </td>
-                <!--Sign up date end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--User item on > LG end-->
-              <!--User item on < LG-->
-              <tr class="md:hidden bg-[#F5F5F5]">
-                <!--ID-->
-                <td class="text-center font-bold min-w-16">
-                  <h6>#1</h6>
-                </td>
-                <!--ID end-->
-                <!--User-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--User name-->
-                    <h5 class="font-medium mb-2">Maroš Kramár</h5>
-                    <h6>UID: cb3c2044-8a6e-4893-b4f8-38891b96034a</h6>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-around pt-4 pr-4 sm:pr-8">
-                      <!--Sign up date-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Sign up date</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>24.02.2024</h6>
-                        </div>
-                      </div>
-                      <!--Sign up date end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--User end-->
-              </tr>
-              <!--User item on < LG end-->
+                    </td>
+                    <!--Actions end-->
+                  </tr>
+                  <!--User item on > LG end-->
+                @endforeach
               </tbody>
               <!--Card body end-->
+
             </table>
           </div>
           <!--List all users tab end-->
@@ -1395,11 +1067,19 @@
 
     <!--Navlinks-->
     <nav class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="category.html">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="signup.html">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="size_guide.html">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="terms_conditions.html">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="shipping.html">Shipping</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/category">Products</a>
+      @auth
+        @if(Auth::user()->role == 'admin')
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
+        @else
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/account">Account</a>
+        @endif
+      @else
+        <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      @endauth
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/size_guide">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/terms_conditions">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/shipping">Shipping</a>
     </nav>
     <!--Navlinks end-->
 
@@ -1450,6 +1130,11 @@
   <script src="../js/admin.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="../js/chart.js"></script>
+  <script src="{{ asset('../js/deleteUser.js') }}"></script>
+  <script src="{{ asset('../js/logout.js') }}"></script>
+  @include('sweetalert::alert')
 </body>
 </html>

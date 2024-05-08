@@ -18,33 +18,32 @@
     <!--Sidebar, only on LG and up-->
     <aside class="max-lg:hidden lg:row-span-10">
       <nav class="flex flex-col justify-between h-full">
-        <a class="w-full h-auto" href="index.html">
+        <a class="w-full h-auto" href="/">
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
         <ul class="flex flex-col pb-4 pl-4">
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="category.html">Products</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="signup.html">Sign up</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="size_guide.html">Size guide</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="terms_conditions.html">Terms</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="shipping.html">Shipping</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/category">Products</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/size_guide">Size guide</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/terms_conditions">Terms</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/shipping">Shipping</a></li>
         </ul>
       </nav>
     </aside>
     <!--Sidebar end-->
-
     <!--Main body-->
     <section class="row-span-10 col-span-6 flex flex-col h-screen">
       <!--Top bar-->
       <header class="self-start flex-none w-full">
         <div class="flex justify-between lg:justify-end">
           <!--Website logo on smaller than LG-->
-          <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="index.html">
+          <a class="lg:hidden w-24 sm:w-32 md:w-36 h-auto pt-2" href="/">
             <img class="max-w-full h-auto mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
           </a>
           <!--Action buttons (cart, user, dark)-->
           <section class="flex gap-2 pr-4 pt-4">
             <!--Cart-->
-            <a href="cart.html">
+            <a href="/cart">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Z"/>
@@ -53,7 +52,7 @@
             </a>
             <!--Cart end-->
             <!--User-->
-            <a href="account.html">
+            <a href="/account">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="none" stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
@@ -76,6 +75,7 @@
       </header>
       <!--Top bar end-->
 
+
       <!--Login card-->
       <section class="flex-1 w-full grid grid-cols-5 items-center py-4">
         <div class="col-span-5 mx-4 md:mx-8 lg:col-span-4 items-center justify-center flex flex-row h-3/4">
@@ -92,11 +92,12 @@
             </header>
             <!--Card Header end-->
             <!--Login form-->
-            <form class="flex flex-col gap-4" action="#">
+            <form class="flex flex-col gap-4" action="/login" method="POST">
+              @csrf
               <!--Email input-->
               <div>
                 <label for="email" class="block font-medium text-sm md:text-base mb-2">Email</label>
-                <input type="email" name="email" id="email" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-violet-900 focus:border-violet-900" required="">
+                <input type="email" name="login_email" id="email" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-0 focus:outline-none focus:border-violet-900" required="">
               </div>
               <!--Email input end-->
               <!--Password input-->
@@ -105,7 +106,7 @@
                   <label for="password" class="block font-medium text-sm md:text-base mb-2">Password</label>
                   <button class="flex items-center place-content-end text-xs md:text-sm underline cursor-pointer" type="button">SHOW</button>
                 </div>
-                <input type="password" name="password" id="password" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-violet-900 focus:border-violet-900" required="">
+                <input type="password" name="login_password" id="password" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-0 focus:outline-none focus:border-violet-900" required="">
               </div>
               <!--Password input end-->
               <!--Card footer-->
@@ -115,7 +116,7 @@
                   <button class="text-white text-lg font-bold px-8 py-2 lg:px-12 border-0 rounded-lg cursor-pointer block mx-auto bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250">SIGN IN</button>
                 </div>
                 <div class="sign-up">
-                  <p class="block text-center leading-3 text-[.6rem] sm:text-[.7rem] mx-auto py-2 opacity-80">Don't have an account yet? <a class="font-bold underline underline-offset-2 hover:text-[#531DACFF]" href="signup.html">Sign up</a></p>
+                  <p class="block text-center leading-3 text-[.6rem] sm:text-[.7rem] mx-auto py-2 opacity-80">Don't have an account yet? <a class="font-bold underline underline-offset-2 hover:text-[#531DACFF]" href="/signup">Sign up</a></p>
                 </div>
               </footer>
               <!--Action buttons end-->
@@ -178,11 +179,11 @@
 
     <!--Navlinks-->
     <nav class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="category.html">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="signup.html">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="size_guide.html">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="terms_conditions.html">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="shipping.html">Shipping</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/category">Products</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/size_guide">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/terms_conditions">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/shipping">Shipping</a>
     </nav>
     <!--Navlinks end-->
 
@@ -230,5 +231,20 @@
   <!--  Place for importing scripts-->
   <script src="../js/navbar.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    let passwordInput = document.getElementById('password');
+    let toggleButton = document.querySelector('.cursor-pointer');
+
+    toggleButton.addEventListener('click', function () {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.textContent = "HIDE";
+      } else {
+        passwordInput.type = "password";
+        this.textContent = "SHOW";
+      }
+    });
+  </script>
+  @include('sweetalert::alert')
 </body>
 </html>

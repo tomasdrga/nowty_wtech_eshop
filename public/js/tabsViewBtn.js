@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
+  const tabs_view = document.querySelectorAll('.tab-btn-view');
   const tabs = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
+  tabs_view.forEach(tab_view => {
+    tab_view.addEventListener('click', function() {
       const target = this.getAttribute('data-target');
 
       // Hide all tab contents
@@ -19,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
         t.classList.remove('tab-active');
         t.classList.add('tab-inactive');
       });
-      this.classList.remove('tab-inactive');
-      this.classList.add('tab-active');
+      document.querySelector(`[data-target="${target}"]`).classList.remove('tab-inactive');
+      document.querySelector(`[data-target="${target}"]`).classList.add('tab-active');
 
       // Store the current active tab in the session Storage
       sessionStorage.setItem('activeTab', target);
@@ -53,5 +54,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
-
-
