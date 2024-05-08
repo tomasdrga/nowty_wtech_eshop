@@ -24,8 +24,15 @@
         <div class="flex flex-col pb-4 pl-4">
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
              href="/category">Products</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/signup">Sign up</a>
+          @auth
+            @if(Auth::user()->role == 'admin')
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
+            @else
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/account">Account</a></li>
+            @endif
+          @else
+            <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          @endauth
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
              href="/size_guide">Size guide</a>
           <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
@@ -97,7 +104,7 @@
           <!--Log out button-->
           <form action= "/logout" method="POST" class="flex">
             @csrf
-            <button class="text-xs sm:text-sm text-nowrap font-bold pl-4 hover:opacity-50">LOG OUT</button>
+            <button class="text-xs sm:text-sm text-nowrap font-bold pl-4 hover:opacity-50 logout-btn">LOG OUT</button>
           </form>
           <!--Log out button end-->
         </div>
@@ -124,7 +131,7 @@
                         <div class="text-xs sm:text-sm opacity-50 mb-2">{{$order->order_status}}</div>
                       </div>
                       <div class="flex items-center">
-                        <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:opacity-50" data-target="tab2"><u>VIEW</u></button>
+                        <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab2"><u>VIEW</u></button>
                       </div>
                     </article>
                   @endforeach
@@ -141,7 +148,7 @@
                   <div class="text-xs sm:text-sm opacity-90 mb-2">•••••••••••</div>
                 </div>
                 <div class="flex items-center">
-                  <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:opacity-50" data-target="tab3"><u>VIEW</u></button>
+                  <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab3"><u>VIEW</u></button>
                 </div>
               </section>
               <!--My details end-->
@@ -160,7 +167,7 @@
                     <div class="text-xs sm:text-sm opacity-90 mb-2">{{auth()->user()->information->shipping_information->country}}</div>
                   </div>
                   <div class="flex items-center">
-                    <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:opacity-50" data-target="tab4" ><u>VIEW</u></button>
+                    <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab4" ><u>VIEW</u></button>
                   </div>
                 </section>
               @endif
@@ -211,7 +218,7 @@
 
               <!--Right side of component-->
               <div class="flex items-center">
-                <button id="edit_button" class="text-user text-xs sm:text-sm mr-2 sm:mr-8 hover:opacity-50"><u>EDIT</u></button>
+                <button id="edit_button" class="text-user text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]"><u>EDIT</u></button>
               </div>
               <!--Right side of component end-->
             </div>
@@ -288,7 +295,7 @@
 
               <!--Right part of shipping address-->
               <div class="flex items-center">
-                <button class="text-xs sm:text-sm mr-2 sm:mr-8 hover:opacity-50" id="edit_address_button"><u>EDIT</u></button>
+                <button class="text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" id="edit_address_button"><u>EDIT</u></button>
               </div>
               <!--Right part of shipping address end-->
             </div>
@@ -331,8 +338,15 @@
     <div class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/category">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="/signup">Sign up</a>
+      @auth
+        @if(Auth::user()->role == 'admin')
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
+        @else
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/account">Account</a>
+        @endif
+      @else
+        <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      @endauth
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/size_guide">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
@@ -395,6 +409,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{ asset('js/editFields.js') }}"></script>
+  <script src="{{ asset('../js/logout.js') }}"></script>
   @include('sweetalert::alert')
 </body>
 </html>

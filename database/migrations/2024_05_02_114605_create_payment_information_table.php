@@ -12,8 +12,8 @@ return new class extends Migration
   {
     Schema::create('payment_information', function (Blueprint $table) {
       $table->uuid('id')->primary();
-      $table->string('first_name', 32);
-      $table->string('last_name', 32);
+      $table->string('first_name', 50);
+      $table->string('last_name', 50);
       $table->string('card_number', 20);
       $table->string('expiration_date', 32);
       $table->string('security_code', 4);

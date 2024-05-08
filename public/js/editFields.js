@@ -41,9 +41,11 @@ $("#edit_button").click(function() {
         // If there is an error, show the error alert
         if (data.status === 'error') {
           let errorMessage = '';
+          console.log(data.message);
           for (let field in data.message) {
-            errorMessage += data.message[field].join(' ');
+            errorMessage += `${data.message[field].join(', ')}\n`;
           }
+          console.log(errorMessage);
           Swal.fire({
             position: 'top-end',
             title: errorMessage.toUpperCase(),
@@ -133,7 +135,7 @@ $("#edit_address_button").click(function() {
         if (data.status === 'error') {
           let errorMessage = '';
           for (let field in data.message) {
-            errorMessage += data.message[field].join(' ');
+            errorMessage += `${data.message[field].join(', ')}\n`;
           }
           Swal.fire({
             position: 'top-end',

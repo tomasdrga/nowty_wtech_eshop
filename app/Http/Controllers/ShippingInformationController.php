@@ -19,13 +19,13 @@ class ShippingInformationController extends Controller
       try{
         // Validate incoming request data
         $validatedData = $request->validate([
-          'data.first_name' => 'required|string|max:25',
-          'data.last_name' => 'required|string|max:25',
-          'data.telephone' => 'required|string|max:25',
-          'data.address' => 'required|string|max:25',
-          'data.city' => 'required|string|max:25',
-          'data.postal_code' => 'required|string|max:10',
-          'data.country' => 'required|string|max:25',
+          'data.first_name' => 'required|string|max:50',
+          'data.last_name' => 'required|string|max:50',
+          'data.telephone' => 'required|string|max:32',
+          'data.address' => 'required|string|max:96',
+          'data.city' => 'required|string|max:192',
+          'data.postal_code' => 'required|string|max:20',
+          'data.country' => 'required|string|max:90',
         ]);
       } catch (\Illuminate\Validation\ValidationException $e) {
         // If validation fails, return a JSON response with error status and error message

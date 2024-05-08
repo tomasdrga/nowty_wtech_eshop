@@ -33,7 +33,13 @@ class UserController extends Controller
       if (auth()->attempt(['email' => $incomingFields['login_email'], 'password'=>$incomingFields['login_password']])){
         // If authentication is successful, regenerate session ID to avoid session fixation attacks
         $request->session()->regenerate();
-        toast('Login successful', 'success');
+
+        if (auth()->user()->role === 'admin') {
+          // If the user is an admin, redirect to the admin page
+          toast('WELCOME ADMIN', 'success');
+          return redirect('/admin');
+        }
+        toast('LOGIN SUCCESSFUL', 'success');
         return redirect('/account');
       }else {
         // If authentication fails, display an error message
@@ -61,7 +67,7 @@ class UserController extends Controller
         foreach ($errors as $error) {
           $messages[] = is_array($error) ? implode(', ', $error) : $error;
         }
-        $message = implode(' ', $messages);
+        $message = implode("\n", $messages);
         toast($message, 'error');
         return redirect('/signup');
       }
@@ -85,7 +91,7 @@ class UserController extends Controller
       $information->save();
 
       // Display a success alert and redirect to account page
-      Alert::success('Success', 'Account created successfully');
+      toast('ACCOUNT CREATED SUCCESSFULLY', 'success');
       return redirect('/account');
     }
 
@@ -100,7 +106,7 @@ class UserController extends Controller
         try {
           // Validate incoming request data
           $validatedData = $request->validate([
-            'data.name' => 'required|string|min:5|max:255',
+            'data.name' => 'required|string|min:1|max:30',
             'data.email' => 'required|string|email|max:255',
           ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -138,4 +144,5 @@ class UserController extends Controller
         'message' => 'Invalid request type'
       ]);
     }
+
 }

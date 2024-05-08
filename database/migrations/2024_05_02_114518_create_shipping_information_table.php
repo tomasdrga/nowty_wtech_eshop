@@ -13,13 +13,13 @@ return new class extends Migration
   {
     Schema::create('shipping_information', function (Blueprint $table) {
       $table->uuid('id')->primary();
-      $table->string('first_name', 32);
-      $table->string('last_name', 32);
+      $table->string('first_name', 50);
+      $table->string('last_name', 50);
       $table->string('telephone', 32);
-      $table->string('address', 32);
-      $table->string('city', 32);
-      $table->string('postal_code', 10);
-      $table->string('country', 32);
+      $table->string('address', 96);
+      $table->string('city', 192);
+      $table->string('postal_code', 20);
+      $table->string('country', 90);
       $table->timestamps();
     });
   }
