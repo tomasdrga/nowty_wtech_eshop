@@ -6,7 +6,7 @@
 
   <title>Nowty Clothing • Account</title>
   <meta name="description" content="Account overview page of Nowty Clothing website."/>
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" href="/img/favicon/nowty_face.png" sizes="any"/>
   <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png"/>
 
@@ -21,18 +21,25 @@
         <a class="w-full h-auto" href="/">
           <img class="h-auto max-w-full mx-auto" src="/img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo"/>
         </a>
-        <div class="flex flex-col pb-4 pl-4">
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/products">Products</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/signup">Sign up</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/size_guide">Size guide</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/terms">Terms</a>
-          <a class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
-             href="/shipping">Shipping</a>
-        </div>
+        <ul class="flex flex-col pb-4 pl-4">
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/products">Products</li>
+          @auth
+            @if(Auth::user()->role == 'admin')
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
+            @else
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/account">Account</a></li>
+            @endif
+          @else
+            <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          @endauth
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/size_guide">Size guide</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/terms">Terms</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/shipping">Shipping</li>
+        </ul>
       </nav>
     </aside>
     <!--Sidebar end-->
@@ -95,9 +102,10 @@
           </div>
           <!--Tab system end-->
           <!--Log out button-->
-          <div class="flex">
-            <button class="text-xs sm:text-sm text-nowrap font-bold pl-4 hover:opacity-50">LOG OUT</button>
-          </div>
+          <form action= "/logout" method="POST" class="flex">
+            @csrf
+            <button class="text-xs sm:text-sm text-nowrap font-bold pl-4 hover:opacity-50 logout-btn">LOG OUT</button>
+          </form>
           <!--Log out button end-->
         </div>
 
@@ -107,72 +115,63 @@
           <section id="tab1" class="tab-content py-4">
             <article class="flex flex-col">
               <!--Recent orders-->
-              <div class="flex flex-col border-b-2 border-[#260065]/50">
-                <h3 class="text-sm lg:text-base font-medium mb-1 pl-4">Recent orders</h3>
-                <!--First order-->
-                <article class="flex flex-row justify-between border-b-[1px] border-[#260065]/50">
-                  <div class="flex flex-col pl-4">
-                    <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                      <div class="text-xs sm:text-sm opacity-90">26/2/2024</div>
-                      <div class="text-xs sm:text-sm opacity-50">#2001781488156</div>
-                    </div>
-                    <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                    <div class="text-xs sm:text-sm opacity-90">€780</div>
-                    <div class="text-xs sm:text-sm opacity-50">shipped</div>
-                  </div>
-                  <div class="flex items-center">
-                    <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
-                  </div>
-                </article>
-                <!--First order end-->
+              @if(auth()->user()->orders->isNotEmpty())
+                <div class="flex flex-col border-b-2 border-[#260065]/50">
+                  <h3 class="text-sm lg:text-base font-medium mb-1 pl-4">Recent orders</h3>
 
-                <!--Second order-->
-                <article class="flex flex-row justify-between">
-                  <div class="flex flex-col pl-4">
-                    <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                      <div class="text-user text-xs sm:text-sm opacity-90">26/2/2024</div>
-                      <div class="text-user text-xs sm:text-sm opacity-50">#2001781488156</div>
-                    </div>
-                    <div class="text-user text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                    <div class="text-user text-xs sm:text-sm opacity-90">€780</div>
-                    <div class="text-user text-xs sm:text-sm opacity-50">shipped</div>
-                  </div>
-                  <div class="flex items-center">
-                    <a href="" class="text-user text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
-                  </div>
-                </article>
-                <!--Second order end-->
-              </div>
+                  @foreach(auth()->user()->orders->sortByDesc('order_creation_at')->take(2) as $order)
+                    <article class="flex flex-row justify-between {{ !$loop->last ? 'border-b-2 border-[#260065]/20' : '' }}">
+                      <div class="flex flex-col pl-4">
+                        <div class="flex flex-row gap-x-8 sm:gap-x-16">
+                          <div class="text-xs sm:text-sm opacity-90">{{date('d/m/Y', strtotime($order->created_at))}}</div>
+                          <div class="text-xs sm:text-sm opacity-50">#{{$order->order_number}}</div>
+                        </div>
+                        <div class="text-xs sm:text-sm opacity-90">{{$order->shipping_information->first_name}} {{$order->shipping_information->last_name}}</div>
+                        <div class="text-xs sm:text-sm opacity-90">€{{$order->total}}</div>
+                        <div class="text-xs sm:text-sm opacity-50 mb-2">{{$order->order_status}}</div>
+                      </div>
+                      <div class="flex items-center">
+                        <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab2"><u>VIEW</u></button>
+                      </div>
+                    </article>
+                  @endforeach
+                </div>
+              @endif
               <!--Recent orders end-->
 
               <!--My details-->
               <section class="flex flex-row justify-between border-b-2 border-[#260065]/50">
                 <div class="flex flex-col pl-4">
                   <h3 class="text-sm lg:text-base font-medium mb-1 mt-2">My details</h3>
-                  <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                  <div class="text-xs sm:text-sm opacity-90">asapko@gmail.com</div>
-                  <div class="text-xs sm:text-sm opacity-90">•••••••••••</div>
+                  <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->name}}</div>
+                  <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->email}}</div>
+                  <div class="text-xs sm:text-sm opacity-90 mb-2">•••••••••••</div>
                 </div>
                 <div class="flex items-center">
-                  <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
+                  <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab3"><u>VIEW</u></button>
                 </div>
               </section>
               <!--My details end-->
 
               <!--Shipping address-->
-              <section class="flex flex-row justify-between border-b-2 border-[#260065]/50">
-                <div class="flex flex-col pl-4">
-                  <h3 class="text-sm lg:text-base font-medium mb-1 mt-2">Shipping address</h3>
-                  <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                  <div class="text-xs sm:text-sm opacity-90">Partizanska 382</div>
-                  <div class="text-xs sm:text-sm opacity-90">Bratislava</div>
-                  <div class="text-xs sm:text-sm opacity-90">811 01</div>
-                  <div class="text-xs sm:text-sm opacity-90">Slovakia</div>
-                </div>
-                <div class="flex items-center">
-                  <a href="" class="text-xs sm:text-sm mr-2 sm:mr-8"><u>View</u></a>
-                </div>
-              </section>
+              @if(auth()->user()->information->shipping_id != null)
+                <section class="flex flex-row justify-between border-b-2 border-[#260065]/50">
+                  <div class="flex flex-col pl-4">
+                    <h3 class="text-sm lg:text-base font-medium mb-1 mt-2">Shipping address</h3>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->first_name}}</div>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->last_name}}</div>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->telephone}}</div>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->address}}</div>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->city}}</div>
+                    <div class="text-xs sm:text-sm opacity-90">{{auth()->user()->information->shipping_information->postal_code}}</div>
+                    <div class="text-xs sm:text-sm opacity-90 mb-2">{{auth()->user()->information->shipping_information->country}}</div>
+                  </div>
+                  <div class="flex items-center">
+                    <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab4" ><u>VIEW</u></button>
+                  </div>
+                </section>
+              @endif
+
               <!--Shipping address end-->
             </article>
           </section>
@@ -181,111 +180,53 @@
           <section id="tab2" class="tab-content hidden">
             <!--Orders content-->
             <div class="flex flex-col pt-2 gap-y-2">
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-xs sm:text-sm opacity-90">26/2/2024</div>
-                  <div class="text-xs sm:text-sm opacity-50">#2001781488156</div>
-                </div>
-                <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-xs sm:text-sm opacity-90">€780</div>
-                <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
-
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-xs sm:text-sm opacity-90">12/1/2024</div>
-                  <div class="text-xs sm:text-sm opacity-50">#2001781488761</div>
-                </div>
-                <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-xs sm:text-sm opacity-90">€15780</div>
-                <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
-
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-user text-xs sm:text-sm opacity-90">1/1/2024</div>
-                  <div class="text-user text-xs sm:text-sm opacity-50">#2001781488228</div>
-                </div>
-                <div class="text-user text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-user text-xs sm:text-sm opacity-90">€12800</div>
-                <div class="text-user text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
-
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-xs sm:text-sm opacity-90">2/12/2023</div>
-                  <div class="text-xs sm:text-sm opacity-50">#2001781981273</div>
-                </div>
-                <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-xs sm:text-sm opacity-90">€680</div>
-                <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
-
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-xs sm:text-sm opacity-90">23/11/2023</div>
-                  <div class="text-xs sm:text-sm opacity-50">#2001781487452</div>
-                </div>
-                <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-xs sm:text-sm opacity-90">€1980</div>
-                <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
-
-              <!--Order-->
-              <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
-                <div class="flex flex-row gap-x-8 sm:gap-x-16">
-                  <div class="text-xs sm:text-sm opacity-90">18/9/2023</div>
-                  <div class="text-xs sm:text-sm opacity-50">#2001781488156</div>
-                </div>
-                <div class="text-xs sm:text-sm opacity-90">ASAP Rocky</div>
-                <div class="text-xs sm:text-sm opacity-90">€1880</div>
-                <div class="text-xs sm:text-sm opacity-50">shipped</div>
-              </article>
-              <!--Order end-->
+              <!--Orders-->
+              @foreach(auth()->user()->orders->sortByDesc('order_creation_at') as $order)
+                <article class="flex flex-col pl-4 justify-between border-b-2 border-[#260065]/20 pb-2">
+                  <div class="flex flex-row gap-x-8 sm:gap-x-16">
+                    <div class="text-xs sm:text-sm opacity-90">{{date('d/m/Y', strtotime($order->created_at))}}</div>
+                    <div class="text-xs sm:text-sm opacity-50">#{{$order->order_number}}</div>
+                  </div>
+                  <div class="text-xs sm:text-sm opacity-90">{{$order->shipping_information->first_name}} {{$order->shipping_information->last_name}}</div>
+                  <div class="text-xs sm:text-sm opacity-90">€{{$order->total}}</div>
+                  <div class="text-xs sm:text-sm opacity-50">{{$order->order_status}}</div>
+                </article>
+              @endforeach
+              <!--Orders end-->
             </div>
             <!--Orders content end-->
           </section>
           <!--Orders tab end-->
+
           <!--My details new tab-->
-          <section id="tab3" class="tab-content hidden">
+          <section id="tab3" class="tab-content hidden overflow-hidden">
             <!--Account details-->
             <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 pt-2">
               <!--Left side of component-->
               <section class="flex flex-col pl-4">
-                <label for="first_name">
-                  <input type="text" id="first_name" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="ASAP" required="">
-                </label>
-                <label for="last_name">
-                  <input type="text" id="last_name" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="ROCKY" required="">
+                <label for="name">
+                  <span id="txt_name" class="text-xs sm:text-sm text-[#260065] w-full outline-none">{{ auth()->user()->name }}</span>
                 </label>
                 <label for="email">
-                  <input type="email" id="email" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="asapko@gmail.com" required="">
+                  <span id="txt_email" class="text-xs sm:text-sm text-[#260065] w-full outline-none">{{ auth()->user()->email }}</span>
                 </label>
-                <label for="password">
-                  <input type="password" id="password" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none pb-4" placeholder="•••••••••••" required="">
+                <label for="password" class="mb-2">
+                  <span id="txt_password" class="text-xs sm:text-sm text-[#260065] w-full outline-none pb-4">••••••••</span>
                 </label>
               </section>
               <!--Left side of component end-->
 
               <!--Right side of component-->
               <div class="flex items-center">
-                <button class="text-user text-xs sm:text-sm mr-2 sm:mr-8"><u>EDIT</u></button>
+                <button id="edit_button" class="text-user text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]"><u>EDIT</u></button>
               </div>
               <!--Right side of component end-->
             </div>
             <!--Account details end-->
           </section>
           <!--My details tab end-->
+
+
           <!--Addresses tab-->
           <section id="tab4" class="tab-content hidden">
             <!--Shipping address-->
@@ -294,33 +235,59 @@
               <section class="flex flex-col pl-4">
                 <h3 class="text-sm lg:text-base font-medium text-user mb-1 mt-2">Shipping address</h3>
 
-                <!--Name-->
-                <label for="name">
-                  <input type="text" id="name" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="ASAP ROCKY" required="">
+                <!--First name-->
+                <label for="firstname">
+                  <span id="txt_firstname" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                      {{ auth()->user()->information->shipping_information->first_name ?? 'FIRST NAME' }}
+                  </span>
                 </label>
-                <!--Name end-->
+                <!--First name end-->
+
+                <!-- Last name -->
+                <label for="lastname">
+                  <span id="txt_lastname" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                    {{ auth()->user()->information->shipping_information->last_name ?? 'LAST NAME' }}
+                  </span>
+                </label>
+                <!-- Last name end -->
+
+                <!-- Last name -->
+                <label for="telephone">
+                  <span id="txt_telephone" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                    {{ auth()->user()->information->shipping_information->telephone ?? 'PHONE NUMBER' }}
+                  </span>
+                </label>
+                <!-- Last name end -->
 
                 <!--Address-->
                 <label for="address">
-                  <input type="text" id="address" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="PARTIZANSKA 382" required="">
+                  <span id="txt_address" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                     {{ auth()->user()->information->shipping_information->address ?? 'ADDRESS' }}
+                  </span>
                 </label>
                 <!--Address end-->
 
                 <!--City-->
                 <label for="city">
-                  <input type="text" id="city" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="BRATISLAVA" required="">
+                  <span id="txt_city" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                    {{ auth()->user()->information->shipping_information->city ?? 'CITY' }}
+                  </span>
                 </label>
                 <!--City end-->
 
                 <!--Postal code-->
                 <label for="postal_code">
-                  <input type="text" id="postal_code" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none" placeholder="811 01" required="">
+                  <span id="txt_postal_code" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none">
+                    {{ auth()->user()->information->shipping_information->postal_code ?? 'POSTAL CODE' }}
+                  </span>
                 </label>
                 <!--Postal code end-->
 
                 <!--Country-->
-                <label for="country">
-                  <input type="text" id="country" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none pb-4" placeholder="SLOVAKIA" required="">
+                <label for="country" class="mb-2">
+                  <span id="txt_country" class="text-xs sm:text-sm text-[#260065] placeholder:text-[#260065] w-full outline-none ">
+                    {{ auth()->user()->information->shipping_information->country ?? 'COUNTRY' }}
+                  </span>
                 </label>
                 <!--Country end-->
               </section>
@@ -328,13 +295,15 @@
 
               <!--Right part of shipping address-->
               <div class="flex items-center">
-                <button class="text-user text-xs sm:text-sm mr-2 sm:mr-8"><u>EDIT</u></button>
+                <button class="text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" id="edit_address_button"><u>EDIT</u></button>
               </div>
               <!--Right part of shipping address end-->
             </div>
             <!--Shipping address end-->
           </section>
           <!--Addresses tab end-->
+
+
         </section>
         <!--Scrollable content end-->
       </section>
@@ -366,18 +335,25 @@
     <div></div>
 
     <!--Navlinks-->
-    <div class="self-center flex flex-col items-center overlay-content">
+    <nav class="self-center flex flex-col items-center overlay-content">
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/products">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
-         href="/signup">Sign up</a>
+      @auth
+        @if(Auth::user()->role == 'admin')
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
+        @else
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/account">Account</a>
+        @endif
+      @else
+        <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      @endauth
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/size_guide">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/terms">Terms</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/shipping">Shipping</a>
-    </div>
+    </nav>
     <!--Navlinks end-->
 
     <!--Overlay bottom bar-->
@@ -424,9 +400,16 @@
   </div>
   <!--Navbar overlay end-->
 
+
   <!--  Place for importing scripts-->
   <script src="../js/navbar.js"></script>
   <script src="../js/tabs.js"></script>
+  <script src="../js/tabsViewBtn.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{{ asset('js/editFields.js') }}"></script>
+  <script src="{{ asset('../js/logout.js') }}"></script>
+  @include('sweetalert::alert')
 </body>
 </html>

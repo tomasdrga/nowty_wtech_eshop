@@ -22,11 +22,23 @@
           <img class="h-auto max-w-full mx-auto" src="../img/logo/nowty_animation_croped.gif" alt="Nowty Clothing logo" />
         </a>
         <ul class="flex flex-col pb-4 pl-4">
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/products">Products</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/size_guide">Size guide</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/terms">Terms</a></li>
-          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/shipping">Shipping</a></li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/products">Products</li>
+          @auth
+            @if(Auth::user()->role == 'admin')
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/admin">Dashboard</a></li>
+            @else
+              <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/account">Account</a></li>
+            @endif
+          @else
+            <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"><a href="/signup">Sign up</a></li>
+          @endauth
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/size_guide">Size guide</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/terms">Terms</li>
+          <li class="leading-relaxed xl:leading-10 font-bold text-xl xl:text-2xl 2xl:text-3xl hover:text-[#531DACFF]"
+             href="/shipping">Shipping</li>
         </ul>
       </nav>
     </aside>
@@ -92,11 +104,18 @@
             </header>
             <!--Card Header end-->
             <!--Sign up form-->
-            <form class="flex flex-col gap-4" action="#">
+            <form class="flex flex-col gap-4" action="/register" method="POST">
+              @csrf
+              <!--Name input-->
+              <div>
+                <label for="name" class="block font-medium text-sm md:text-base mb-2">Name</label>
+                <input type="text" name="name" id="name" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-0 focus:outline-none focus:border-violet-900" required="">
+              </div>
+              <!--Name input end-->
               <!--Email input-->
               <div>
                 <label for="email" class="block font-medium text-sm md:text-base mb-2">Email</label>
-                <input type="email" name="email" id="email" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-violet-900 focus:border-violet-900" required="">
+                <input type="email" name="email" id="email" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-0 focus:outline-none focus:border-violet-900" required="">
               </div>
               <!--Email input end-->
               <!--Password input-->
@@ -105,17 +124,18 @@
                   <label for="password" class="block font-medium text-sm md:text-base mb-2">Password</label>
                   <button class="flex items-center place-content-end text-xs md:text-sm underline cursor-pointer" type="button">SHOW</button>
                 </div>
-                <input type="password" name="password" id="password" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-violet-900 focus:border-violet-900" required="">
+
+                <input type="password" name="password" id="password" class="block border w-full h-8 rounded-lg p-2.5 focus:ring-0 focus:outline-none focus:border-violet-900" required="">
               </div>
               <!--Password input end-->
               <!--Card footer-->
               <!--Checkbox agreements-->
               <section class="flex items-start">
                 <div class="flex items-center h-8">
-                  <input type="checkbox" id="checkbox-terms" class="w-5 h-5 rounded-lg accent-[#260065] cursor-pointer" />
+                  <input type="checkbox" name="checkbox" id="checkbox-terms" class="w-5 h-5 rounded-lg accent-[#260065] cursor-pointer" />
                 </div>
                 <div class="text-sm ml-3">
-                  <label for="checkbox-terms" class="leading-3 text-[.6rem] sm:text-[.7rem] opacity-75">By creating an account, I agree to our Terms of use and Privacy Policy <a class="font-medium hover:underline hover:text-[#531DACFF]" href="terms_conditions.html">Terms and Conditions</a></label>
+                  <label for="checkbox-terms" class="leading-3 text-[.6rem] sm:text-[.7rem] opacity-75">By creating an account, I agree to our Terms of use and Privacy Policy <a class="font-medium hover:underline hover:text-[#531DACFF]" href="/terms_conditions">Terms and Conditions</a></label>
                 </div>
               </section>
               <!--Checkbox agreements end-->
@@ -125,7 +145,7 @@
                   <button class="text-white text-lg font-bold px-8 py-2 lg:px-12 border-0 rounded-lg cursor-pointer block mx-auto bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250">SIGN UP</button>
                 </div>
                 <div class="sign-up">
-                  <p class="block text-center leading-3 text-[.6rem] sm:text-[.7rem] mx-auto py-2 opacity-80">Already have an account? <a class="font-bold underline underline-offset-2 hover:text-[#531DACFF]" href="login.html">Login</a></p>
+                  <p class="block text-center leading-3 text-[.6rem] sm:text-[.7rem] mx-auto py-2 opacity-80">Already have an account? <a class="font-bold underline underline-offset-2 hover:text-[#531DACFF]" href="/login">Login</a></p>
                 </div>
               </footer>
               <!--Action buttons end-->
@@ -188,11 +208,23 @@
 
     <!--Navlinks-->
     <nav class="self-center flex flex-col items-center overlay-content">
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/products">Products</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/size_guide">Size guide</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/terms">Terms</a>
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/shipping">Shipping</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/products">Products</a>
+      @auth
+        @if(Auth::user()->role == 'admin')
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/admin">Dashboard</a>
+        @else
+          <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/account">Account</a>
+        @endif
+      @else
+        <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
+      @endauth
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/size_guide">Size guide</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/terms">Terms</a>
+      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+         href="/shipping">Shipping</a>
     </nav>
     <!--Navlinks end-->
 
@@ -240,5 +272,20 @@
   <!--  Place for importing scripts-->
   <script src="../js/navbar.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    let passwordInput = document.getElementById('password');
+    let toggleButton = document.querySelector('.cursor-pointer');
+
+    toggleButton.addEventListener('click', function () {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.textContent = "HIDE";
+      } else {
+        passwordInput.type = "password";
+        this.textContent = "SHOW";
+      }
+    });
+  </script>
+  @include('sweetalert::alert')
 </body>
 </html>

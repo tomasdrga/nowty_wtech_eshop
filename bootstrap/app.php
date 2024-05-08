@@ -12,6 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->redirectGuestsTo('/login');
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\Admin::class,
+            'userType' => \App\Http\Middleware\UserType::class,
+            'userLogged' => \App\Http\Middleware\UserLogged::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
