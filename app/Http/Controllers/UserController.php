@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Information;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {

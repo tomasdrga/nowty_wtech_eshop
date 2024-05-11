@@ -428,6 +428,7 @@
                 <!--Image input with preview-->
                 <div class="border-[#260065]/50 border-[1px] h-[116px] rounded-[5px] p-3 grid grid-cols-5 gap-x-8">
                   <div class="flex justify-center h-24 pb-2">
+
                     <label for="fileInput1" class="cursor-pointer">
                       <img id='preview_img1' class="object-cover rounded-[5px] h-full w-24" src="{{ asset('storage/uploads/' .$editableProduct->indexImage->name) }}" alt="Current profile photo" onclick="document.getElementById('fileInput1').click();" />
                       <input type="file" id="fileInput1" name="fileInput1" onchange="loadFile(event, 'preview_img1')" class="hidden" />
@@ -441,8 +442,12 @@
                   </div>
 
                   @foreach($editableProduct->secondaryImages as $key => $image)
-                    <div class="flex justify-center h-24 pb-2">
+                    <div class="relative flex justify-center h-24 pb-2">
                       <label for="fileInput{{ $key+3 }}" class="cursor-pointer">
+                        <label class="absolute text-sm top-[-6px] px-1.5 right-[-3px] bg-[#FFFFFF] border border-[#260065] rounded-lg text-[#260065] py-[2px] cursor-pointer">
+                          <input type="checkbox" name="checkbox-delete-secondary[{{ $key }}]" value="{{ $image->id }}" id="checkbox-delete-{{ $key }}" class="w-4 h-4  bg-[#F5F5F5] rounded-lg accent-[#260065]" />
+                          Delete
+                        </label>
                         <img id='preview_img{{ $key+3 }}' class="object-cover rounded-[5px] h-full w-24" src="{{ asset('storage/uploads/' .$image->name) }}" alt="Current profile photo" onclick="document.getElementById('fileInput{{$key+3}}').click();" />
                         <input type="file" id="fileInput{{ $key+3 }}" name="fileInput{{ $key+3 }}"  onchange="loadFile(event, 'preview_img{{ $key+3 }}')" class="hidden" />
                       </label>

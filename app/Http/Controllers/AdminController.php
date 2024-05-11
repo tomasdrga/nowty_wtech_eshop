@@ -10,7 +10,10 @@ use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -103,8 +106,23 @@ class AdminController extends Controller
   // Function to delete a product
   public function destroy_product($id)
   {
-    $product=Product::find($id);
+    // Find the product
+    $product = Product::find($id);
+
+    // Get all images associated with the product
+    $images = Image::where('product_id', $id)->get();
+
+    // Iterate over the images and delete from storage
+    foreach ($images as $image) {
+      // Builds the path to the image and deletes it
+      Storage::delete('public/uploads/'.$image->name);
+      // Delete the image record
+      $image->delete();
+    }
+
+    // Delete the product itself
     $product->delete();
+
     return response()->json(['status' => 'success']);
   }
 
@@ -149,6 +167,18 @@ class AdminController extends Controller
     } catch (\Illuminate\Validation\ValidationException $e) {
       toast('SOMETHING WERE WRONG DURING UPDATING PRODUCT, TRY AGAIN', 'error');
       return redirect('/admin#all-products');
+    }
+
+    // Check if the names of the images are unique
+    $inputImages = ['fileInput1', 'fileInput2', 'fileInput3', 'fileInput4', 'fileInput5', 'dropzone'];
+    $images = Image::all();
+    foreach ($images as $image) {
+      foreach ($inputImages as $inputImage) {
+        if ($request->hasFile($inputImage) && $image->name == $request->file($inputImage)->getClientOriginalName()) {
+          toast('THE NAMES OF THE IMAGES MUST BE UNIQUE', 'error');
+          return redirect('/admin#all-products');
+        }
+      }
     }
 
     // Fetch the product with the given id
@@ -210,12 +240,31 @@ class AdminController extends Controller
             $productImage->save();
           }
         } else {
+          // Get the existing image record for this product of the given type
+          $image = $product->images()->where('type', $imageTypes[$index])->first();
+
+          // Delete the old image file from storage
+          Storage::delete('public/uploads/'.$image->name);
+
+          // Store new image file
           $file = $request->{$imageName};
           $fileName = $file->getClientOriginalName();
           $file->storeAs('public/uploads', $fileName);
-          $image = $product->images()->where('type', $imageTypes[$index])->first();
+
+          // Update stored image name in the image record
           $image->name = $fileName;
           $image->save();
+        }
+      }
+    }
+
+    // Delete the images of the product that were selected for deletion
+    if ($request->has('checkbox-delete-secondary')) {
+      foreach ($request->input('checkbox-delete-secondary') as $id) {
+        $productImage = $product->images()->find($id);
+        if ($productImage) {
+          Storage::delete('public/uploads/'.$productImage->name);
+          $productImage->delete();
         }
       }
     }
@@ -229,8 +278,11 @@ class AdminController extends Controller
 
     // Validate the request
     try {
-      $request->validate([
-        'title' => 'required',
+      $messages = [
+        'title.unique' => 'THE TITLE HAS ALREADY BEEN TAKEN',
+      ];
+      $validator = Validator::make($request->all(),[
+        'title' => ['required',Rule::unique('products', 'name')],
         'category' => 'required',
         'description' => 'required',
         'tech_details' => 'required',
@@ -248,12 +300,32 @@ class AdminController extends Controller
         'quantity_m' => 'required',
         'quantity_l' => 'required',
         'quantity_xl' => 'required',
-      ]);
+      ], $messages);
+      if ($validator->fails()) {
+        $errors = $validator->errors();
+
+        if ($errors->has('title')) {
+          toast($errors->first('title'), 'error');
+        } else {
+          toast('PLEASE FILL IN ALL FIELDS', 'error');
+        }
+
+        return redirect('/admin#create-new-product');
+      }
+
     } catch (\Illuminate\Validation\ValidationException $e) {
-      toast('PLEASE FILL IN ALL FIELDS', 'error');
+      toast('SOMETHING WENT WRONG', 'error');
       return redirect('/admin#create-new-product');
     }
 
+    #check if the names of the images are unique
+    $images = Image::all();
+    foreach ($images as $image) {
+      if ($image->name == $request->file('dropzone')->getClientOriginalName() || $image->name == $request->file('fileInput1')->getClientOriginalName() || $image->name == $request->file('fileInput2')->getClientOriginalName() || $image->name == $request->file('fileInput3')->getClientOriginalName() || $image->name == $request->file('fileInput4')->getClientOriginalName() || $image->name == $request->file('fileInput5')->getClientOriginalName()) {
+        toast('THE NAMES OF THE IMAGES MUST BE UNIQUE', 'error');
+        return redirect('/admin#create-new-product');
+      }
+    }
     $imageNames = ['fileInput1', 'fileInput2', 'fileInput3', 'fileInput4', 'fileInput5', 'dropzone'];
     $imageTypes = ['index', 'main', 'secondary', 'secondary', 'secondary', 'size_guide'];
 
