@@ -88,7 +88,7 @@
       <section class="flex-1 w-full grid grid-cols-5 items-center">
         <div class="col-span-5 mx-4 md:mx-8 py-2 lg:col-span-4 items-center flex flex-row overflow-y-hidden overflow-x-auto whitespace-nowrap no-scrollbar h-3/4">
           @foreach($products as $product)
-            <a style='background-image: url("../img/products/{{ $product->indexImage->name }}")' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1 hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="{{ route('product.show', $product->slug) }}"></a>
+            <a style='background-image: url({{ asset('storage/uploads/' .$product->indexImage->name) }})' class="shrink rounded-lg bg-cover max-sm:min-w-16 min-w-24 xl:min-w-28 2xl:min-w-32 h-full max-sm:my-1 mx-1 hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="{{ route('product.show', $product->slug) }}"></a>
           @endforeach
         </div>
       </section>

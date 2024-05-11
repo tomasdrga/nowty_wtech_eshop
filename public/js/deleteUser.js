@@ -10,7 +10,6 @@ $(document).on("click", ".delete-btn", function(){
       id: id
     },
     success: function(response) {
-      console.log(response);
       $.ajax({
         url: '/admin/getUsers',
         type: 'GET',

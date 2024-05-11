@@ -15,8 +15,8 @@ class PaymentInformationSeeder extends Seeder
     {
         DB::table('payment_information')->insert([
             'id' => 'd3b3b3b3-3b3b-3b3b-3b3b-3b3b3b3b3b3b',
-            'first_name' => 'John',
-            'last_name' => 'DOE',
+            'first_name' => 'Matej',
+            'last_name' => 'Jonatan',
             'card_number' => '1234567890123456',
             'expiration_date' => '12/24',
             'security_code' => '123',

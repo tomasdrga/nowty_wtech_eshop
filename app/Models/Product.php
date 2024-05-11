@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -45,6 +47,11 @@ class Product extends Model
     public function secondaryImages()
     {
         return $this->hasMany('App\Models\Image')->where('type', 'secondary');
+    }
+
+    public function sizeGuideImage()
+    {
+      return $this->hasOne('App\Models\Image')->where('type', 'size_guide');
     }
 
     public function sizes() {
