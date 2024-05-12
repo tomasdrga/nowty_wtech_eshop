@@ -18,6 +18,7 @@ class AdminController extends Controller
   {
     // Fetch user with the given id and delete
     $user=User::find($id);
+    \Cart::erase($user->id);
     $user->delete();
 
     return response()->json(['status' => 'success']);

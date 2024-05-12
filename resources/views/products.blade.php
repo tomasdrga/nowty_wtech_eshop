@@ -11,6 +11,9 @@
   <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png" />
 
   <link rel="stylesheet" href="../css/style.css" />
+
+  @livewireStyles
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
   <!--Body-->
@@ -52,18 +55,14 @@
             </a>
           </div>
           <!--Searchbar on >= MD-->
-          <section class="w-1/2 md:w-1/3">
-            <form class="max-sm:hidden min-w-72 lg:pl-4 pt-4">
-              <label class="text-xs md:text-sm lg:text-base font-medium sr-only mb-2">SEARCH</label>
+          <section class="relative z-20 w-1/2 md:w-1/3">
+            <form id="searchForm" class="search-bar max-sm:hidden min-w-72 lg:ml-4 pt-4">
+              <label for="searchInput" class="text-xs md:text-sm lg:text-base font-medium sr-only mb-2">SEARCH</label>
               <div class="relative flex">
-                <input type="search" class="block w-full text-xs md:text-sm lg:text-base border border-gray-300 rounded-lg placeholder:text-[#260065]/50 p-2 focus:outline-none" placeholder="SEARCH" required />
-                <button type="submit" class="absolute right-0 top-0 bottom-0 text-sm text-white font-medium rounded-r-lg m-auto px-3 py-2 hover:bg-[#260065] hover:text-white hover:transition-all hover:transition-250 focus:outline-none">
-                  <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                  </svg>
-                </button>
+                <input id="searchInput" type="search" class="searchInput block w-full text-xs md:text-sm lg:text-base border border-gray-300 rounded-lg placeholder:text-[#260065]/50 p-2 focus:outline-none" placeholder="SEARCH" required />
               </div>
             </form>
+            <div id="results" class="hidden min-w-72 max-h-96 max-lg:w-full absolute top-full max-lg:-mt-7 lg:left-4 flex flex-col rounded-lg bg-white divide-y-2 divide-[#260065]/50 outline outline-2 outline-[#260065] overflow-y-auto"></div>
           </section>
           <!--Searchbar on >= MD end-->
           <!--Action buttons (cart, user, dark)-->
@@ -102,19 +101,17 @@
       <!--Top bar end-->
 
       <!--Products-->
-      <section class="flex-1 flex-col justify-between w-full">
+      <section class="flex-1 flex-col justify-between w-full z-10">
         <!--Searchbar on < SM-->
-        <form class="sm:hidden min-w-56 px-4 pt-4">
-          <label class="text-xs md:text-sm lg:text-base font-medium sr-only mb-2">SEARCH</label>
-          <div class="relative flex">
-            <input type="search" class="block w-full text-xs md:text-sm lg:text-base border border-gray-300 rounded-lg placeholder:text-[#260065]/50 p-2 focus:outline-none" placeholder="SEARCH" required />
-            <button type="submit" class="absolute right-0 top-0 bottom-0 text-sm text-white font-medium rounded-r-lg m-auto px-3 py-2 hover:bg-[#260065] hover:text-white hover:transition-all hover:transition-250 focus:outline-none">
-              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-              </svg>
-            </button>
-          </div>
-        </form>
+        <section class="relative">
+          <form id="searchFormSmall" class="sm:hidden search-bar min-w-56 px-4 pt-4">
+          <label for="searchInputSmall" class="text-xs md:text-sm lg:text-base font-medium sr-only mb-2">SEARCH</label>
+            <div class="relative flex">
+              <input id="searchInputSmall" type="search" class="searchInput block w-full text-xs md:text-sm lg:text-base border border-gray-300 rounded-lg placeholder:text-[#260065]/50 p-2 focus:outline-none" placeholder="SEARCH" required />
+            </div>
+          </form>
+          <div id="resultsSmall" class="hidden min-w-56 max-h-72 absolute top-full lg:left-4 mx-4 flex flex-col rounded-lg bg-white divide-y-2 divide-[#260065]/50 outline outline-2 outline-[#260065] overflow-y-auto z-20"></div>
+        </section>
         <!--Searchbar on < SM end-->
 
         <!--Top row-->
@@ -131,272 +128,36 @@
           </div>
           <!--Tab system end-->
 
-          <!--Dropdown-->
-          <div class="relative z-10">
-            <!--Dropdown button-->
-            <button id="dropdownButton" data-dropdown-toggle="dropdownMenu" class="inline-flex items-center text-xs md:text-sm lg:text-base font-semibold text-center rounded-lg pl-4 py-2.5" type="button">
-              FILTER
-              <svg class="w-2 h-2 md:w-2.5 md:h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="#260065" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-              </svg>
-            </button>
-            <!--Dropdown button end-->
-            <!--Dropdown menu-->
-            <div id="dropdownMenu" class="absolute top-full right-0 -mt-2 w-48 md:w-56 hidden rounded-lg bg-white divide-y-2 divide-[#260065]/50 outline outline-2 outline-[#260065]">
-              <!--General filters-->
-              <ul class="text-xs md:text-sm py-2" aria-labelledby="dropdownButton">
-                <li><a href="#" class="block px-4 py-2 hover:text-[#531DACFF]">New arrivals</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:text-[#531DACFF]">Lowest price</a></li>
-                <li><a href="#" class="block px-4 py-2 hover:text-[#531DACFF]">Highest price</a></li>
-              </ul>
-              <!--General filters end-->
-              <!--Size filters-->
-              <section>
-                <p class="block text-xs md:text-sm font-medium px-4 pt-2">Size</p>
-                <div class="flex flex-row">
-                  <ul class="text-xs md:text-sm w-1/2 px-4 py-3 space-y-3" aria-labelledby="dropdownCheckboxButton">
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-1" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-1" class="ms-2">XS</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-3" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-3" class="ms-2">M</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-5" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-5" class="ms-2">XL</label>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="text-xs md:text-sm w-1/2 px-4 py-3 space-y-3" aria-labelledby="dropdownCheckboxButton">
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-2" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-2" class="ms-2">S</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-4" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-4" class="ms-2">L</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input id="checkbox-item-6" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                        <label for="checkbox-item-6" class="ms-2">XXL</label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </section>
-              <!--Size filters end-->
-              <!--Material filters-->
-              <section>
-                <p class="block text-xs md:text-sm font-medium px-4 pt-2">Color</p>
-                <ul class="text-xs md:text-sm px-4 py-3 space-y-3" aria-labelledby="dropdownCheckboxButton">
-                  <li>
-                    <div class="flex items-center">
-                      <input id="checkbox-item-7" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                      <label for="checkbox-item-7" class="ms-2">Black</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <input id="checkbox-item-8" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                      <label for="checkbox-item-8" class="ms-2">Denim</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <input id="checkbox-item-9" type="checkbox" value="" class="w-3 h-3 md:w-4 md:h-4 rounded-lg accent-[#260065] cursor-pointer focus:ring-violet-500 focus:ring-2">
-                      <label for="checkbox-item-9" class="ms-2">Wild</label>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-              <!--Material filters end-->
-            </div>
-            <!--Dropdown menu end-->
-          </div>
-          <!--Dropdown end-->
+          <!--Product filter-->
+          <livewire:filter-products/>
+          <!--Product filter end-->
         </section>
         <!--Top row end-->
 
         <!--Scrollable content-->
         <section class="overflow-auto max-h-[calc(100vh-12.5rem)] sm:max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-13rem)] lg:md:max-h-[calc(100vh-6rem)]">
           <!--New tab-->
-          <div id="new" class="tab-content hidden grid max-[350px]:grid-cols-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            @foreach($products as $product)
-                <a class="flex flex-col gap-y-4 relative w-full h-full min-w-42 min-h-56 max-w-52 max-h-76 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="{{ route('product.show', $product->slug) }}">
-                    <span class="absolute top-0 right-0 px-1 rounded-lg bg-[#260065] text-[#F5F5F5]">New</span>
-                    <div class="flex items-center justify-center rounded-lg bg-[#F5F5F5] min-h-44 md:max-2xl:min-h-52 px-4 py-2 md:px-8 md:py-4">
-                        <img class="min-w-16 min-h-24 md:max-2xl:min-h-44 max-h-36 md:max-2xl:max-h-48 object-scale-down" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }}">
-                    </div>
-                    <div class="flex flex-col h-full justify-between text-xs md:text-sm lg:text-base">
-                        <p class="font-normal">{{ $product->name }}</p>
-                        <p class="text-sm md:text-base lg:text-lg font-bold">${{ $product->price }}</p>
-                    </div>
-                </a>
-            @endforeach
-          </div>
+          <livewire:show-new-products activeTab="new" isHidden=true/>
           <!--New tab end-->
           <!--All tab-->
-          <div id="all" class="tab-content grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-products activeTab="all" isHidden=false/>
           <!--All tab end-->
           <!--Bottoms tab-->
-          <div id="bottoms" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-bottom-products activeTab="bottoms" isHidden=true/>
           <!--Bottoms tab end-->
           <!--Hoods tab-->
-          <div id="hoods" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-hood-products activeTab="hoods" isHidden=true/>
           <!--Hoods tab end-->
           <!--Tees tab-->
-          <div id="tees" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-tee-products activeTab="tees" isHidden=true/>
           <!--Tees tab end-->
           <!--Hats tab-->
-          <div id="hats" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-hat-products activeTab="hats" isHidden=true/>
           <!--Hats tab end-->
           <!--Accessories tab-->
-          <div id="accessories" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 items-start justify-items-center gap-8 px-4 sm:px-16 py-8">
-            <a class="flex flex-col gap-y-4 min-w-42 min-h-72 max-w-52 max-h-96 p-2 rounded-lg hover:outline hover:outline-2 hover:outline-[#260065]/20 hover:text-[#531DACFF] hover:transition-all hover:transition-100" href="product_detail.html">
-              <div class="rounded-lg bg-[#F5F5F5] px-4 py-2 md:px-8 md:py-4">
-                <img class="min-w-16 max-h-56 object-contain" src="../img/products/palace_5.png" alt="">
-              </div>
-              <div class="text-xs md:text-sm lg:text-base">
-                <p class="font-normal">BIG OL' JEAN KRYPTEK CAMO</p>
-                <p class="text-sm md:text-base lg:text-lg font-bold">420$</p>
-              </div>
-            </a>
-          </div>
+          <livewire:show-accessories-products activeTab="accessories" isHidden=true/>
           <!--Accessories tab end-->
+
         </section>
         <!--Scrollable content end-->
       </section>
@@ -421,7 +182,7 @@
   <!--Body end-->
 
   <!--Navbar overlay-->
-  <div id="navbar-overlay" class="fixed -bottom-full left-0 z-[1] flex flex-col justify-between w-screen h-screen bg-white transition-all duration-250 md:overflow-hidden">
+  <div id="navbar-overlay" class="fixed -bottom-full left-0 z-20 flex flex-col justify-between w-screen h-screen bg-white transition-all duration-250 md:overflow-hidden">
     <!--Spacer-->
     <div></div>
 
@@ -479,7 +240,10 @@
   <!--  Place for importing scripts-->
   <script src="../js/navbar.js"></script>
   <script src="../js/tabs.js"></script>
+  <script src="../js/search.js"></script>
   <script src="../js/dropdown.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  @include('sweetalert::alert')
+  @livewireScripts
 </body>
 </html>

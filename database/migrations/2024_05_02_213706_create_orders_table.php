@@ -15,7 +15,9 @@ return new class extends Migration
           $table->uuid('id')->primary();
           $table->string('order_number')->unique();
 
-          $table->uuid('user_id');
+          $table->decimal('shipping_price', 7, 2);
+
+          $table->uuid('user_id')->nullable();
           $table->foreign('user_id')->references('id')->on('users');
 
           $table->uuid('shipping_id')->nullable();
@@ -26,7 +28,7 @@ return new class extends Migration
 
           $table->enum('order_status', ['pending', 'processing', 'shipped', 'delivered', 'canceled'])->default('pending');
 
-          $table->float('total');
+          $table->decimal('total', 7, 2);
           $table->timestamps();
         });
     }

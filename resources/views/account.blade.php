@@ -11,6 +11,7 @@
   <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png"/>
 
   <link rel="stylesheet" href="../css/style.css"/>
+  @livewireStyles
 </head>
 <body>
   <!--Body-->
@@ -407,5 +408,6 @@
   <script src="{{ asset('js/editFields.js') }}"></script>
   <script src="{{ asset('../js/logout.js') }}"></script>
   @include('sweetalert::alert')
+  @livewireScripts
 </body>
 </html>

@@ -15,7 +15,12 @@ class UserController extends Controller
      * Function for handling user logout
     */
     public function logout() {
+      if (auth()->check()) {
+        \Cart::erase(auth()->user()->id);
+        \Cart::store(auth()->user()->id);
+      }
       auth()->logout();
+      \Cart::destroy();
       return redirect('/');
     }
 
@@ -33,6 +38,8 @@ class UserController extends Controller
       if (auth()->attempt(['email' => $incomingFields['login_email'], 'password'=>$incomingFields['login_password']])){
         // If authentication is successful, regenerate session ID to avoid session fixation attacks
         $request->session()->regenerate();
+
+        \Cart::restore(auth()->user()->id);
 
         if (auth()->user()->role === 'admin') {
           // If the user is an admin, redirect to the admin page

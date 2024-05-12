@@ -6,13 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "anayarojo/shoppingcart": "^4.2",
         "laravel/framework": "^11.0",
+        "laravel/scout": "^10.9",
         "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.4",
         "ramsey/uuid": "^4.7",
         "realrashid/sweet-alert": "^7.1",
-        "synergitech/laravel-alert": "^2.0"
+        "synergitech/laravel-alert": "^2.0",
+        "typesense/typesense-php": "^4.9"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",

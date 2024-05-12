@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 64)->unique();
-            $table->enum('type', ['index', 'main', 'secondary']);
+            $table->enum('type', ['index', 'main', 'secondary', 'size_guide']);
             $table->uuid('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

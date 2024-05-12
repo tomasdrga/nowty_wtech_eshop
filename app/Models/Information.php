@@ -35,7 +35,7 @@ class Information extends Model
 
   public function payment_information()
   {
-    return $this->belongsTo(Payment::class);
+    return $this->belongsTo(PaymentInformation::class, 'payment_id');
   }
 
 }
