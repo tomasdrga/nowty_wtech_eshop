@@ -17,13 +17,31 @@ class TeesSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        $tees_names = ['Supreme 30', 'Chiz Face'];
+        $tees_names = ['Tunnel Tee', 'Travis Main', 'Supreme TNF', 'Supreme 30',
+                      'Nice Brown Tee', 'Melvins Striped White', 'Melvins Striped Black', 'Melvins Prick',
+                      'Melvins Bullhead', 'Chiz Face'];
 
         $tees_description = ['Big up real trees\nFake ones are shit',
-                                'Big up real trees\nFake ones are shit'];
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit',
+                              'Big up real trees\nFake ones are shit'];
 
         $tees_technical_details = ['Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
-                                      'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware'];
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
+                                  'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware'];
 
         for ($i=0; $i < 2; $i++) {
             Product::create([
