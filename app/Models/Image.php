@@ -14,6 +14,10 @@ class Image extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public static function create(array $array)
+    {
+    }
+
     public function product()
     {
         return $this->belongsTo('App\Models\Product');
