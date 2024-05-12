@@ -33,14 +33,6 @@ class ImageBottomsSeeder extends Seeder
 
        $product_number = 0;
        foreach ($products as $product) {
-         Image::create([
-           'id' => Uuid::uuid4(),
-           'name' => $sizeGuideImages[$product_number],
-           'type' => 'size_guide',
-           'product_id' => $product->id,
-           'created_at' => now(),
-           'updated_at' => now()
-         ]);
          for ($i = 0; $i < count($imageNames[$product_number]); $i++) {
            Image::create([
              'id' => Uuid::uuid4(),
