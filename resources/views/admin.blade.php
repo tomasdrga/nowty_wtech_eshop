@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="/img/favicon/nowty_face.png" />
 
   <link rel="stylesheet" href="../css/style.css" />
+  @livewireStyles
 </head>
 <body>
   <!--Body-->
@@ -990,5 +991,6 @@
     chartLine.render();
   </script>
   @include('sweetalert::alert')
+  @livewireScripts
 </body>
 </html>

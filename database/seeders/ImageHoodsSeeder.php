@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use App\Models\Product;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

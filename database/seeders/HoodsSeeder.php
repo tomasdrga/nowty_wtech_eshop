@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class HoodsSeeder extends Seeder
 {
@@ -47,7 +50,7 @@ class HoodsSeeder extends Seeder
           'name' => $bottoms_names[$i],
           'description' => $bottoms_description[$i],
           'technical_details' => $bottoms_technical_details[$i],
-          'category' => 'bottoms',
+          'category' => 'hoods',
           'price' => round(rand(9000, 100000) / 100.0, 2),
           'created_at' => now(),
           'updated_at' => now()

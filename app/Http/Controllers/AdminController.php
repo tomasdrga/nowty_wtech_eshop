@@ -99,6 +99,7 @@ class AdminController extends Controller
   public function destroy_user($id)
   {
     $user=User::find($id);
+    \Cart::erase($user->id);
     $user->delete();
     return response()->json(['status' => 'success']);
   }

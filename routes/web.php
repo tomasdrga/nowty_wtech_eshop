@@ -24,11 +24,17 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
+Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart');
+
+Route::post('/add-product', 'App\Http\Controllers\CartController@addToCart')->name('add-to-cart');
+
 Route::get('/products', 'App\Http\Controllers\ProductController@loadProducts');
 
 Route::get('/checkout', function () {
     return view('checkout');
 });
+
+Route::post('/checkout/create-order', 'App\Livewire\Checkout@createOrder')->name('create-order');
 
 Route::get('/login', function () {
     return view('login');
@@ -55,6 +61,8 @@ Route::get('/terms', function () {
 Route::get('/404', function() {
     abort(404);
 });
+
+Route::get('/search', 'App\Http\Controllers\ProductController@search')->name('search');
 
 Route::post("/register", [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
