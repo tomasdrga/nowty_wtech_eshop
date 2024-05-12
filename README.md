@@ -33,6 +33,7 @@ This project was build and ran in docker. So the following guide provides a set 
 
    For Unix-based systems:
     ```bash
+    mkdir storage/app/public/uploads
     mv public/img/products/* storage/app/public/uploads
     ```
 

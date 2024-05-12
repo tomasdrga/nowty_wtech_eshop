@@ -34,7 +34,5 @@ class DatabaseSeeder extends Seeder
         $this->call(InformationSeeder::class);
 
         $this->call(OrderSeeder::class);
-
-        $this->call
     }
 }
