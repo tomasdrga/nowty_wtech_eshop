@@ -58,6 +58,8 @@ const performSearch = (searchInput, resultsContainer, e) => {
 
       if (Array.isArray(products) && products.length >= 1) {
         productHtml = products.map(product => {
+          const imageUrl = "/storage/uploads/" + product.main_image.name;
+
           return `
             <a href="/product/${product.slug}" class="grid grid-cols-2 gap-4 py-4 px-8">
               <div class="space-y-1">
@@ -65,7 +67,7 @@ const performSearch = (searchInput, resultsContainer, e) => {
                 <div class="text-xs lg:text-sm text-[#260065]/50">\$${product.price}</div>
               </div>
               <div class="flex items-center justify-end">
-                <img class="w-16 h-16 xl:w-20 xl:h-20 rounded-md object-contain" src="../img/products/${product.main_image.name}" alt="${product.name}" />
+                <img class="w-16 h-16 xl:w-20 xl:h-20 rounded-md object-contain" src="${imageUrl}" alt="${product.name}" />
               </div>
             </a>`;
         }).join('');

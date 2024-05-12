@@ -30,5 +30,54 @@ class SizeSeeder extends Seeder
           $newSize->save();
         }
       }
+
+      $productsHoods = Product::all()->where('category', 'hoods');
+
+      foreach ($productsHoods as $product) {
+        foreach ($sizesArray as $sizeName) {
+          $newSize = new Size();
+          $newSize->name = $sizeName;
+          $newSize->quantity = rand(0, 40);
+          $newSize->product_id = $product->id;
+          $newSize->save();
+        }
+      }
+
+      $productsAccessories = Product::all()->where('category', 'accessories');
+
+      foreach ($productsAccessories as $product) {
+        foreach ($sizesArray as $sizeName) {
+          $newSize = new Size();
+          $newSize->name = $sizeName;
+          $newSize->quantity = rand(0, 40);
+          $newSize->product_id = $product->id;
+          $newSize->save();
+        }
+      }
+
+      $productsHats = Product::all()->where('category', 'hats');
+
+      foreach ($productsHats as $product) {
+        foreach ($sizesArray as $sizeName) {
+          $newSize = new Size();
+          $newSize->name = $sizeName;
+          $newSize->quantity = rand(0, 40);
+          $newSize->product_id = $product->id;
+          $newSize->save();
+        }
+      }
+
+      $productsTees = Product::all()->where('category', 'tees');
+
+      foreach ($productsTees as $product) {
+        foreach ($sizesArray as $sizeName) {
+          $newSize = new Size();
+          $newSize->name = $sizeName;
+          $newSize->quantity = rand(0, 40);
+          $newSize->product_id = $product->id;
+          $newSize->save();
+        }
+      }
+
     }
 }
