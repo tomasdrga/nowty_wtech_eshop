@@ -33,12 +33,12 @@ This project was build and ran in docker. So the following guide provides a set 
 
    For Unix-based systems:
     ```bash
-     mv public/img/products/* storage/app/public/uploads
+    mv public/img/products/* storage/app/public/uploads
     ```
 
    For Windows:
     ```bash
-     move public\img\products* storage\app\public\uploads
+    move public\img\products* storage\app\public\uploads
     ```
 
 6. **Create environment file:**  Copy the contents of .env.example into .env file
@@ -55,15 +55,15 @@ This project was build and ran in docker. So the following guide provides a set 
 
 1.  **Update the .env:** You need to update your `.env` file. To be more specific you need to change or fill in fields `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
     ```bash
-      DB_CONNECTION=pgsql
-      DB_HOST=db
-      DB_PORT=5432
-      DB_DATABASE=database_name
-      DB_USERNAME=username
-      DB_PASSWORD=password
+    DB_CONNECTION=pgsql
+    DB_HOST=db
+    DB_PORT=5432
+    DB_DATABASE=database_name
+    DB_USERNAME=username
+    DB_PASSWORD=password
 2.  **Application Key:**  Generate the laravel app key.
      ```bash
-    php artisan key:generate
+     php artisan key:generate
 
 3.  **Additional Configuration:** You may encounter some additional configuration, but the steps above should cover everything.
 
