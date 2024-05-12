@@ -221,7 +221,7 @@
             <!--One item in list of information part end-->
 
             <!--One item in list of information part-->
-            <div class="flex flex-row justify-between bg-[#F5F5F5] mx-20 py-3 pb-10">
+            <div class="flex flex-row justify-between bg-[#F5F5F5] mx-20 py-3 ">
               <div class="flex flex-col pl-4">
                 <h3 class="text-lg font-semibold">Number of accessories</h3>
               </div>
