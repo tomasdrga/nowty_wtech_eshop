@@ -91,10 +91,10 @@
         <div class="flex flex-row justify-between px-4 border-b-2 border-[#260065] pt-2 pb-1">
           <!--Tab system-->
           <div class="flex flex-row gap-x-8 overflow-x-auto no-scrollbar text-xs md:text-sm lg:text-base">
-            <button class="tab-btn tab-active text-nowrap font-semibold" data-target="tab1">OVERVIEW</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab2">ORDERS</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab3">MY DETAILS</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab4">ADDRESSES</button>
+            <button class="tab-btn tab-active text-nowrap font-semibold" data-target="overview">OVERVIEW</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="orders">ORDERS</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="details">MY DETAILS</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="addresses">ADDRESSES</button>
           </div>
           <!--Tab system end-->
           <!--Log out button-->
@@ -108,7 +108,7 @@
         <!--Scrollable content-->
         <section class="overflow-auto max-h-[calc(100vh-11rem)] sm:max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-13rem)] lg:md:max-h-[calc(100vh-5rem)]">
           <!--Overview tab-->
-          <section id="tab1" class="tab-content py-4">
+          <section id="overview" class="tab-content py-4">
             <article class="flex flex-col">
               <!--Recent orders-->
               @if(auth()->user()->orders->isNotEmpty())
@@ -127,7 +127,7 @@
                         <div class="text-xs sm:text-sm opacity-50 mb-2">{{$order->order_status}}</div>
                       </div>
                       <div class="flex items-center">
-                        <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab2"><u>VIEW</u></button>
+                        <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="orders"><u>VIEW</u></button>
                       </div>
                     </article>
                   @endforeach
@@ -144,7 +144,7 @@
                   <div class="text-xs sm:text-sm opacity-90 mb-2">•••••••••••</div>
                 </div>
                 <div class="flex items-center">
-                  <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab3"><u>VIEW</u></button>
+                  <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="details"><u>VIEW</u></button>
                 </div>
               </section>
               <!--My details end-->
@@ -163,7 +163,7 @@
                     <div class="text-xs sm:text-sm opacity-90 mb-2">{{auth()->user()->information->shipping_information->country}}</div>
                   </div>
                   <div class="flex items-center">
-                    <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="tab4" ><u>VIEW</u></button>
+                    <button class="tab-btn-view text-xs sm:text-sm mr-2 sm:mr-8 hover:text-[#531DACFF]" data-target="addresses" ><u>VIEW</u></button>
                   </div>
                 </section>
               @endif
@@ -173,7 +173,7 @@
           </section>
           <!--Overview tab end-->
           <!--Orders tab-->
-          <section id="tab2" class="tab-content hidden">
+          <section id="orders" class="tab-content hidden">
             <!--Orders content-->
             <div class="flex flex-col pt-2 gap-y-2">
               <!--Orders-->
@@ -195,7 +195,7 @@
           <!--Orders tab end-->
 
           <!--My details new tab-->
-          <section id="tab3" class="tab-content hidden overflow-hidden">
+          <section id="details" class="tab-content hidden overflow-hidden">
             <!--Account details-->
             <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 pt-2">
               <!--Left side of component-->
@@ -224,7 +224,7 @@
 
 
           <!--Addresses tab-->
-          <section id="tab4" class="tab-content hidden">
+          <section id="addresses" class="tab-content hidden">
             <!--Shipping address-->
             <div class="flex flex-row justify-between border-b-2 border-[#260065]/50 pt-2">
               <!--Left part of shipping address-->

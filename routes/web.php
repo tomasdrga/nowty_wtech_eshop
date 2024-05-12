@@ -14,6 +14,11 @@ Route::get('/account', function () {
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.users')->middleware(['auth', 'admin']);
 Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy_user'])->name('admin.delete')->middleware(['auth', 'admin']);
 Route::get('/admin/getUsers', [AdminController::class, 'getUsers'])->middleware(['auth', 'admin']);
+Route::post('/admin/createProduct', [AdminController::class, 'createNewProduct'])->middleware(['auth', 'admin']);
+Route::delete('/admin/deleteProduct/{id}', [AdminController::class, 'destroy_product'])->name('admin.deleteProduct')->middleware(['auth', 'admin']);
+Route::get('/admin/getProducts', [AdminController::class, 'getProducts'])->middleware(['auth', 'admin']);
+Route::get('/admin/giveProduct/{id}', [AdminController::class, 'giveProduct'])->name('admin.giveProduct')->middleware(['auth', 'admin']);
+Route::post('admin/updateProduct/{id}', [AdminController::class, 'updateProduct'])->middleware(['auth', 'admin']);
 
 Route::get('/cart', function () {
     return view('cart');
