@@ -1,3 +1,6 @@
+@php
+  use Illuminate\Support\Str;
+@endphp
 <!doctype html>
 <html lang="en">
 <head>
@@ -95,10 +98,11 @@
         <section class="flex flex-row justify-between px-4 border-b-2 border-[#260065] pt-2 pb-1">
           <!--Tab system-->
           <div class="flex flex-row gap-x-8 overflow-x-auto no-scrollbar text-xs md:text-sm lg:text-base">
-            <button class="tab-btn tab-active text-nowrap font-semibold" data-target="tab1">OVERVIEW</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab2">ALL PRODUCTS</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab3">CREATE NEW PRODUCT</button>
-            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="tab4">LIST ALL USERS</button>
+            <button class="tab-btn tab-active text-nowrap font-semibold" data-target="overview">OVERVIEW</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="all-products">ALL PRODUCTS</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="create-new-product">CREATE NEW PRODUCT</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold" data-target="all-users">LIST ALL USERS</button>
+            <button class="tab-btn tab-inactive text-nowrap font-semibold hidden" data-target="edit-product">EDIT PRODUCTS</button>
           </div>
           <!--Tab system end-->
           <!--Log out button-->
@@ -113,20 +117,19 @@
         <!--Scrollable content-->
         <section class="overflow-auto max-h-[calc(100vh-9rem)] sm:max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-11rem)] lg:md:max-h-[calc(100vh-5rem)]">
           <!--Overview tab-->
-          <div id="tab1" class="tab-content py-4">
+          <div id="overview" class="tab-content py-4">
             <!--Charts part-->
             <section class="flex flex-row justify-between border-b-2 border-[#260065]/50 gap-x-4 mx-20">
               <!--Pie chart-->
               <article class="w-1/3 mb-4">
                 <div class="flex flex-col rounded-[5px] bg-[#F5F5F5] h-[24rem]">
-                  <span class="text-lg font-semibold text-[#260065] py-4 px-2">Order amount</span>
+                  <span class="text-lg font-semibold text-[#260065] py-4 px-2">Products</span>
                   <div class="py-6 mt-4 grid place-items-center px-2">
                     <div id="pie-chart"></div>
                   </div>
                 </div>
               </article>
               <!--Pie chart end-->
-
               <!--Line chart-->
               <article class="w-2/3">
                 <div class="flex flex-col rounded-[5px] bg-[#F5F5F5] h-[24rem]">
@@ -146,7 +149,7 @@
                 <h3 class="text-lg font-semibold">Number of users</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>1250</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$users->unique('id')->count()}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -157,7 +160,7 @@
                 <h3 class="text-lg font-semibold">Number of orders</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>456</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$orders->unique('id')->count()}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -168,7 +171,7 @@
                 <h3 class="text-lg font-semibold">Number of all products</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>123</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$productsAll}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -176,10 +179,10 @@
             <!--One item in list of information part-->
             <div class="flex flex-row justify-between bg-[#F5F5F5] mx-20 py-3">
               <div class="flex flex-col pl-4">
-                <h3 class="text-lg font-semibold">Number of bottoms</h3>
+                <h3 id="number-bottoms" class="text-lg font-semibold">Number of bottoms</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>12</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$bottomsCount}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -190,7 +193,7 @@
                 <h3 class="text-lg font-semibold">Number of hoods</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>69</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$hoodsCount}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -201,7 +204,7 @@
                 <h3 class="text-lg font-semibold">Number of tees</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>29</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$teesCount}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -212,7 +215,7 @@
                 <h3 class="text-lg font-semibold">Number of hats</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>10</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$hatsCount}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
@@ -223,16 +226,17 @@
                 <h3 class="text-lg font-semibold">Number of accessories</h3>
               </div>
               <div class="flex items-center">
-                <a href="#" class="text-lg font-bold mr-4"><u>23</u></a>
+                <a href="#" class="text-lg font-bold mr-4"><u>{{$accessoriesCount}}</u></a>
               </div>
             </div>
             <!--One item in list of information part end-->
           </div>
           <!--Overview tab end-->
+
           <!--All tab-->
-          <div id="tab2" class="tab-content hidden">
+          <div id="all-products" class="tab-content hidden">
             <!--Cart table-->
-            <table class="table-auto w-full max-h-min">
+            <table class="table-auto w-full max-h-min mb-10">
               <!--Cart table head-->
               <thead class="border-b-2 border-[#260065]/50">
               <!--Head on LG-->
@@ -250,717 +254,437 @@
               </tr>
               </thead>
               <!--Head end-->
+
               <!--Card body-->
-              <tbody>
-              <!--Cart item on > LG-->
-              <tr class="max-md:hidden bg-[#F5F5F5]">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="Product image in admin">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <div class="text-sm">
-                      <h6>Category: Bottom</h6>
-                      <h6>Color: Pink</h6>
-                      <h6>Material: Denim</h6>
+              <tbody id="productTableBody">
+              @foreach($products as $product)
+                <!--Cart item on > LG-->
+                <tr class="max-md:hidden {{$loop->iteration % 2 != 1 ? '':'bg-[#F5F5F5]'}}">
+                  <!--Image-->
+                  <td>
+                    <div class="flex justify-center items-center">
+                      <img src="{{ asset('storage/uploads/' .$product->mainImage->name) }}" alt="{{ $product->name }}" class="w-20 h-20 object-contain" alt="Product image in admin">
                     </div>
-                  </div>
-                </td>
-                <!--Product end-->
-                <!--Quantity-->
-                <td>
-                  <div class="flex flex-row justify-center gap-x-2 font-medium">
-                    <h6>1,000+pcs</h6>
-                  </div>
-                </td>
-                <!--Quantity end-->
-                <!--Price-->
-                <td class="text-center font-medium">
-                  <h6>420$</h6>
-                </td>
-                <!--Price end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Edit</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--Cart item on > LG end-->
-              <!--Cart item on < LG-->
-              <tr class="md:hidden bg-[#F5F5F5]">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--Product name-->
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-between pt-4 pr-4 sm:pr-8">
-                      <!--Quantity-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Quantity</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>1,000+pcs</h6>
-                        </div>
+                  </td>
+                  <!--Image end-->
+                  <!--Product-->
+                  <td class="py-2">
+                    <div class="flex flex-col justify-between h-full">
+                      <h5 class="font-medium mb-2">{{ $product->name }}</h5>
+                      <div class="text-sm">
+                        <h6>Category: {{ $product->category }}</h6>
+                        <h6>Color:
+                          @foreach ($product->colors as $color)
+                            {{ $color->name }}
+                          @endforeach
+                        </h6>
+                        <h6>Material:
+                          @foreach ($product->materials as $material)
+                            {{ $material->name }}
+                          @endforeach
+                        </h6>
                       </div>
-                      <!--Quantity end-->
-                      <!--Price-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Price</h6>
-                        <h6 class="text-center font-medium">420$</h6>
-                      </div>
-                      <!--Price end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Edit</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
                     </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--Product end-->
-              </tr>
-              <!--Cart item on < LG end-->
+                  </td>
+                  <!--Product end-->
 
-              <!--Cart item on > LG-->
-              <tr class="max-md:hidden">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="Product image in admin">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <div class="text-sm">
-                      <h6>Category: Bottom</h6>
-                      <h6>Color: Pink</h6>
-                      <h6>Material: Denim</h6>
+                  <!--Quantity-->
+                  <td>
+                    <div class="flex flex-row justify-center gap-x-2 font-medium">
+                      <h6>{{$product->sizes->sum('quantity')}}</h6>
                     </div>
-                  </div>
-                </td>
-                <!--Product end-->
-                <!--Quantity-->
-                <td>
-                  <div class="flex flex-row justify-center gap-x-2 font-medium">
-                    <h6>1,000+pcs</h6>
-                  </div>
-                </td>
-                <!--Quantity end-->
-                <!--Price-->
-                <td class="text-center font-medium">
-                  <h6>420$</h6>
-                </td>
-                <!--Price end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Edit</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--Cart item on > LG end-->
-              <!--Cart item on < LG-->
-              <tr class="md:hidden">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--Product name-->
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-between pt-4 pr-4 sm:pr-8">
-                      <!--Quantity-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Quantity</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>1,000+pcs</h6>
-                        </div>
-                      </div>
-                      <!--Quantity end-->
-                      <!--Price-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Price</h6>
-                        <h6 class="text-center font-medium">420$</h6>
-                      </div>
-                      <!--Price end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Edit</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
+                  </td>
+                  <!--Quantity end-->
+                  <!--Price-->
+                  <td class="text-center font-medium">
+                    <h6>{{$product->price}}$</h6>
+                  </td>
+                  <!--Price end-->
+                  <!--Actions-->
+                  <td class="font-medium">
+                    <div class="flex flex-row gap-x-4 justify-center self-center">
+                      <a href="{{ '/product/' . Str::slug($product->name) }}" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
+                      <a href="{{ route('admin.giveProduct', $product->id) }}" class="underline decoration-2 hover:text-[#531DACFF] edit-btn">Edit</a>
+                      <a href="#" class="underline decoration-2 hover:text-[#531DACFF] delete-product-btn" data-id="{{$product->id}}">Delete</a>
                     </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--Product end-->
-              </tr>
-              <!--Cart item on < LG end-->
-
-              <!--Cart item on > LG-->
-              <tr class="max-md:hidden bg-[#F5F5F5]">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="Product image in admin">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <div class="text-sm">
-                      <h6>Category: Bottom</h6>
-                      <h6>Color: Pink</h6>
-                      <h6>Material: Denim</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--Product end-->
-                <!--Quantity-->
-                <td>
-                  <div class="flex flex-row justify-center gap-x-2 font-medium">
-                    <h6>1,000+pcs</h6>
-                  </div>
-                </td>
-                <!--Quantity end-->
-                <!--Price-->
-                <td class="text-center font-medium">
-                  <h6>420$</h6>
-                </td>
-                <!--Price end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Edit</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--Cart item on > LG end-->
-              <!--Cart item on < LG-->
-              <tr class="md:hidden bg-[#F5F5F5]">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--Product name-->
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-between pt-4 pr-4 sm:pr-8">
-                      <!--Quantity-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Quantity</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>1,000+pcs</h6>
-                        </div>
-                      </div>
-                      <!--Quantity end-->
-                      <!--Price-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Price</h6>
-                        <h6 class="text-center font-medium">420$</h6>
-                      </div>
-                      <!--Price end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Edit</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--Product end-->
-              </tr>
-              <!--Cart item on < LG end-->
-
-              <!--Cart item on > LG-->
-              <tr class="max-md:hidden">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="Product image in admin">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2">
-                  <div class="flex flex-col justify-between h-full">
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <div class="text-sm">
-                      <h6>Category: Bottom</h6>
-                      <h6>Color: Pink</h6>
-                      <h6>Material: Denim</h6>
-                    </div>
-                  </div>
-                </td>
-                <!--Product end-->
-                <!--Quantity-->
-                <td>
-                  <div class="flex flex-row justify-center gap-x-2 font-medium">
-                    <h6>1,000+pcs</h6>
-                  </div>
-                </td>
-                <!--Quantity end-->
-                <!--Price-->
-                <td class="text-center font-medium">
-                  <h6>420$</h6>
-                </td>
-                <!--Price end-->
-                <!--Actions-->
-                <td class="font-medium">
-                  <div class="flex flex-row gap-x-4 justify-center self-center">
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">View</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Edit</a>
-                    <a href="#" class="underline decoration-2 hover:text-[#531DACFF]">Delete</a>
-                  </div>
-                </td>
-                <!--Actions end-->
-              </tr>
-              <!--Cart item on > LG end-->
-              <!--Cart item on < LG-->
-              <tr class="md:hidden">
-                <!--Image-->
-                <td>
-                  <div class="flex justify-center items-center">
-                    <img src="../img/products/palace_5.png" class="w-20 h-20 object-contain" alt="">
-                  </div>
-                </td>
-                <!--Image end-->
-                <!--Product-->
-                <td class="py-2" colspan="5">
-                  <div class="flex flex-col justify-between h-full text-sm">
-                    <!--Product name-->
-                    <h5 class="font-medium mb-2">P45 STANDARD JEAN SAND WASH</h5>
-                    <!--Bottom buttons-->
-                    <div class="flex flex-row justify-between pt-4 pr-4 sm:pr-8">
-                      <!--Quantity-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Quantity</h6>
-                        <div class="flex flex-row justify-center gap-x-2 font-medium">
-                          <h6>1,000+pcs</h6>
-                        </div>
-                      </div>
-                      <!--Quantity end-->
-                      <!--Price-->
-                      <div class="flex flex-col">
-                        <h6 class="opacity-50">Price</h6>
-                        <h6 class="text-center font-medium">420$</h6>
-                      </div>
-                      <!--Price end-->
-                      <!--Actions-->
-                      <div class="flex flex-col">
-                        <h6 class="w-full text-center opacity-50">Actions</h6>
-                        <div class="flex flex-row gap-x-4 justify-center self-center font-medium">
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">View</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Edit</a>
-                          <a href="#" class="underline decoration-2 focus:text-[#531DACFF] hover:text-[#531DACFF]">Delete</a>
-                        </div>
-                      </div>
-                      <!--Actions end-->
-                    </div>
-                    <!--Bottom buttons end-->
-                  </div>
-                </td>
-                <!--Product end-->
-              </tr>
-              <!--Cart item on < LG end-->
+                  </td>
+                  <!--Actions end-->
+                </tr>
+                <!--Cart item on > LG end-->
+              @endforeach
               </tbody>
               <!--Card body end-->
             </table>
           </div>
           <!--All tab end-->
+
           <!--Crate new tab-->
-          <div id="tab3" class="tab-content hidden">
-            <!--Inputs for create product-->
-            <section class="grid grid-cols-3 grid-rows-6 gap-y-5 gap-x-4 border-b-2 border-[#260065]/50 pt-2 px-4 pb-4">
-              <!--Title of product-->
-              <div class="col-start-1 row-start-1">
-                <span class="text-sm font-medium">Title</span>
-                <label for="title">
-                  <input type="text" id="title" class="border border-[#260065]/50 rounded-[5px] font-medium text-xs md:text-sm w-full h-9 placeholder:opacity-50 p-2.5 outline-none" placeholder="P45 STANDARD JEAN SAND WASH" required="">
-                </label>
-              </div>
-              <!--Title of product end-->
-
-              <!--Category-->
-              <div class="col-start-1 row-start-2">
-                <span class="text-sm font-medium">Category</span>
-                <label for="category">
-                  <input type="text" id="category" class="border rounded-[5px] border-[#260065]/50 text-xs md:text-sm w-full h-9 placeholder:opacity-50 outline-none p-2.5" placeholder="BOTTOMS" required="">
-                </label>
-              </div>
-              <!--Category end-->
-
-              <!--Material-->
-              <div class="col-start-1 row-start-3">
-                <span class="text-sm font-medium">Material</span>
-                <label for="material">
-                  <input type="text" id="material" class="border rounded-[5px] border-[#260065]/50 text-xs md:text-sm w-full h-9 placeholder:opacity-50 outline-none p-2.5" placeholder="DENIM" required="">
-                </label>
-              </div>
-              <!--Material end-->
-
-              <!--Color-->
-              <div class="col-start-1 row-start-4">
-                <span class="text-sm font-medium">Color</span>
-                <label for="color">
-                  <input type="text" id="color" class="text-xs border text-admin border-[1px] border-[#260065]/50 outline-none h-9 md:text-sm placeholder:opacity-50 rounded-[5px] w-full p-2.5" placeholder="DARK BLUE" required="">
-                </label>
-              </div>
-              <!--Color end-->
-
-              <!--Price-->
-              <div class="col-start-1 row-start-5">
-                <span class="text-sm font-medium">Price in €</span>
-                <label for="price">
-                  <input type="text" id="price" class="border rounded-[5px] border-[#260065]/50 text-xs md:text-sm w-full h-9 placeholder:opacity-50 outline-none p-2.5" placeholder="426" required="">
-                </label>
-              </div>
-              <!--Price end-->
-
-              <!--Size guide-->
-              <div class="col-start-1 row-start-6">
-                <span class="text-sm font-medium">Size guide</span>
-                <div class="flex items-center justify-center w-full">
-                  <label for="dropzone-file" class="flex flex-col items-center justify-center border border-[#260065]/50 rounded-[5px] w-full h-9 cursor-pointer">
-                    <span class="flex flex-row justify-between w-full">
-                      <span id="file-name" class="text-xs md:text-sm font-medium opacity-20 p-2.5">p45_size_guide.png</span>
-                    </span>
-                    <!--Dropzone field-->
-                    <input id="dropzone-file" type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0].name"/>
+          <div id="create-new-product" class="tab-content hidden">
+            <form method="POST" action="admin/createProduct" enctype="multipart/form-data">
+              @csrf
+              <!--Inputs for create product-->
+              <section class="grid grid-cols-3 grid-rows-6 gap-y-5 gap-x-4 border-b-2 border-[#260065]/50 pt-2 px-4 pb-4">
+                <!--Title of product-->
+                <div class="col-start-1 row-start-1">
+                  <span class="text-sm font-medium">Title</span>
+                  <label for="title">
+                    <input type="text" id="title" name="title" class="border border-[#260065]/50 rounded-[5px] font-medium text-xs md:text-sm w-full h-9 placeholder:opacity-50 p-2.5 outline-none" placeholder="P45 STANDARD JEAN SAND WASH" required="">
                   </label>
                 </div>
-              </div>
-              <!--Size guide end-->
+                <!--Title of product end-->
 
-              <!--Description and sizes-->
-              <section class="col-start-2 row-start-1 row-span-4 col-span-2">
-                <div class="flex flex-row gap-x-4">
-                  <!--Texts for description and tech details-->
-                  <div class="flex flex-col gap-y-5 w-8/12">
-                    <div>
-                      <label for="description" class="text-sm font-medium">Description (MAX. 5 bullet Points)</label>
-                      <textarea id="description" rows="3" class="resize-none block border border-[#260065]/50 rounded-[5px] w-full h-[116px] outline-none text-xs md:text-sm placeholder:opacity-50 px-2.5 py-1" placeholder="• IF YOU DON’T LIKE \n• THIS PANTS \n• LEAVE THE WEBSITE \n• IMMEDIATELY \n• YOU TOSS POT"></textarea>
-                    </div>
-                    <div>
-                      <label for="tech_details" class="text-admin text-sm font-medium">Technical Details (MAX. 5 bullet Points)</label>
-                      <textarea id="tech_details" rows="3" class="resize-none block border border-[#260065]/50 rounded-[5px] w-full h-[116px] outline-none text-xs md:text-sm placeholder:opacity-50 px-2.5 py-1" placeholder="• 80% COTTON \n• 10% WOOL \n• GORATEX \n• WATERPROOF"></textarea>
-                    </div>
-                  </div>
-                  <!--Texts for description and tech details end-->
-
-                  <!--Sizes quantity-->
-                  <div class="flex flex-col w-4/12 gap-y-1">
-                    <span class="text-sm font-medium">Sizes quantity</span>
-                    <div class="flex flex-col gap-y-6">
-                      <!--XS quantity-->
-                      <div class="flex items-center justify-between rounded-[5px] border border-[#260065]/50 h-9" data-hs-input-number>
-                        <!--Label for size-->
-                        <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
-                          <span>XS</span>
-                        </div>
-                        <!--Label for size end-->
-
-                        <!--Input for quantity-->
-                        <label for="quantity_xs">
-                          <input id="quantity_xs" class="text-center outline-none w-full p-0" type="text" value="1" data-hs-input-number-input>
-                        </label>
-                        <!--Input for quantity end-->
-
-                        <!--Buttons for increment and decrement-->
-                        <div class="flex justify-end items-center h-full">
-                          <!--Decrement button-->
-                          <div class="justify-center border-l border-[#260065]/50 h-full p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Decrement button end-->
-
-                          <!--Increment button-->
-                          <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Increment button end-->
-                        </div>
-                        <!--Buttons for increment and decrement end-->
-                      </div>
-                      <!--XS quantity end-->
-
-                      <!--S quantity-->
-                      <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
-                        <!--Label for size-->
-                        <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
-                          <span>S</span>
-                        </div>
-                        <!--Label for size end-->
-
-                        <!--Input for quantity-->
-                        <label for="quantity_s">
-                          <input id="quantity_s" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
-                        </label>
-                        <!--Input for quantity end-->
-
-                        <!--Buttons for increment and decrement-->
-                        <div class="flex justify-end items-center h-full">
-                          <!--Decrement button-->
-                          <div class="justify-center border-l-[1px] border-[#260065]/50 h-full p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Decrement button end-->
-
-                          <!--Increment button-->
-                          <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Increment button end-->
-                        </div>
-                        <!--Buttons for increment and decrement end-->
-                      </div>
-                      <!--S quantity end-->
-
-                      <!--M quantity-->
-                      <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
-                        <!--Label for size-->
-                        <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
-                          <span>M</span>
-                        </div>
-                        <!--Label for size end-->
-
-                        <!--Input for quantity-->
-                        <label for="quantity_m">
-                          <input id="quantity_m" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
-                        </label>
-                        <!--Input for quantity end-->
-
-                        <!--Buttons for increment and decrement-->
-                        <div class="flex justify-end items-center h-full">
-                          <!--Decrement button-->
-                          <div class="h-full justify-center border-l border-[#260065]/50 p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Decrement button end-->
-
-                          <!--Increment button-->
-                          <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Increment button end-->
-                        </div>
-                        <!--Buttons for increment and decrement end-->
-                      </div>
-                      <!--M quantity end-->
-
-                      <!--L quantity-->
-                      <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
-                        <!--Label for size-->
-                        <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
-                          <span>L</span>
-                        </div>
-                        <!--Label for size end-->
-
-                        <!--Input for quantity-->
-                        <label for="quantity_l">
-                          <input id="quantity_l" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
-                        </label>
-                        <!--Input for quantity end-->
-
-                        <!--Buttons for increment and decrement-->
-                        <div class="flex justify-end items-center h-full">
-                          <!--Decrement button-->
-                          <div class="h-full justify-center border-l-[1px] border-[#260065]/50 p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Decrement button end-->
-
-                          <!--Increment button-->
-                          <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Increment button end-->
-                        </div>
-                        <!--Buttons for increment and decrement end-->
-                      </div>
-                      <!--L quantity end-->
-
-                      <!--XL quantity-->
-                      <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
-                        <!--Label for size-->
-                        <div class="flex justify-center items-center border-r-[1px] border-[#260065]/50 w-10 h-full">
-                          <span>XL</span>
-                        </div>
-                        <!--Label for size end-->
-
-                        <!--Input for quantity-->
-                        <label for="quantity_xl">
-                          <input id="quantity_xl" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
-                        </label>
-                        <!--Input for quantity end-->
-
-                        <!--Buttons for increment and decrement-->
-                        <div class="flex justify-end items-center h-full">
-                          <!--Decrement button-->
-                          <div class="h-full justify-center p-1 border-l-[1px] border-[#260065]/50">
-                            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Decrement button end-->
-
-                          <!--Increment button-->
-                          <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
-                            <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
-                              <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                              </svg>
-                            </button>
-                          </div>
-                          <!--Increment button end-->
-                        </div>
-                        <!--Buttons for increment and decrement end-->
-                      </div>
-                      <!--XL quantity end-->
-                    </div>
-                  </div>
-                  <!--Sizes quantity end-->
+                <!--Category-->
+                <div class="col-start-1 row-start-2">
+                  <span class="text-sm font-medium">Category</span>
+                  <label for="category">
+                    <select id="category" name="category" class="border border-[#260065]/50 rounded-[5px] bg-white font-medium text-xs md:text-sm w-full h-9 placeholder:opacity-50 p-2.5 outline-none" required="">
+                      <option value="">SELECT CATEGORY</option>
+                      <option value="bottoms">BOTTOMS</option>
+                      <option value="hoods">HOODS</option>
+                      <option value="tees">TEES</option>
+                      <option value="hats">HATS</option>
+                      <option value="accessories">ACCESSORIES</option>
+                    </select>
+                  </label>
                 </div>
-              </section>
-              <!--Description and sizes end-->
+                <!--Category end-->
 
-              <!--Product images-->
-              <section class="col-start-2 row-start-5 row-span-2 col-span-2">
-                <span class="text-sm font-medium">Images</span>
-                <!--Image input with preview-->
-                <div class="border-[#260065]/50 border-[1px] h-[116px] rounded-[5px] p-3 grid grid-cols-5 gap-x-8">
-                  <div class="flex justify-center h-24 pb-2">
-                    <img id='preview_img1' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput1').click();" />
-                    <input type="file" id="fileInput1" onchange="loadFile(event, 'preview_img1')" class="hidden" />
-                  </div>
-                  <div class="flex justify-center h-24 pb-2">
-                    <img id='preview_img2' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput2').click();" />
-                    <input type="file" id="fileInput2" onchange="loadFile(event, 'preview_img2')" class="hidden" />
-                  </div>
-                  <div class="flex justify-center h-24 pb-2">
-                    <img id='preview_img3' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput3').click();" />
-                    <input type="file" id="fileInput3" onchange="loadFile(event, 'preview_img3')" class="hidden" />
-                  </div>
+                <!--Material-->
+                <div class="col-start-1 row-start-3">
+                  <span class="text-sm font-medium">Material</span>
+                  <label for="material">
+                    <select id="material" name="material" class="border border-[#260065]/50 rounded-[5px] bg-white font-medium text-xs md:text-sm w-full h-9 placeholder:opacity-50 p-2.5 outline-none" required="">
+                      <option value="">SELECT MATERIAL</option>
+                      <option value="denim">DENIM</option>
+                      <option value="cotton">COTTON</option>
+                      <option value="leather">LEATHER</option>
+                    </select>
+                  </label>
+                </div>
+                <!--Material end-->
 
-                  <div class="flex justify-center h-24 pb-2">
-                    <img id='preview_img4' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput4').click();" />
-                    <input type="file" id="fileInput4" onchange="loadFile(event, 'preview_img4')" class="hidden" />
-                  </div>
-                  <div class="flex justify-center h-24 pb-2">
-                    <img id='preview_img5' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput5').click();" />
-                    <input type="file" id="fileInput5" onchange="loadFile(event, 'preview_img5')" class="hidden" />
+                <!--Color-->
+                <div class="col-start-1 row-start-4">
+                  <span class="text-sm font-medium">Color</span>
+                  <label for="color">
+                    <select id="color" name="color" class="border border-[#260065]/50 rounded-[5px] bg-white font-medium text-xs md:text-sm w-full h-9 placeholder:opacity-50 p-2.5 outline-none" required="">
+                      <option value="">SELECT COLOR</option>
+                      <option value="black">BLACK</option>
+                      <option value="denim">DENIM</option>
+                      <option value="wild">WILD</option>
+                    </select>
+                  </label>
+                </div>
+                <!--Color end-->
+
+                <!--Price-->
+                <div class="col-start-1 row-start-5">
+                  <span class="text-sm font-medium">Price in €</span>
+                  <label for="price">
+                    <input type="number" id="price" name="price" class="border rounded-[5px] border-[#260065]/50 text-xs md:text-sm w-full h-9 placeholder:opacity-50 outline-none p-2.5" placeholder="426" required="">
+                  </label>
+                </div>
+                <!--Price end-->
+
+                <!--Size guide-->
+                <div class="col-start-1 row-start-6">
+                  <span class="text-sm font-medium">Size guide</span>
+                  <div class="flex items-center justify-center w-full">
+                    <label for="dropzone" class="flex flex-col items-center justify-center border border-[#260065]/50 rounded-[5px] w-full h-9 cursor-pointer">
+                      <span class="flex flex-row justify-between w-full">
+                        <span id="file-name" class="text-xs md:text-sm font-medium opacity-20 p-2.5">p45_size_guide.png</span>
+                      </span>
+                      <input id="dropzone" name="dropzone" type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0].name"/>
+                    </label>
                   </div>
                 </div>
-                <!--Image input with preview end-->
-              </section>
-              <!--Product images end-->
-            </section>
-            <!--Inputs for create product end-->
+                <!--Size guide end-->
 
-            <!--Create product button-->
-            <section class="flex justify-end pt-8 pr-4 pb-10">
-              <button class="text-xl text-white font-bold border-0 rounded-lg bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250 px-8 py-2">CREATE PRODUCT</button>
-            </section>
-            <!--Create product button end-->
+                <!--Description and sizes-->
+                <section class="col-start-2 row-start-1 row-span-4 col-span-2">
+                  <div class="flex flex-row gap-x-4">
+                    <!--Texts for description and tech details-->
+                    <div class="flex flex-col gap-y-5 w-8/12">
+                      <div>
+                        <label for="description" class="text-sm font-medium">Description (MAX. 5 bullet Points)</label>
+                        <textarea id="description" name="description" rows="3" class="resize-none block border border-[#260065]/50 rounded-[5px] w-full h-[116px] outline-none text-xs md:text-sm placeholder:opacity-50 px-2.5 py-1" placeholder="• IF YOU DON’T LIKE \n• THIS PANTS \n• LEAVE THE WEBSITE \n• IMMEDIATELY \n• YOU TOSS POT"></textarea>
+                      </div>
+                      <div>
+                        <label for="tech_details" class="text-admin text-sm font-medium">Technical Details (MAX. 5 bullet Points)</label>
+                        <textarea id="tech_details" name="tech_details" rows="3" class="resize-none block border border-[#260065]/50 rounded-[5px] w-full h-[116px] outline-none text-xs md:text-sm placeholder:opacity-50 px-2.5 py-1" placeholder="• 80% COTTON \n• 10% WOOL \n• GORATEX \n• WATERPROOF"></textarea>
+                      </div>
+                    </div>
+                    <!--Texts for description and tech details end-->
+
+                    <!--Sizes quantity-->
+                    <div class="flex flex-col w-4/12 gap-y-1">
+                      <span class="text-sm font-medium">Sizes quantity</span>
+                      <div class="flex flex-col gap-y-6">
+                        <!--XS quantity-->
+                        <div class="flex items-center justify-between rounded-[5px] border border-[#260065]/50 h-9" data-hs-input-number>
+                          <!--Label for size-->
+                          <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
+                            <span>XS</span>
+                          </div>
+                          <!--Label for size end-->
+
+                          <!--Input for quantity-->
+                          <label for="quantity_xs">
+                            <input id="quantity_xs" name="quantity_xs" class="text-center outline-none w-full p-0" type="text" value="1" data-hs-input-number-input>
+                          </label>
+                          <!--Input for quantity end-->
+
+                          <!--Buttons for increment and decrement-->
+                          <div class="flex justify-end items-center h-full">
+                            <!--Decrement button-->
+                            <div class="justify-center border-l border-[#260065]/50 h-full p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Decrement button end-->
+
+                            <!--Increment button-->
+                            <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                  <path d="M12 5v14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Increment button end-->
+                          </div>
+                          <!--Buttons for increment and decrement end-->
+                        </div>
+                        <!--XS quantity end-->
+
+                        <!--S quantity-->
+                        <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
+                          <!--Label for size-->
+                          <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
+                            <span>S</span>
+                          </div>
+                          <!--Label for size end-->
+
+                          <!--Input for quantity-->
+                          <label for="quantity_s">
+                            <input id="quantity_s" name="quantity_s" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
+                          </label>
+                          <!--Input for quantity end-->
+
+                          <!--Buttons for increment and decrement-->
+                          <div class="flex justify-end items-center h-full">
+                            <!--Decrement button-->
+                            <div class="justify-center border-l-[1px] border-[#260065]/50 h-full p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Decrement button end-->
+
+                            <!--Increment button-->
+                            <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                  <path d="M12 5v14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Increment button end-->
+                          </div>
+                          <!--Buttons for increment and decrement end-->
+                        </div>
+                        <!--S quantity end-->
+
+                        <!--M quantity-->
+                        <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
+                          <!--Label for size-->
+                          <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
+                            <span>M</span>
+                          </div>
+                          <!--Label for size end-->
+
+                          <!--Input for quantity-->
+                          <label for="quantity_m">
+                            <input id="quantity_m" name="quantity_m" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
+                          </label>
+                          <!--Input for quantity end-->
+
+                          <!--Buttons for increment and decrement-->
+                          <div class="flex justify-end items-center h-full">
+                            <!--Decrement button-->
+                            <div class="h-full justify-center border-l border-[#260065]/50 p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Decrement button end-->
+
+                            <!--Increment button-->
+                            <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                  <path d="M12 5v14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Increment button end-->
+                          </div>
+                          <!--Buttons for increment and decrement end-->
+                        </div>
+                        <!--M quantity end-->
+
+                        <!--L quantity-->
+                        <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
+                          <!--Label for size-->
+                          <div class="flex items-center justify-center border-r border-[#260065]/50 w-10 h-full">
+                            <span>L</span>
+                          </div>
+                          <!--Label for size end-->
+
+                          <!--Input for quantity-->
+                          <label for="quantity_l">
+                            <input id="quantity_l" name="quantity_l" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
+                          </label>
+                          <!--Input for quantity end-->
+
+                          <!--Buttons for increment and decrement-->
+                          <div class="flex justify-end items-center h-full">
+                            <!--Decrement button-->
+                            <div class="h-full justify-center border-l-[1px] border-[#260065]/50 p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Decrement button end-->
+
+                            <!--Increment button-->
+                            <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                  <path d="M12 5v14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Increment button end-->
+                          </div>
+                          <!--Buttons for increment and decrement end-->
+                        </div>
+                        <!--L quantity end-->
+
+                        <!--XL quantity-->
+                        <div class="flex items-center justify-between rounded-[5px] border-[1px] border-[#260065]/50 h-9" data-hs-input-number>
+                          <!--Label for size-->
+                          <div class="flex justify-center items-center border-r-[1px] border-[#260065]/50 w-10 h-full">
+                            <span>XL</span>
+                          </div>
+                          <!--Label for size end-->
+
+                          <!--Input for quantity-->
+                          <label for="quantity_xl">
+                            <input id="quantity_xl" name="quantity_xl" class="text-center outline-none w-full p-0" type="number" value="0" data-hs-input-number-input>
+                          </label>
+                          <!--Input for quantity end-->
+
+                          <!--Buttons for increment and decrement-->
+                          <div class="flex justify-end items-center h-full">
+                            <!--Decrement button-->
+                            <div class="h-full justify-center p-1 border-l-[1px] border-[#260065]/50">
+                              <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md" data-hs-input-number-decrement>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Decrement button end-->
+
+                            <!--Increment button-->
+                            <div class="bg-[#260065] rounded-r-[4px] h-full justify-center p-1">
+                              <button type="button" class="size-6 inline-flex justify-center items-center text-sm font-medium text-white" data-hs-input-number-increment>
+                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M5 12h14"/>
+                                  <path d="M12 5v14"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <!--Increment button end-->
+                          </div>
+                          <!--Buttons for increment and decrement end-->
+                        </div>
+                        <!--XL quantity end-->
+                      </div>
+                    </div>
+                    <!--Sizes quantity end-->
+                  </div>
+                </section>
+                <!--Description and sizes end-->
+
+                <!--Product images-->
+                <section class="col-start-2 row-start-5 row-span-2 col-span-2">
+                  <span class="text-sm font-medium">Images</span>
+                  <!--Image input with preview-->
+                  <div class="border-[#260065]/50 border-[1px] h-[116px] rounded-[5px] p-3 grid grid-cols-5 gap-x-8">
+                    <div class="flex justify-center h-24 pb-2">
+                      <label for="fileInput1" class="cursor-pointer">
+                        <img id='preview_img1' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput1').click();" />
+                        <input type="file" id="fileInput1" name="fileInput1" onchange="loadFile(event, 'preview_img1')" class="hidden" />
+                      </label>
+                    </div>
+                    <div class="flex justify-center h-24 pb-2">
+                      <label for="fileInput1" class="cursor-pointer">
+                        <img id='preview_img2' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput2').click();" />
+                        <input type="file" id="fileInput2" name="fileInput2" onchange="loadFile(event, 'preview_img2')" class="hidden" />
+                      </label>
+                    </div>
+                    <div class="flex justify-center h-24 pb-2">
+                      <label for="fileInput1" class="cursor-pointer">
+                        <img id='preview_img3' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput3').click();" />
+                        <input type="file" id="fileInput3" name="fileInput3"  onchange="loadFile(event, 'preview_img3')" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="flex justify-center h-24 pb-2">
+                      <label for="fileInput1" class="cursor-pointer">
+                        <img id='preview_img4' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput4').click();" />
+                        <input type="file" id="fileInput4" name="fileInput4"  onchange="loadFile(event, 'preview_img4')" class="hidden" />
+                      </label>
+                    </div>
+                    <div class="flex justify-center h-24 pb-2">
+                      <label for="fileInput1" class="cursor-pointer">
+                        <img id='preview_img5' class="object-cover rounded-[5px] h-full w-24" src="../img/icons/add-photo.png" alt="Current profile photo" onclick="document.getElementById('fileInput5').click();" />
+                        <input type="file" id="fileInput5" name="fileInput5"  onchange="loadFile(event, 'preview_img5')" class="hidden" />
+                      </label>
+                    </div>
+                  </div>
+                  <!--Image input with preview end-->
+                </section>
+                <!--Product images end-->
+              </section>
+              <!--Inputs for create product end-->
+
+              <!--Create product button-->
+              <section class="flex justify-end pt-8 pr-4 pb-10">
+                <button type="submit" class="text-xl text-white font-bold border-0 rounded-lg bg-[#260065] hover:bg-[#531DACFF] transition hover:transition-250 px-8 py-2">CREATE PRODUCT</button>
+              </section>
+              <!--Create product button end-->
+            </form>
           </div>
           <!--Create new tab end-->
+
           <!--List all users tab-->
-          <div id="tab4" class="tab-content hidden">
+          <div id="all-users" class="tab-content hidden">
             <table class="table-auto w-full max-h-min mb-10">
               <!--Cart table head-->
               <thead class="border-b-2 border-[#260065]/50">
@@ -979,7 +703,6 @@
               </tr>
               </thead>
               <!--Head end-->
-
 
               <!--Card body-->
               <tbody id="usersTableBody">
@@ -1034,7 +757,6 @@
                 @endforeach
               </tbody>
               <!--Card body end-->
-
             </table>
           </div>
           <!--List all users tab end-->
@@ -1079,7 +801,7 @@
       @else
         <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]" href="/signup">Sign up</a>
       @endauth
-      <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
+      <a class="leading-relaxed md:leading-10 font-bold tzext-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/size_guide">Size guide</a>
       <a class="leading-relaxed md:leading-10 font-bold text-xl md:text-2xl hover:text-[#531DACFF] focus:text-[#531DACFF]"
          href="/terms">Terms</a>
@@ -1137,9 +859,137 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="../js/chart.js"></script>
   <script src="{{ asset('../js/deleteUser.js') }}"></script>
+  <script src="{{ asset('../js/deleteProduct.js') }}"></script>
   <script src="{{ asset('../js/logout.js') }}"></script>
+  <script>
+    const pieChartConfig = {
+      series: [{{$bottomsCount}}, {{$hoodsCount}}, {{$teesCount}}, {{$hatsCount}}, {{$accessoriesCount}}],
+      labels: ["Bottoms", "Hoods", "Tees", "Hats", "Accessories"],
+      chart: {
+        type: "pie",
+        width: 280,
+        height: 280,
+        toolbar: {
+          show: false,
+        },
+      },
+      title: {
+        show: "",
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val, opts) {
+          return opts.w.globals.labels[opts.seriesIndex];
+        },
+      },
+      colors: ["#6991E5","#DDF0FF", "#FEEBBB","#EABAC2","#CE5374"],
+      legend: {
+        show: false,
+      },
+    };
+
+    //Create pie chart and render
+    const chartPie = new ApexCharts(document.querySelector("#pie-chart"), pieChartConfig);
+    chartPie.render();
+  </script>
+
+  <script>
+    // Line chart
+    const chartConfig = {
+      series: [
+        {
+          name: "Sales",
+          data: [{{$january_orders}}, {{$february_orders}}, {{$march_orders}}, {{$april_orders}}, {{$may_orders}}, {{$june_orders}}, {{$july_orders}}, {{$august_orders}}, {{$september_orders}}, {{$october_orders}}, {{$november_orders}}, {{$december_orders}}],
+        },
+      ],
+      chart: {
+        type: "line",
+        height: 240,
+        toolbar: {
+          show: false,
+        },
+      },
+      title: {
+        show: "",
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      colors: ["#6991E5"],
+      stroke: {
+        lineCap: "round",
+        curve: "smooth",
+      },
+      markers: {
+        size: 0,
+      },
+      xaxis: {
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+        labels: {
+          style: {
+            colors: "#260065",
+            fontSize: "12px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#260065",
+            fontSize: "12px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+      },
+      grid: {
+        show: true,
+        borderColor: "#dddddd",
+        strokeDashArray: 5,
+        xaxis: {
+          lines: {
+            show: true,
+          },
+        },
+        padding: {
+          top: 5,
+          right: 20,
+        },
+      },
+      fill: {
+        opacity: 0.8,
+      },
+      tooltip: {
+        theme: "dark",
+      },
+    };
+
+    //Create line chart and render
+    const chartLine = new ApexCharts(document.querySelector("#line-chart"), chartConfig);
+    chartLine.render();
+  </script>
   @include('sweetalert::alert')
   @livewireScripts
 </body>

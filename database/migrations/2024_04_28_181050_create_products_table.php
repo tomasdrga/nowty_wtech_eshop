@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('category', ['bottoms', 'hoods', 'tees', 'hats', 'accessories']);
             $table->decimal('price', 7, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -16,14 +16,14 @@ class UserSeeder extends Seeder
     {
       DB::table('users')->insert([
         'id' => '9bf339c0-27b1-497f-b968-481afa3ea1c5',
-        'name' => 'matej',
+        'name' => 'Matej',
         'email'=>'matej@gmail.com',
         'password' => bcrypt('12345678'),
         'created_at' => '2024-05-02 11:46:13'
       ]);
 
       DB::table('users')->insert([
-        'id' => '9bf339c0-27b1-497f-b968-481afa3bc1a5',
+        'id' => Uuid::uuid4(),
         'name' => 'admin',
         'email'=>'admin@gmail.com',
         'password' => bcrypt('12345678'),

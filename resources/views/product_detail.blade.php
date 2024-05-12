@@ -139,9 +139,9 @@
         <section class="overflow-auto h-[calc(100vh-12.5rem)] sm:h-[calc(100vh-12rem)] md:h-[calc(100vh-13rem)] lg:md:h-[calc(100vh-6rem)] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-8 px-4 sm:px-16 py-8">
           <!--Image side-->
           <section class="flex flex-col justify-around items-center h-full">
-            <div class="justify-center justify-items-center self-center w-3/4 h-3/5 min-h-24 max-h-96"><img class="h-full object-contain mx-auto main-image" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }}"></div>
+            <div class="justify-center justify-items-center self-center w-3/4 h-3/5 min-h-24 max-h-96"><img class="h-full object-contain mx-auto main-image" src="{{ asset('storage/uploads/' .$product->mainImage->name) }}" alt="{{ $product->name }}"></div>
             <div class="flex flex-row justify-center items-center w-full gap-x-2">
-              <div class="rounded-lg border border-double border-transparent hover:border-violet-500"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain secondary-image cursor-pointer" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }} front"></div>
+              <div class="rounded-lg border border-double border-transparent hover:border-violet-500"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain secondary-image cursor-pointer" src="{{ asset('storage/uploads/' .$product->mainImage->name) }}" alt="{{ $product->name }} front"></div>
               @foreach($product->secondaryImages as $image)
               <div class="rounded-lg border border-double border-transparent hover:border-violet-500">
                   <img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain rounded-lg secondary-image cursor-pointer" src="../img/products/{{ $image->name }}" alt="{{ $product->name }} secondary images">

@@ -3,54 +3,37 @@ document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
+  function activateTab(targetId) {
+    tabContents.forEach(content => content.classList.add('hidden'));
+    document.getElementById(targetId).classList.remove('hidden');
+
+    tabs.forEach(t => {
+      t.classList.remove('tab-active', 'tab-inactive');
+      t.classList.add(t.getAttribute('data-target') === targetId ? 'tab-active' : 'tab-inactive');
+    });
+  }
+
   tabs_view.forEach(tab_view => {
-    tab_view.addEventListener('click', function() {
-      const target = this.getAttribute('data-target');
+    tab_view.addEventListener('click', function(event) {
+      event.preventDefault();
 
-      // Hide all tab contents
-      tabContents.forEach(content => {
-        content.classList.add('hidden');
-      });
-
-      // Show the target tab content
-      document.getElementById(target).classList.remove('hidden');
-
-      // Update tab button styles
-      tabs.forEach(t => {
-        t.classList.remove('tab-active');
-        t.classList.add('tab-inactive');
-      });
-      document.querySelector(`[data-target="${target}"]`).classList.remove('tab-inactive');
-      document.querySelector(`[data-target="${target}"]`).classList.add('tab-active');
-
-      // Store the current active tab in the session Storage
-      sessionStorage.setItem('activeTab', target);
+      const targetId = this.getAttribute('data-target');
+      activateTab(targetId);
+      history.pushState(null, null, `#${targetId}`);
     });
   });
 
-  // When the document loads
-  // Get last active tab from session storage
-  const activeTab = sessionStorage.getItem('activeTab');
-
-  // If there is any saved active tab in session storage
-  if (activeTab) {
-    // Hide all tab contents
-    tabContents.forEach(content => {
-      content.classList.add('hidden');
-    });
-
-    // Show the saved tab content
-    document.getElementById(activeTab).classList.remove('hidden');
-
-    // Update tab button styles
-    tabs.forEach(t => {
-      if (t.getAttribute('data-target') === activeTab) {
-        t.classList.remove('tab-inactive');
-        t.classList.add('tab-active');
-      } else {
-        t.classList.remove('tab-active');
-        t.classList.add('tab-inactive');
-      }
-    });
+  // Restore active tab on load
+  const initialTab = location.hash.slice(1) || sessionStorage.getItem('activeTab');
+  if (initialTab) {
+    activateTab(initialTab);
   }
+
+  // Handle back/forward navigation
+  window.addEventListener('popstate', function() {
+    const activeTab = location.hash.slice(1);
+    if (activeTab) {
+      activateTab(activeTab);
+    }
+  });
 });

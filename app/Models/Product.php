@@ -6,6 +6,7 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ class Product extends Model implements Buyable
     use HasFactory;
     use HasUuids;
     use Searchable;
+    use SoftDeletes;
 
     public $incrementing = false;
     protected $keyType = 'string';
