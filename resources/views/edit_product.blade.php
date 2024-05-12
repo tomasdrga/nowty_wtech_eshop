@@ -48,7 +48,7 @@
         <!--Website logo on smaller than LG-->
         <div class="lg:hidden w-1/4 md:w-1/3">
           <a class="justify-start w-24 sm:w-32 md:w-36 h-auto pt-2" href="/">
-            <img class="w-24 sm:w-32 md:w-36 h-auto" src="{{asset("img/logo/nowty_animation_croped.gif")}}" alt="Nowty Clothing logo" />
+            <img class="w-24 sm:w-32 md:w-36 h-auto" src="{{asset('img/logo/nowty_animation_croped.gif')}}" alt="Nowty Clothing logo" />
           </a>
         </div>
 

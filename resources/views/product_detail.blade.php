@@ -144,7 +144,7 @@
               <div class="rounded-lg border border-double border-transparent hover:border-violet-500"><img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain secondary-image cursor-pointer" src="{{ asset('storage/uploads/' .$product->mainImage->name) }}" alt="{{ $product->name }} front"></div>
               @foreach($product->secondaryImages as $image)
               <div class="rounded-lg border border-double border-transparent hover:border-violet-500">
-                  <img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain rounded-lg secondary-image cursor-pointer" src="../img/products/{{ $image->name }}" alt="{{ $product->name }} secondary images">
+                  <img class="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 object-contain rounded-lg secondary-image cursor-pointer" src="{{ asset('storage/uploads/' .$image->name) }}" alt="{{ $product->name }} secondary images">
               </div>
               @endforeach
             </div>
@@ -239,7 +239,7 @@
                       <!--body-->
                       @if($product->sizeGuideImage)
                       <div class="flex justify-center">
-                          <img src="../img/products/{{ $product->sizeGuideImage->name }}" alt="Size Guide" class="w-96 h-52 object-contain">
+                          <img src="{{ asset('storage/uploads/' .$product->sizeGuideImage->name) }}" alt="Size Guide" class="w-96 h-52 object-contain">
                       </div>
                       @else
                       <div class="flex justify-center p-5">
@@ -270,7 +270,7 @@
                         <!--body-->
                         <div class="relative flex flex-col justify-center min-h-[200px] gap-y-8">
                           <div class="flex items-center px-8">
-                            <img class="w-16 h-16 md:w-20 md:h-20 xl:w-24 xl:h-24 object-contain rounded-lg" src="../img/products/{{ $product->mainImage->name }}" alt="{{ $product->name }}">
+                            <img class="w-16 h-16 md:w-20 md:h-20 xl:w-24 xl:h-24 object-contain rounded-lg" src="{{ asset('storage/uploads/' .$product->mainImage->name) }}" alt="{{ $product->name }}">
                             <div class="flex flex-col justify-between h-full ml-4">
                               <h5 class="font-bold mb-2">{{ $product->name }}</h5>
                               <div class="text-sm">

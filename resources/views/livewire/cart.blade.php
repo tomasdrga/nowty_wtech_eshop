@@ -37,7 +37,7 @@
             <!--Image-->
             <td>
               <div class="flex justify-center items-center">
-                <img src="../img/products/{{ $row->options->image }}" alt="{{ $row->options->image }}" class="w-20 h-20 object-contain">
+                <img src="{{ asset('storage/uploads/' .$row->options->image) }}" alt="{{ $row->options->image }}" class="w-20 h-20 object-contain">
               </div>
             </td>
             <!--Image end-->
@@ -57,7 +57,7 @@
             <td>
               <div class="flex flex-row justify-center gap-x-2 font-bold">
                   <button wire:click="decreaseQuantity('{{ $row->rowId }}')" class="decr-button">-</button>
-                  <h6>{{ $row->qty}}</h6>
+                  <h6>{{ $row->qty }}</h6>
                   <button wire:click="increaseQuantity('{{ $row->rowId }}')" class="incr-button">+</button>
               </div>
             </td>
@@ -84,7 +84,7 @@
             <!--Image-->
             <td>
               <div class="flex justify-center items-center">
-                <img src="../img/products/{{ $row->options->image }}" class="w-20 h-20 object-contain" alt="{{ $row->options->image }}">
+                <img src="{{ asset('storage/uploads/' .$row->options->image) }}" class="w-20 h-20 object-contain" alt="{{ $row->options->image }}">
               </div>
             </td>
             <!--Image end-->
