@@ -33,6 +33,8 @@ class OrderSeeder extends Seeder
         $date = new DateTime();
         $date->setDate($date->format('Y'), rand(1, 12), rand(1, 28));
         $total = rand(100, 999999) / 100;
+        $shipping = rand(10, 9999) / 100;
+        $order['shipping_price'] = number_format($shipping, 2, '.', '');
         $order['created_at'] = $date->format('Y-m-d');
         $order['order_number'] = '123456' . str_pad($i, 10, '0', STR_PAD_LEFT);
         $order['id'] = Uuid::uuid4();

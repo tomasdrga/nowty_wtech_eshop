@@ -43,13 +43,13 @@ class TeesSeeder extends Seeder
                                   'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware',
                                   'Heavy cotton\nBranded hammer loop\nSide pockets\nMetal hardware'];
 
-        for ($i=0; $i < 2; $i++) {
+        for ($i=0; $i < 10; $i++) {
             Product::create([
                 'id' => Uuid::uuid4(),
                 'name' => $tees_names[$i],
                 'description' => $tees_description[$i],
                 'technical_details' => $tees_technical_details[$i],
-                'category' => 'hats',
+                'category' => 'tees',
                 'price' => round(rand(9000, 15000) / 100.0, 2),
                 'created_at' => now(),
                 'updated_at' => now()

@@ -20,7 +20,7 @@ class ImageHoodsSeeder extends Seeder
 
       $imageTypes = ['index', 'main', 'secondary', 'secondary', 'secondary'];
       $imageNames = [['AOI_hooded_work_jacket_index.png', 'AOI_hooded_work_jacket_main.png', 'AOI_hooded_work_jacket_back.png', 'AOI_hooded_work_jacket_detail_1.png', 'AOI_hooded_work_jacket_detail_2.png'],
-        ['AOI_zip_up_hood_index.png', 'AOI_zip_up_hood_main.png', 'AOI_zip_up_hood_back.png', 'AOI_zip_up_hood_detail_1.png', 'AOI_zip_up_hood_detail_2.png'],
+        ['AOI_zip_up_hooded_index.png', 'AOI_zip_up_hooded_main.png', 'AOI_zip_up_hooded_back.png', 'AOI_zip_up_hooded_detail_1.png', 'AOI_zip_up_hooded_detail_2.png'],
         ['bonded_sherpa_zip_grey_index.png', 'bonded_sherpa_zip_grey_main.png', 'bonded_sherpa_zip_grey_back.png', 'bonded_sherpa_zip_grey_detail_1.png', 'bonded_sherpa_zip_grey_detail_2.png'],
         ['isnt_it_hood_black_index.png', 'isnt_it_hood_black_main.png', 'isnt_it_hood_black_back.png', 'isnt_it_hood_black_detail_1.png', 'isnt_it_hood_black_detail_2.png'],
         ['isnt_it_hood_navy_index.png', 'isnt_it_hood_navy_main.png', 'isnt_it_hood_navy_back.png', 'isnt_it_hood_navy_detail_1.png','isnt_it_hood_navy_detail_2.png'],
