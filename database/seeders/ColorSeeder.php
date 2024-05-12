@@ -14,31 +14,29 @@ class ColorSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-      $products = Product::all()->where('category', 'bottoms');
+  public function run(): void
+  {
+    $products = Product::whereIn('category', ['bottoms', 'hoods','accessories','hats','tees'])->get();
 
-      $colorsArray = ['black', 'denim', 'wild'];
+    $colorsArray = ['black', 'denim', 'wild'];
 
-      $productsColors = ['wild','denim','wild','wild','wild','black','wild','wild','wild','wild'];
-
-      $colors = [];
-      foreach ($colorsArray as $colorName) {
-        $color = new Color();
-        $color->id = Uuid::uuid4();
-        $color->name = $colorName;
-        $color->save();
-        $colors[$colorName] = $color;
-      }
-
-      foreach ($products as $index => $product) {
-        $colorName = $productsColors[$index % count($productsColors)];
-        $color = $colors[$colorName];
-        DB::table('product_colors')->insert([
-          'id' => Uuid::uuid4(),
-          'product_id' => $product->id,
-          'color_id' => $color->id
-        ]);
-      }
+    $colors = [];
+    foreach ($colorsArray as $colorName) {
+      $color = new Color();
+      $color->id = Uuid::uuid4();
+      $color->name = $colorName;
+      $color->save();
+      $colors[] = $color;
     }
+
+    foreach ($products as $product) {
+      $randomColorKey = array_rand($colors);
+      $color = $colors[$randomColorKey];
+      DB::table('product_colors')->insert([
+        'id' => Uuid::uuid4(),
+        'product_id' => $product->id,
+        'color_id' => $color->id
+      ]);
+    }
+  }
 }

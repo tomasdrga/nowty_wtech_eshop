@@ -17,11 +17,9 @@ class MaterialSeeder extends Seeder
 
   public function run(): void
   {
-    $products = Product::all()->where('category', 'bottoms');
+    $products = Product::whereIn('category', ['bottoms', 'hoods','accessories','hats','tees'])->get();
 
     $materialsArray = ['denim', 'cotton', 'leather'];
-
-    $productsMaterials = ['cotton','denim','cotton','leather','denim','cotton','cotton','cotton','cotton','denim'];
 
     $materials = [];
     foreach ($materialsArray as $materialName) {
@@ -32,8 +30,9 @@ class MaterialSeeder extends Seeder
       $materials[$materialName] = $material;
     }
 
-    foreach ($products as $index => $product) {
-      $materialName = $productsMaterials[$index % count($productsMaterials)];
+    foreach ($products as $product) {
+      $randomKey = array_rand($materialsArray);
+      $materialName = $materialsArray[$randomKey];
       $material = $materials[$materialName];
       DB::table('product_materials')->insert([
         'id' => Uuid::uuid4(),
