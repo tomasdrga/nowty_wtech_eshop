@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('name', ['xs', 's', 'm', 'l', 'xl', '2xl']);
+            $table->enum('name', ['xs', 's', 'm', 'l', 'xl', 'uni']);
             $table->integer('quantity');
             $table->uuid('product_id');
             $table->foreign('product_id')->references('id')->on('products');

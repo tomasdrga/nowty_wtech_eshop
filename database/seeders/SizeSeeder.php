@@ -46,25 +46,21 @@ class SizeSeeder extends Seeder
       $productsAccessories = Product::all()->where('category', 'accessories');
 
       foreach ($productsAccessories as $product) {
-        foreach ($sizesArray as $sizeName) {
-          $newSize = new Size();
-          $newSize->name = $sizeName;
-          $newSize->quantity = rand(0, 40);
-          $newSize->product_id = $product->id;
-          $newSize->save();
-        }
+        $newSize = new Size();
+        $newSize->name = 'uni';
+        $newSize->quantity = rand(0, 40);
+        $newSize->product_id = $product->id;
+        $newSize->save();
       }
 
       $productsHats = Product::all()->where('category', 'hats');
 
       foreach ($productsHats as $product) {
-        foreach ($sizesArray as $sizeName) {
-          $newSize = new Size();
-          $newSize->name = $sizeName;
-          $newSize->quantity = rand(0, 40);
-          $newSize->product_id = $product->id;
-          $newSize->save();
-        }
+        $newSize = new Size();
+        $newSize->name = 'uni';
+        $newSize->quantity = rand(0, 40);
+        $newSize->product_id = $product->id;
+        $newSize->save();
       }
 
       $productsTees = Product::all()->where('category', 'tees');
