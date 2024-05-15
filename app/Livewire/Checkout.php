@@ -163,9 +163,9 @@ class Checkout extends Component
               // Update shipping information
               $paymentInformation->first_name = $requestDetails['firstname'];
               $paymentInformation->last_name = $requestDetails['lastname'];
-              $paymentInformation->card_number = $requestDetails['card_number'];
-              $paymentInformation->expiration_date = $requestDetails['expiration_date'];
-              $paymentInformation->security_code = $requestDetails['security_code'];
+              $paymentInformation->card_number = bcrypt($requestDetails['card_number']);
+              $paymentInformation->expiration_date = bcrypt($requestDetails['expiration_date']);
+              $paymentInformation->security_code = bcrypt($requestDetails['security_code']);
               $paymentInformation->save();
 
               // If the user does not have shipping information, associate the shipping information with the user's information
@@ -238,9 +238,9 @@ class Checkout extends Component
               // Update shipping information
               $paymentInformation->first_name = $requestDetails['firstname'];
               $paymentInformation->last_name = $requestDetails['lastname'];
-              $paymentInformation->card_number = $requestDetails['card_number'];
-              $paymentInformation->expiration_date = $requestDetails['expiration_date'];
-              $paymentInformation->security_code = $requestDetails['security_code'];
+              $paymentInformation->card_number = bcrypt($requestDetails['card_number']);
+              $paymentInformation->expiration_date = bcrypt($requestDetails['expiration_date']);
+              $paymentInformation->security_code = bcrypt($requestDetails['security_code']);
               $paymentInformation->save();
 
               $orderNumber = 'ORD-' . Str::uuid()->toString();

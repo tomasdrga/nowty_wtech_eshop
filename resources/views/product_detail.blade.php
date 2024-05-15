@@ -167,7 +167,7 @@
               <!--Details-->
               <div class="flex flex-col gap-y-1 text-xs md:text-sm font-medium text-label" x-data="{ isOpenTechDetails: false, isOpenSizeGuide: false, isOpenCart: false }">
                 <a href="#" @click.prevent="isOpenTechDetails = true" class="hover:text-[#531DACFF]"><u>Technical details</u></a>
-                <div x-show="isOpenTechDetails"
+                <div x-cloak x-show="isOpenTechDetails"
                   x-transition:enter="transition ease-out duration-300"
                   x-transition:enter-start="opacity-0 transform scale-90"
                   x-transition:enter-end="opacity-100 transform scale-100"
@@ -220,7 +220,7 @@
                   </div>
                 </div>
                 <a href="#" @click.prevent="isOpenSizeGuide = true" class="hover:text-purple-800"><u>Size Guide</u></a>
-                <div x-show="isOpenSizeGuide"
+                <div x-cloak x-show="isOpenSizeGuide"
                   x-transition:enter="transition ease-out duration-300"
                   x-transition:enter-start="opacity-0 transform scale-90"
                   x-transition:enter-end="opacity-100 transform scale-100"
@@ -251,7 +251,7 @@
                   </div>
                 </div>
                 <button id="cartButton" href="#" @click.prevent="isOpenCart = true" class="hidden hover:text-[#531DACFF]"><u>Show Cart</u></button>
-                <div x-show="isOpenCart"
+                <div x-cloak x-show="isOpenCart"
                     x-transition:enter="transition ease-out duration-300"
                     x-transition:enter-start="opacity-0 transform scale-90"
                     x-transition:enter-end="opacity-100 transform scale-100"
@@ -296,37 +296,64 @@
                 <p class="text-xs md:text-sm font-medium text-label">Sizes:</p>
                 @php
                     $all_sizes = ['xs', 's', 'm', 'l', 'xl'];
+                    $hats_accessories_sizes = ['uni'];
 
                     $product_sizes = [];
                     foreach ($product->sizes as $size) {
                         $product_sizes[$size->name] = $size;
                     }
                     $all_disabled = true;
+                    $is_hats_or_accessories = $product->category == 'hats' || $product->category == 'accessories';
                 @endphp
 
                 <div class="flex flex-col items-baseline">
-                    <div class="flex text-xs md:text-sm space-x-2">
-                        @foreach($all_sizes as $possible_size)
-                            @php
-                                $product_size = $product_sizes[$possible_size] ?? null;
-                                $size_quantity = $product_size ? $product_size->quantity : 0;
-                                if ($size_quantity > 0) {
-                                    $all_disabled = false;
-                                }
-                            @endphp
-                            <label class="{{ $size_quantity <= 0 ? 'pointer-events-none' : '' }}">
-                                <input data-low="{{ $size_quantity <= 10 && $size_quantity > 0 ? 'true' : 'false' }}"
-                                       class="sr-only peer size-option"
-                                       name="size"
-                                       type="radio"
-                                       value="{{ $possible_size }}"
-                                       {{ $size_quantity <= 0 ? 'disabled' : '' }}/>
-                                <span class="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-lg cursor-pointer peer-checked:font-semibold peer-checked:bg-[#260065] peer-checked:text-white outline outline-2
-                               {{ $size_quantity <= 0 ? 'outline-[#260065]/50 text-[#260065]/50' : 'text-[#260065] outline-[#260065]' }}">
-                                    {{ $possible_size }}
-                                </span>
-                            </label>
-                        @endforeach
+                  <div class="flex text-xs md:text-sm space-x-2">
+                    @if($is_hats_or_accessories)
+                      @foreach($hats_accessories_sizes as $possible_size)
+                        @php
+                            $product_size = $product_sizes[$possible_size] ?? null;
+                            $size_quantity = $product_size ? $product_size->quantity : 0;
+                            if ($size_quantity > 0) {
+                                $all_disabled = false;
+                            }
+                        @endphp
+                        <!-- Display Uni Size option for Hats and Accessories -->
+                        <label class="{{ $all_disabled ? 'pointer-events-none' : '' }}">
+                            <input data-low="{{ $all_disabled ? 'false' : 'true' }}"
+                                   class="sr-only peer size-option"
+                                   name="size"
+                                   type="radio"
+                                   value="uni"
+                                   {{ $all_disabled ? 'disabled' : '' }}/>
+                            <span class="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-lg cursor-pointer peer-checked:font-semibold peer-checked:bg-[#260065] peer-checked:text-white outline outline-2
+                                   {{ $all_disabled ? 'outline-[#260065]/50 text-[#260065]/50' : 'text-[#260065] outline-[#260065]' }}">
+                                Uni
+                            </span>
+                        </label>
+                      @endforeach
+                    @else
+                      @foreach($all_sizes as $possible_size)
+                        @php
+                            $product_size = $product_sizes[$possible_size] ?? null;
+                            $size_quantity = $product_size ? $product_size->quantity : 0;
+                            if ($size_quantity > 0) {
+                                $all_disabled = false;
+                            }
+                        @endphp
+                        <label class="{{ $size_quantity <= 0 ? 'pointer-events-none' : '' }}">
+                            <input data-low="{{ $size_quantity <= 10 && $size_quantity > 0 ? 'true' : 'false' }}"
+                                   class="sr-only peer size-option"
+                                   name="size"
+                                   type="radio"
+                                   value="{{ $possible_size }}"
+                                   {{ $size_quantity <= 0 ? 'disabled' : '' }}/>
+                            <span class="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-lg cursor-pointer peer-checked:font-semibold peer-checked:bg-[#260065] peer-checked:text-white outline outline-2
+                           {{ $size_quantity <= 0 ? 'outline-[#260065]/50 text-[#260065]/50' : 'text-[#260065] outline-[#260065]' }}">
+                                {{ $possible_size }}
+                            </span>
+                        </label>
+                      @endforeach
+                    @endif
                     </div>
                     @if($all_disabled)
                       <div id="outOfStockMessage" class="text-[#260065]/50 mt-2">Product out of stock!</div>
@@ -517,6 +544,15 @@
           alert('There was an error with the request.');
       });
   });
+  </script>
+  <script>
+      // Remove x-cloak once the page is loaded
+      document.addEventListener('DOMContentLoaded', function () {
+          var elements = document.querySelectorAll('[x-cloak]');
+          elements.forEach(function(element) {
+              element.removeAttribute('x-cloak');
+          });
+      });
   </script>
   @livewireScripts
 </body>
