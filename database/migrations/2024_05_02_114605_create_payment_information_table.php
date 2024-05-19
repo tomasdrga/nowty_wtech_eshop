@@ -14,9 +14,9 @@ return new class extends Migration
       $table->uuid('id')->primary();
       $table->string('first_name', 50);
       $table->string('last_name', 50);
-      $table->string('card_number', 20);
-      $table->string('expiration_date', 32);
-      $table->string('security_code', 4);
+      $table->string('card_number', 60);
+      $table->string('expiration_date', 60);
+      $table->string('security_code', 60);
       $table->timestamps();
     });
   }

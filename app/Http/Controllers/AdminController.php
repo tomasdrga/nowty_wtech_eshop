@@ -45,8 +45,12 @@ class AdminController extends Controller
       $catProducts = Product::where('category', $category)->get();
       $count_by_category[$category.'Count'] = 0;
       foreach ($catProducts as $product) {
-        foreach ($sizes as $size) {
-          $count_by_category[$category.'Count'] += $product->sizes()->where('name', $size)->first()->quantity;
+        if($category === 'hats' || $category === 'accessories') {
+          $count_by_category[$category.'Count'] += $product->sizes()->where('name', 'uni')->first()->quantity;
+        } else {
+          foreach ($sizes as $size) {
+            $count_by_category[$category.'Count'] += $product->sizes()->where('name', $size)->first()->quantity;
+          }
         }
       }
     }
